@@ -1,4 +1,0 @@
-<!--index.wxml-->
-<view class="container">
-  <van-button type="primary">默认按钮</van-button>
-</view>
