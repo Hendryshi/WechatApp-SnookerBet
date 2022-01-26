@@ -10,7 +10,7 @@ Component({
       {
         icon: "tv-o",
         text: "直播",
-        url: "/pages/live/live",
+        url: "/pages/listViewGroup/listViewGroup",
       },
       {
         icon: "user-o",

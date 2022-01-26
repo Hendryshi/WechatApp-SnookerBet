@@ -1,7 +1,7 @@
 {
   "pages": [
     "pages/home/home",
-    "pages/live/live",
+    "pages/listViewGroup/listViewGroup",
     "pages/user/user"
   ],
   "window": {
@@ -12,7 +12,13 @@
   },
   "sitemapLocation": "sitemap.json",
   "usingComponents": {
-    "van-button": "@vant/weapp/button/index"
+    "van-button": "@vant/weapp/button/index",
+    "van-row": "@vant/weapp/row/index",
+    "van-col": "@vant/weapp/col/index",
+    "van-collapse": "@vant/weapp/collapse/index",
+    "van-collapse-item": "@vant/weapp/collapse-item/index",
+    "van-sticky": "@vant/weapp/sticky/index",
+    "van-tag": "@vant/weapp/tag/index"
   },
   "tabBar": {
     "custom": true,
@@ -21,7 +27,7 @@
         "pagePath": "pages/home/home"
       },
       {
-        "pagePath": "pages/live/live"
+        "pagePath": "pages/listViewGroup/listViewGroup"
       },
       {
         "pagePath": "pages/user/user"
