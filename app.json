@@ -1,8 +1,9 @@
 {
   "pages": [
     "pages/home/home",
-    "pages/listViewGroup/listViewGroup",
-    "pages/user/user"
+    "pages/live/live",
+    "pages/user/user",
+    "pages/match-detail/match-detail"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -18,7 +19,11 @@
     "van-collapse": "@vant/weapp/collapse/index",
     "van-collapse-item": "@vant/weapp/collapse-item/index",
     "van-sticky": "@vant/weapp/sticky/index",
-    "van-tag": "@vant/weapp/tag/index"
+    "van-tag": "@vant/weapp/tag/index",
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index",
+    "van-cell": "@vant/weapp/cell/index",
+    "van-cell-group": "@vant/weapp/cell-group/index"
   },
   "tabBar": {
     "custom": true,
@@ -27,7 +32,7 @@
         "pagePath": "pages/home/home"
       },
       {
-        "pagePath": "pages/listViewGroup/listViewGroup"
+        "pagePath": "pages/live/live"
       },
       {
         "pagePath": "pages/user/user"

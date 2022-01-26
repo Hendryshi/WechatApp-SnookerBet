@@ -13,7 +13,7 @@
 		 wx:key="index"
 		 class="card"
 		 catchtap="ClickCell"
-		 data-selectdata="{{item}}"
+		 data-id="{{item.AB_Money}}"
 		>
 			<view class="playerPart" style="width:30%">
 				<image src="https://d9e5aaf64f4cd6ea36e-a4f331decd676ada08548b37a013de11.ssl.cf3.rackcdn.com/40287.png" mode="widthFix" />

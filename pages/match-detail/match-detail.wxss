@@ -1,52 +1,53 @@
 .top-bg {
-  height: 120px;
+  height: 200px;
   width: 100%;
   position: fixed;
   top: 0;
-  z-index: 1;
-}
-
-.top-title {
-  color: white;
-  margin-top: 100rpx;
-  width: 100%;
-  font-size: large;
-  text-align: center;
-  position: fixed;
   z-index: 2;
 }
 
-.main-bg {
-  padding-top: 120px;
+.header {
+  height: 90rpx;
+  width: 100%;
+  position: fixed;
+  top: 200px;
 }
 
-.header {
-  background: rgb(230, 230, 230);
-  height: 100rpx;
-  line-height: 100rpx;
-  padding-left: 30rpx;
-  font-size: 26rpx;
-  align-items: center;
-  position: sticky;
-  top: 120px;
+.cellBg {
+  margin-top: 250px;
+  background: white;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
+  margin-right: 20rpx;
+  margin-left: 20rpx;
+}
+
+.prePart {
+  display: flex;
+  justify-content: space-between;
+}
+
+.van-cell-group__title {
+  font-weight: bold;
+  color: black;
+  font-size: 16px;
+}
+
+.preScore {
+  color: black;
 }
 
 .card {
-  background: white;
   height: 250rpx;
   align-items: center;
   line-height: 40rpx;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  transition: 0.3s;
-  border-radius: 30rpx;
-  margin: 20rpx;
+  top:40rpx;
   display: flex;
   justify-content: center;
+  position: fixed;
+  z-index: 3;
+  width: 100%;
 }
 
-.card:hover {
-  box-shadow: 0 16rpx 32rpx 0 rgba(0, 0, 0, 0.2);
-}
 
 .playerPart {
   height: 100%;
@@ -69,11 +70,13 @@
 .player1 {
   margin-top: 20rpx;
   padding-left: 10rpx;
+  color: white;
 }
 
 .player2 {
   margin-top: 20rpx;
   padding-right: 10rpx;
+  color: white;
 }
 
 .matchPart {
@@ -93,6 +96,7 @@
 .matchDate {
   text-align: center;
   line-height: 40rpx;
+  color: white;
 }
 
 .score {
@@ -101,6 +105,7 @@
   font-size: 60rpx;
   width: 50%;
   font-family: fantasy;
+  color: white;
 }
 
 .matchStatus {

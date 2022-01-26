@@ -209,7 +209,10 @@ Page({
     return index;
   },
 
-  ClickCell() {
-    console.log("点击cell");
+  ClickCell(evt) {
+    var id = evt.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: `/pages/match-detail/match-detail?id=${id}`,
+    });
   },
 });

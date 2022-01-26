@@ -1,0 +1,74 @@
+<view>
+	<view class="card">
+		<view class="playerPart" style="width:30%">
+			<image src="https://d9e5aaf64f4cd6ea36e-a4f331decd676ada08548b37a013de11.ssl.cf3.rackcdn.com/40287.png" mode="widthFix" />
+			<van-tag type="success" round class="rankTag">#10</van-tag>
+			<view class="player1">奥沙利文</view>
+		</view>
+		<view style="width:40%" class="matchPart">
+			<view class="matchDate">
+				2022/01/25 - 9:30
+			</view>
+			<view class="matchScore">
+				<view class="score" style="text-align: right;">10</view>
+				<view class="score">vs</view>
+				<view class="score" style="text-align: left">4</view>
+			</view>
+		</view>
+		<view class="playerPart" style="width:30%">
+			<image src="https://4d9e5aaf64f4cd6ea36e-a4f331decd676ada08548b37a013de11.ssl.cf3.rackcdn.com/2690.png" mode="widthFix" />
+			<van-tag type="success" round class="rankTag">#16</van-tag>
+			<view class="player2">奥沙利文</view>
+		</view>
+	</view>
+	<image class="top-bg" src="/images/match.jpg" mode="aspectFill" />
+</view>
+
+<view class='header'>
+	<van-tabs active="{{active}}" swipeable bind:change="onChange">
+		<van-tab title="玩家预测" />
+		<van-tab title="历史战绩" />
+	</van-tabs>
+</view>
+
+<view wx:if="{{active===0}}" class="cellBg release">
+	<van-cell-group inset title="佳佳" title-class="preName">
+		<van-cell center title-width="350rpx" size="large">
+			<view>
+				<van-tag type="success" style="margin:20rpx" size="small">比分对</van-tag>
+				<van-tag type="primary" size="small">输赢对</van-tag>
+			</view>
+			<view slot="title">
+				<view class="preScore">奥沙利文 10 - 5 丁俊晖</view>
+			</view>
+		</van-cell>
+	</van-cell-group>
+	<van-cell-group inset title="聪聪">
+		<van-cell
+		 center
+		 title-width="350rpx"
+		 size="large"
+		 class="preName"
+		>
+			<view>
+				<van-tag type="primary" size="small">输赢对</van-tag>
+			</view>
+			<view slot="title">
+				<view class="preScore">奥沙利文 10 - 5 丁俊晖</view>
+			</view>
+		</van-cell>
+	</van-cell-group>
+	<van-cell-group inset title="肥肥" title-class="preName">
+		<van-cell center title-width="350rpx" size="large">
+			<view/>
+			<view slot="title">
+				<view class="preScore">奥沙利文 10 - 5 丁俊晖</view>
+			</view>
+		</van-cell>
+	</van-cell-group>
+</view>
+
+<view wx:else class="cellBg">
+	<view>历史战绩内容</view>
+</view>
+
