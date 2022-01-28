@@ -7,38 +7,19 @@
 
 <view class="main-bg">
 	<view wx:for="{{dataArr}}" wx:key="index" class="section">
-		<view class="header" id="header" data-selectdata="{{item.Round}}"> {{item.Round}}</view>
-		<view
+		<view class="header" id="header" data-selectdata="{{item.Round}}">{{item.Round}}</view>
+		<match-card
 		 wx:for="{{item.AB_Bill}}"
 		 wx:key="index"
-		 class="card"
 		 catchtap="ClickCell"
 		 data-id="{{item.AB_Money}}"
 		>
-			<view class="playerPart" style="width:30%">
-				<image src="https://d9e5aaf64f4cd6ea36e-a4f331decd676ada08548b37a013de11.ssl.cf3.rackcdn.com/40287.png" mode="widthFix" />
-				<van-tag type="success" round class="rankTag">#10</van-tag>
-				<view class="player1">奥沙利文</view>
-			</view>
-			<view style="width:40%" class="matchPart">
-                <view class="matchDate">
-                    2022/01/25 - 9:30
-                </view>
-				<view class="matchScore">
-					<view class="score" style="text-align: right; color: green">10</view>
-					<view class="score">-</view>
-					<view class="score" style="text-align: left">4</view>
-				</view>
-				<view class="matchStatus">
-					<van-tag type="warning" size="large">已结束</van-tag>
-				</view>
-			</view>
-			<view class="playerPart" style="width:30%">
-				<image src="https://4d9e5aaf64f4cd6ea36e-a4f331decd676ada08548b37a013de11.ssl.cf3.rackcdn.com/2690.png" mode="widthFix" />
-				<van-tag type="success" round class="rankTag">#16</van-tag>
-				<view class="player2">奥沙利文</view>
-			</view>
-		</view>
+			<player slot="player1" style="width:30%" showRank="True" />
+			<player slot="player2" style="width:30%" showRank="True" />
+			<match-info slot="matchInfo">
+				
+			</match-info>
+		</match-card>
 	</view>
 </view>
 

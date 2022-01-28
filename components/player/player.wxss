@@ -1,0 +1,23 @@
+.playerPart {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.playerPart image {
+  border-radius: 50%;
+  width: 65%;
+}
+
+.rankTag {
+  margin-top: -30rpx;
+}
+
+.player {
+  margin-top: 20rpx;
+}
+
+.showRank-False {
+    display: none;
+}

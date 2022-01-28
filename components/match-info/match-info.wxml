@@ -1,0 +1,14 @@
+<view class="matchPart">
+	<view class="matchDate">
+		{{matchDate}}
+	</view>
+	<view class="matchScore">
+		<view style="text-align: right; color: green">{{score1}}</view>
+		<view>vs</view>
+		<view style="text-align: left; color: green">{{score2}}</view>
+	</view>
+	<view class="matchStatus matchType-{{matchType}}">
+		<van-tag type="warning" size="large">已结束</van-tag>
+	</view>
+</view>
+

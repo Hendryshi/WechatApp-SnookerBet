@@ -1,0 +1,5 @@
+<view class="playerPart">
+	<image src="{{avator}}" mode="widthFix" />
+	<van-tag color="black" round class="rankTag showRank-{{showRank}}">{{rank}}</van-tag>
+	<view class="player">{{name}}</view>
+</view>

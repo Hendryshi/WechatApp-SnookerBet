@@ -23,7 +23,11 @@
     "van-tab": "@vant/weapp/tab/index",
     "van-tabs": "@vant/weapp/tabs/index",
     "van-cell": "@vant/weapp/cell/index",
-    "van-cell-group": "@vant/weapp/cell-group/index"
+    "van-cell-group": "@vant/weapp/cell-group/index",
+
+    "match-card": "components/match-card/match-card",
+    "player": "components/player/player",
+    "match-info": "components/match-info/match-info"
   },
   "tabBar": {
     "custom": true,

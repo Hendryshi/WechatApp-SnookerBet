@@ -1,0 +1,28 @@
+.matchPart {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.matchScore {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  line-height: 80rpx;
+  font-size: 60rpx;
+  font-family: fantasy;
+}
+
+.matchDate {
+  line-height: 40rpx;
+}
+
+.matchStatus {
+  display: flex;
+  justify-content: center;
+}
+
+.matchType-none {
+    display: none;
+}

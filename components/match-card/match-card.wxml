@@ -1,0 +1,6 @@
+<view class="card custom-class">
+    <slot name="player1"></slot>
+	<slot name="matchInfo"></slot>
+    <slot name="player2"></slot>
+</view>
+

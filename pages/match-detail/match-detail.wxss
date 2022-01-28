@@ -1,5 +1,5 @@
 .top-bg {
-  height: 200px;
+  height: 400rpx;
   width: 100%;
   position: fixed;
   top: 0;
@@ -10,15 +10,26 @@
   height: 90rpx;
   width: 100%;
   position: fixed;
-  top: 200px;
+  top: 400rpx;
+  z-index: 2;
 }
 
 .cellBg {
-  margin-top: 250px;
+  margin-top: 500rpx;
   background: white;
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
   margin-right: 20rpx;
   margin-left: 20rpx;
+}
+
+.card {
+  background-color: transparent !important;
+  color: white;
+  top: 40rpx;
+  position: fixed;
+  z-index: 3;
+  width: 100%;
+  margin: 0rpx !important;
 }
 
 .prePart {
@@ -34,82 +45,4 @@
 
 .preScore {
   color: black;
-}
-
-.card {
-  height: 250rpx;
-  align-items: center;
-  line-height: 40rpx;
-  top:40rpx;
-  display: flex;
-  justify-content: center;
-  position: fixed;
-  z-index: 3;
-  width: 100%;
-}
-
-
-.playerPart {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.playerPart image {
-  border-radius: 50%;
-  width: 120rpx;
-  margin-top: 30rpx;
-}
-
-.rankTag {
-  margin-top: -30rpx;
-}
-
-.player1 {
-  margin-top: 20rpx;
-  padding-left: 10rpx;
-  color: white;
-}
-
-.player2 {
-  margin-top: 20rpx;
-  padding-right: 10rpx;
-  color: white;
-}
-
-.matchPart {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  line-height: 60rpx;
-}
-
-.matchScore {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.matchDate {
-  text-align: center;
-  line-height: 40rpx;
-  color: white;
-}
-
-.score {
-  text-align: center;
-  line-height: 80rpx;
-  font-size: 60rpx;
-  width: 50%;
-  font-family: fantasy;
-  color: white;
-}
-
-.matchStatus {
-  display: flex;
-  justify-content: center;
-  /* margin-top: 10px; */
 }
