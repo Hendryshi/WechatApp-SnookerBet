@@ -1,0 +1,21 @@
+.top-bg {
+    height: 400rpx;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+  }
+  
+  .top-title {
+    color: white;
+    margin-top: 100rpx;
+    width: 100%;
+    font-size: large;
+    text-align: center;
+    position: fixed;
+    z-index: 2;
+  }
+  
+  .main-bg {
+    padding-top: 400rpx;
+  }

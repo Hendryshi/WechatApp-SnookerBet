@@ -1,6 +1,39 @@
-<match-card custom-class="cardTest">
-	<player slot="player1" style="width:30%" showRank="True" />
-	<player slot="player2" style="width:30%" showRank="True" />
-    <match-info slot="matchInfo" style="width:40%" />
-</match-card>
+<view>
+	<view class="top-title">
+		比分直播
+	</view>
+	<image class="top-bg" src="/images/live.jpg" mode="aspectFill" />
+</view>
+
+<view class="main-bg">
+	<match-card custom-class="cardTest">
+		<player slot="player1" style="width:30%" showRank="True" />
+		<player slot="player2" style="width:30%" showRank="True" />
+		<match-info slot="matchInfo" matchType="live" style="width:40%" />
+	</match-card>
+
+	<match-card custom-class="cardTest">
+		<player slot="player1" style="width:30%" showRank="True" />
+		<player slot="player2" style="width:30%" showRank="True" />
+		<match-info slot="matchInfo" matchType="live" style="width:40%" />
+	</match-card>
+
+	<match-card custom-class="cardTest">
+		<player slot="player1" style="width:30%" showRank="True" />
+		<player slot="player2" style="width:30%" showRank="True" />
+		<match-info slot="matchInfo" matchType="live" style="width:40%" />
+	</match-card>
+
+	<match-card custom-class="cardTest">
+		<player slot="player1" style="width:30%" showRank="True" />
+		<player slot="player2" style="width:30%" showRank="True" />
+		<match-info slot="matchInfo" matchType="live" style="width:40%" />
+	</match-card>
+
+	<match-card custom-class="cardTest">
+		<player slot="player1" style="width:30%" showRank="True" />
+		<player slot="player2" style="width:30%" showRank="True" />
+		<match-info slot="matchInfo" matchType="live" style="width:40%" />
+	</match-card>
+</view>
 

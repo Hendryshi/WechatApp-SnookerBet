@@ -8,7 +8,10 @@
 		<view style="text-align: left; color: green">{{score2}}</view>
 	</view>
 	<view class="matchStatus matchType-{{matchType}}">
-		<van-tag type="warning" size="large">已结束</van-tag>
+
+		<van-tag wx:if="{{matchType == 'end'}}" type="warning" size="large">已结束</van-tag>
+		<van-tag wx:elif="{{matchType == 'live'}}" type="primary" size="large">直播中</van-tag>
+		<van-tag wx:else color="#808080" size="large">未开始</van-tag>
 	</view>
 </view>
 
