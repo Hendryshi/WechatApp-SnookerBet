@@ -1,5 +1,5 @@
 .top-bg {
-  height: 400rpx;
+  height: 360rpx;
   width: 100%;
   position: fixed;
   top: 0;
@@ -10,16 +10,17 @@
   height: 90rpx;
   width: 100%;
   position: fixed;
-  top: 400rpx;
+  top: 360rpx;
   z-index: 2;
 }
 
 .cellBg {
-  margin-top: 500rpx;
+  margin-top: 460rpx;
   background: white;
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
   margin-right: 20rpx;
   margin-left: 20rpx;
+  color: black;
 }
 
 .card {
@@ -32,17 +33,7 @@
   margin: 0rpx !important;
 }
 
-.prePart {
-  display: flex;
-  justify-content: space-between;
-}
-
 .van-cell-group__title {
   font-weight: bold;
-  color: black;
   font-size: 16px;
-}
-
-.preScore {
-  color: black;
 }

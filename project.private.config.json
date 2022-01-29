@@ -23,6 +23,12 @@
           "pathName": "pages/live/live",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/rank/rank",
+          "query": "",
+          "scene": null
         }
       ]
     }

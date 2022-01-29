@@ -2,8 +2,11 @@
   "pages": [
     "pages/home/home",
     "pages/live/live",
+    "pages/rank/rank",
     "pages/user/user",
-    "pages/match-detail/match-detail"
+    "pages/match/match",
+    "pages/match-detail/match-detail",
+    "pages/predict/predict"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -24,6 +27,8 @@
     "van-tabs": "@vant/weapp/tabs/index",
     "van-cell": "@vant/weapp/cell/index",
     "van-cell-group": "@vant/weapp/cell-group/index",
+    "van-icon": "@vant/weapp/icon/index",
+    "van-card": "@vant/weapp/card/index",
 
     "match-card": "components/match-card/match-card",
     "player": "components/player/player",
@@ -37,6 +42,9 @@
       },
       {
         "pagePath": "pages/live/live"
+      },
+      {
+        "pagePath": "pages/rank/rank"
       },
       {
         "pagePath": "pages/user/user"

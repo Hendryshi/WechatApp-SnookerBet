@@ -18,14 +18,14 @@
 </view>
 
 <view wx:if="{{active===0}}" class="cellBg release">
-	<van-cell-group inset title="佳佳" title-class="preName">
+	<van-cell-group inset title="佳佳">
 		<van-cell center title-width="350rpx" size="large">
 			<view>
 				<van-tag type="success" size="small">比分对</van-tag>
 				<van-tag type="primary" size="small" style="margin-left:20rpx">输赢对</van-tag>
 			</view>
 			<view slot="title">
-				<view class="preScore">奥沙利文 10 - 5 丁俊晖</view>
+				<view>奥沙利文 10 - 5 丁俊晖</view>
 			</view>
 		</van-cell>
 	</van-cell-group>

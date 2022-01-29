@@ -1,5 +1,5 @@
 {
-  "usingComponents": {
-    
-  }
+  "usingComponents": {},
+  "navigationBarTitleText": "斯诺克小竞猜",
+  "navigationBarBackgroundColor": "#afdd22"
 }

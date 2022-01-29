@@ -1,0 +1,106 @@
+<view>
+	<view class="top-title" />
+	<image class="top-bg" src="/images/rank.jpg" mode="aspectFill" />
+</view>
+
+<view class='header'>
+	<van-tabs active="{{active}}" swipeable bind:change="onChange">
+		<van-tab title="玩家排名" />
+		<van-tab title="统计图" />
+	</van-tabs>
+</view>
+
+<view wx:if="{{active===0}}" class="cellBg release">
+	<van-cell-group inset>
+		<van-cell title-width="300rpx">
+			<view slot="title">
+				<view class="van-cell-text">排名</view>
+			</view>
+			<view class="rankul">
+				<view class="rankli">比分</view>
+				<view class="rankli">局数</view>
+				<view class="rankli">积分</view>
+			</view>
+		</van-cell>
+		<van-cell title-width="300rpx">
+			<view slot="title">
+				<view class="van-cell-text">
+					<van-icon
+					 size="40rpx"
+					 color="#f0c239"
+					 name="award"
+					 style="margin-right: 5rpx"
+					/>
+					佳佳
+				</view>
+			</view>
+			<view class="rankul">
+				<view class="rankli">7</view>
+				<view class="rankli">6</view>
+				<view class="rankli">2000</view>
+			</view>
+		</van-cell>
+		<van-cell title-width="300rpx">
+			<view slot="title">
+				<view class="van-cell-text">
+					<van-icon
+					 size="40rpx"
+					 color="#395260"
+					 name="award"
+					 style="margin-right: 5rpx"
+					/>
+					我是一个玩家
+				</view>
+			</view>
+			<view class="rankul">
+				<view class="rankli">0</view>
+				<view class="rankli">8</view>
+				<view class="rankli">1200</view>
+			</view>
+		</van-cell>
+		<van-cell title-width="300rpx">
+			<view slot="title">
+				<view class="van-cell-text">
+					<van-icon
+					 size="40rpx"
+					 color="#b25d25"
+					 name="award"
+					 style="margin-right: 5rpx"
+					/>
+					玩家3号
+				</view>
+			</view>
+			<view class="rankul">
+				<view class="rankli">3</view>
+				<view class="rankli">3</view>
+				<view class="rankli">50</view>
+			</view>
+		</van-cell>
+		<van-cell title-width="300rpx">
+			<view slot="title">
+				<view class="van-cell-text">
+					<!--    <van-icon size="40rpx" color="white" name="award" style="margin-right: 5rpx" />
+                 --> 玩家4号
+				</view>
+			</view>
+			<view class="rankul">
+				<view class="rankli">3</view>
+				<view class="rankli">3</view>
+				<view class="rankli">50</view>
+			</view>
+		</van-cell>
+	</van-cell-group>
+</view>
+
+<view wx:else class="cellBg release">
+	<canvas
+	 canvas-id="canvasColumn"
+	 id="canvasColumn"
+	 type="2d"
+	 bindtouchstart="touchLineA"
+	 bindtouchmove="moveLineA"
+	 bindtouchend="touchEndLineA"
+	 class="charts-box"
+	/>
+</view>
+

@@ -13,6 +13,11 @@ Component({
         url: "/pages/live/live",
       },
       {
+        icon: "bar-chart-o",
+        text: "排名",
+        url: "/pages/rank/rank",
+      },
+      {
         icon: "user-o",
         text: "我的",
         url: "/pages/user/user",
