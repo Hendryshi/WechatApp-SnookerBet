@@ -1,1 +1,85 @@
-<view class="container"></view>
+<view>
+	<image class="top-bg" src="/images/predict.jpg" mode="aspectFill" />
+	<view class="progress">
+		<van-progress
+		 pivot-text="1/4决赛"
+		 stroke-width="50rpx"
+		 color="linear-gradient(to right, #be99ff, #7232dd)"
+		 percentage="50"
+		/>
+	</view>
+</view>
+
+<view class="main-bg">
+	<match-card custom-class="cardTest">
+		<player slot="player1" style="width:30%" showRank="True" />
+		<player slot="player2" style="width:30%" showRank="True" />
+		<view slot="matchInfo" style="width:40%" class="matchbox">
+			<view class="scorebox">
+				<view bindtap="showPopup" class="score">
+					{{score1}}
+				</view>
+				<view>vs</view>
+				<view bindtap="showPopup" class="score">
+					{{score1}}
+				</view>
+			</view>
+			<view/>
+		</view>
+	</match-card>
+
+	<match-card custom-class="cardTest">
+		<player slot="player1" style="width:30%" showRank="True" />
+		<player slot="player2" style="width:30%" showRank="True" />
+		<view slot="matchInfo" style="width:40%" class="matchbox">
+			<view class="scorebox">
+				<view bindtap="showPopup" class="score">
+					{{score1}}
+				</view>
+				<view>vs</view>
+				<view bindtap="showPopup" class="score">
+					{{score1}}
+				</view>
+			</view>
+			<view/>
+		</view>
+	</match-card>
+
+	<match-card custom-class="cardTest">
+		<player slot="player1" style="width:30%" showRank="True" />
+		<player slot="player2" style="width:30%" showRank="True" />
+		<view slot="matchInfo" style="width:40%" class="matchbox">
+			<view class="scorebox">
+				<view bindtap="showPopup" class="score">
+					{{score1}}
+				</view>
+				<view>vs</view>
+				<view bindtap="showPopup" class="score">
+					{{score1}}
+				</view>
+			</view>
+			<view/>
+		</view>
+	</match-card>
+</view>
+
+<view class="bottom">
+	<van-button type="primary" round>上一轮</van-button>
+	<van-button type="primary" round>下一轮</van-button>
+</view>
+
+<van-popup
+ show="{{show}}"
+ bind:close="onClose"
+ position="bottom"
+ custom-style="height: 40%"
+>
+	<van-picker
+	 title="选择分数"
+	 show-toolbar
+	 columns="{{columns}}"
+	 bindcancel="onClose"
+	 bindconfirm="onConfirm"
+	/>
+</van-popup>
+

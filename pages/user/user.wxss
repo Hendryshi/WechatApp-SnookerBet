@@ -1,0 +1,16 @@
+.headBg {
+  background-color: #afdd22;
+  height: 400rpx;
+  border-bottom-right-radius: 80rpx;
+  border-bottom-left-radius: 80rpx;
+  box-shadow: 4rpx 4rpx 8rpx rgba(0, 0, 0, 0.3);
+}
+
+.cellBg {
+  margin-top: 50rpx;
+  background: white;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
+  margin-right: 20rpx;
+  margin-left: 20rpx;
+  color: black;
+}

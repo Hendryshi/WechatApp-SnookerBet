@@ -1,1 +1,11 @@
-<view class="container">user</view>
+<view class="headBg" />
+
+<view class="cellBg release">
+	<van-cell-group inset>
+		<van-cell title="查看竞猜" size="large" is-link />
+        <van-cell title="反馈" size="large" is-link />
+        <van-cell title="单元格" size="large" is-link />
+        <van-cell title="单元格" size="large" is-link />
+	</van-cell-group>
+</view>
+

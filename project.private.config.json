@@ -29,6 +29,18 @@
           "pathName": "pages/rank/rank",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/predict/predict",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/user/user",
+          "query": "",
+          "scene": null
         }
       ]
     }
