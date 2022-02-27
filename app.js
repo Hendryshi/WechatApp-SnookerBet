@@ -1,6 +1,8 @@
 // app.js
 App({
-  onLaunch() {
-    
-  }
-})
+  onLaunch() {},
+
+  globalData: {
+    baseUrl: "http://api.snooker.org/"
+  },
+});

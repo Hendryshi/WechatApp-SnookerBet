@@ -3,7 +3,7 @@ Component({
     avator: {
       type: String,
       value:
-        "https://d9e5aaf64f4cd6ea36e-a4f331decd676ada08548b37a013de11.ssl.cf3.rackcdn.com/40287.png",
+        "http://www.snooker.org/img/players/McLeod.png",
     },
     name: {
       type: String,

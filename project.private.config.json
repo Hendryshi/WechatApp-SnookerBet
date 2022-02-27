@@ -41,6 +41,12 @@
           "pathName": "pages/user/user",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/match/match",
+          "query": "",
+          "scene": null
         }
       ]
     }
