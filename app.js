@@ -3,6 +3,6 @@ App({
   onLaunch() {},
 
   globalData: {
-    baseUrl: "http://api.snooker.org/"
+    baseUrl: "http://test.api.snookerBet/"
   },
 });

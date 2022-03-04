@@ -7,6 +7,6 @@ module.exports = {
   },
 
   getMatch(idevent){
-    return request.get(`?t=6&e=${idevent}`)
+    return request.get(`api/Snooker/GetEventWithMatch/${idevent}`)
   }
 };

@@ -1,0 +1,9 @@
+function showImage(avator){
+    if(avator === "")
+        return "/images/TBD.jpg"
+    return avator
+}
+
+module.exports ={
+    showImage:showImage
+}

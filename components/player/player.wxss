@@ -7,7 +7,7 @@
 
 .playerPart image {
   border-radius: 50%;
-  width: 65%;
+  width: 115rpx;
 }
 
 .rankTag {
