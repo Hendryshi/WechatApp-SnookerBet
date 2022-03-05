@@ -1,11 +1,32 @@
 <view class="headBg" />
 
-<view class="cellBg release">
-	<van-cell-group inset>
-		<van-cell title="查看竞猜" size="large" is-link />
-        <van-cell title="反馈" size="large" is-link />
-        <van-cell title="单元格" size="large" is-link />
-        <van-cell title="单元格" size="large" is-link />
-	</van-cell-group>
+<view class="card">
+    <view class="matchBox">
+        <view class="playerBox">
+            <view class="player">
+                <image src="https://4d9e5aaf64f4cd6ea36e-a4f331decd676ada08548b37a013de11.ssl.cf3.rackcdn.com/1335.png" lazy-load mode="widthFix" />
+                <view class="name">马克 威廉姆斯</view>
+                <van-tag round class="rankTag">6</van-tag>
+            </view>
+            <view class="score">
+                5
+            </view>
+        </view>
+        <view class="playerBox">
+            <view class="player">
+                <image src="https://4d9e5aaf64f4cd6ea36e-a4f331decd676ada08548b37a013de11.ssl.cf3.rackcdn.com/1395.png" lazy-load mode="widthFix" />
+                
+                <view class="name">丁俊晖</view>
+                <van-tag round class="rankTag">10</van-tag>
+            </view>
+            <view class="score">
+                5
+            </view>
+        </view>
+    </view>
+    <view class="statusBox">
+        <view class="status"><van-icon size="50rpx" name="checked" color="green"/></view>
+        <view class="status"><van-icon size="50rpx" name="passed" color="black" /></view>
+    </view>
 </view>
 

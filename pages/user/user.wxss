@@ -14,3 +14,80 @@
   margin-left: 20rpx;
   color: black;
 }
+
+.card {
+  background: white;
+  height: 200rpx;
+  align-items: center;
+  line-height: 40rpx;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  border-radius: 30rpx;
+  margin: 20rpx; 
+  display: flex;
+  justify-content: space-between;
+}
+
+.matchBox{
+  height: 90%;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+}
+
+.statusBox{
+  height: 90%;
+  width: 30%;
+}
+
+.playerBox{
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.player{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-left: 20rpx;
+}
+
+image {
+  border-radius: 50%;
+  width: 65rpx;
+}
+
+.rankTag{
+  margin-right: 5px;
+}
+
+.name{
+  margin-left: 20rpx;
+}
+
+.score {
+  width: 75rpx;
+  height: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30rpx;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.statusBox{
+  height: 90%;
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px ridge;
+}
+
+.status{
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
