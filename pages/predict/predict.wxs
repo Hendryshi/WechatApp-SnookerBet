@@ -1,0 +1,44 @@
+var getScoreRange=function(maxScore){
+	var newScoreRange = [];
+	for(var i = 0; i <= maxScore; i++){
+		newScoreRange.push(i);
+	}
+	return newScoreRange;
+}
+var btnPre=function(index,len){
+	if(index === 0){ return "visibility: hidden";}
+	else{ return "visibility: visible";}
+}
+var btnSub=function(index,len){
+	if(index === len-1){ return "visibility: visible";}
+	else{ return "visibility: hidden";}
+}
+var iconClick=function(playerId, winnerId){
+	if(playerId === winnerId) return "checked";
+	else return "passed";
+}
+var iconColor=function(playerId, winnerId){	
+	if(playerId === winnerId) {
+		return "green";
+	}
+	else{
+		return "black";
+	}
+}
+
+var desactive=function(item,maxScore,readonly,score){
+	if(item[score] === maxScore || item.predictStatus === 1 || readonly || item.winnerId === 0 || item.winnerId === null){	
+		return "desactive";
+	}else{
+		return "";
+	}
+}
+
+module.exports={
+	getScoreRange: getScoreRange,
+	displayPre: btnPre,
+	displaySub: btnSub,
+	iconClick: iconClick,
+	iconColor: iconColor,
+	desactive: desactive
+};

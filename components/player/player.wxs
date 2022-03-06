@@ -1,5 +1,5 @@
 function showImage(avator){
-    if(avator === "")
+    if(avator === "" || avator === null || avator === undefined)
         return "/images/TBD.jpg"
     return avator
 }

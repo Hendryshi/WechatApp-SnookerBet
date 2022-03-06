@@ -1,71 +1,90 @@
+<wxs src="./predict.wxs" module="scoreRange" />
+<wxs src="../../components/player/player.wxs" module="playerObj"></wxs>
 <view>
 	<image class="top-bg" src="/images/predict.jpg" mode="aspectFill" />
 	<view class="progress">
 		<van-progress
-		 pivot-text="1/4决赛"
+		 pivot-text="{{currentRoundName}}"
 		 stroke-width="50rpx"
 		 color="linear-gradient(to right, #be99ff, #7232dd)"
-		 percentage="50"
+		 percentage="{{(currentMatchIndex+1)/matchinfo.length*100}}"
 		/>
 	</view>
 </view>
 
 <view class="main-bg">
-	<match-card custom-class="cardTest">
-		<player slot="player1" style="width:30%" showRank="True" />
-		<player slot="player2" style="width:30%" showRank="True" />
+	<!--<match-card custom-class="cardTest" wx:for="{{matchinfo[currentMatchIndex].oPredicts}}" wx:key="number">
+		<player slot="player1" name="{{item.player1.name}}" style="width:30%" showRank="True" />
+		<player slot="player2" name="{{item.player2.name}}" style="width:30%" showRank="True" />
 		<view slot="matchInfo" style="width:40%" class="matchbox">
 			<view class="scorebox">
-				<view bindtap="showPopup" class="score">
-					{{score1}}
+				<view id="{{index}}-score1" bindtap="showPopup" class="score" >
+					{{item.score1}}
 				</view>
 				<view>vs</view>
-				<view bindtap="showPopup" class="score">
-					{{score1}}
+				<view id="{{index}}-score2" bindtap="showPopup" class="score">
+					{{item.score2}}
 				</view>
 			</view>
 			<view/>
 		</view>
-	</match-card>
-
-	<match-card custom-class="cardTest">
-		<player slot="player1" style="width:30%" showRank="True" />
-		<player slot="player2" style="width:30%" showRank="True" />
-		<view slot="matchInfo" style="width:40%" class="matchbox">
-			<view class="scorebox">
-				<view bindtap="showPopup" class="score">
-					{{score1}}
+	</match-card>-->
+	<view class="card" wx:for="{{matchinfo[currentMatchIndex].oPredicts}}" wx:key="number">
+		<view class="matchBox">
+			<view class="playerBox">
+				<view class="player">
+					<image src="{{playerObj.showImage(item.player1.photo)}}" lazy-load mode="widthFix" />
+					<view class="name">{{item.player1.name}}</view>
+					<van-tag round class="rankTag">{{item.player1.rank}}</van-tag>
 				</view>
-				<view>vs</view>
-				<view bindtap="showPopup" class="score">
-					{{score1}}
+				<view class="score {{scoreRange.desactive(item,maxScore,readonly,'score1')}}" id="{{index}}-score1" bindtap="showPopup">
+					{{item.score1}}
 				</view>
 			</view>
-			<view/>
-		</view>
-	</match-card>
-
-	<match-card custom-class="cardTest">
-		<player slot="player1" style="width:30%" showRank="True" />
-		<player slot="player2" style="width:30%" showRank="True" />
-		<view slot="matchInfo" style="width:40%" class="matchbox">
-			<view class="scorebox">
-				<view bindtap="showPopup" class="score">
-					{{score1}}
+			<view class="playerBox">
+				<view class="player">
+					<image src="{{playerObj.showImage(item.player2.photo)}}" lazy-load mode="widthFix" />
+					<view class="name">{{item.player2.name}}</view>
+					<van-tag round class="rankTag">{{item.player2.rank}}</van-tag>
 				</view>
-				<view>vs</view>
-				<view bindtap="showPopup" class="score">
-					{{score1}}
+				<view class="score {{scoreRange.desactive(item,maxScore,readonly,'score2')}}" id="{{index}}-score2" bindtap="showPopup">
+					{{item.score2}}
 				</view>
 			</view>
-			<view/>
 		</view>
-	</match-card>
+		<view class="statusBox">
+			<view class="status">
+				<van-icon size="50rpx" id="{{index}}-{{item.player1.idPlayer}}-score1" name="{{scoreRange.iconClick(item.player1.idPlayer,item.winnerId)}}" color="{{scoreRange.iconColor(item.player1.idPlayer, item.winnerId)}}" bindclick="onPredictWinner"/>
+			</view>
+			<view class="status">
+				<van-icon size="50rpx" id="{{index}}-{{item.player2.idPlayer}}-score2" name="{{scoreRange.iconClick(item.player2.idPlayer,item.winnerId)}}" color="{{scoreRange.iconColor(item.player2.idPlayer, item.winnerId)}}" bindclick="onPredictWinner"/>
+			</view>
+		</view>
+	</view>
 </view>
 
 <view class="bottom">
-	<van-button type="primary" round>上一轮</van-button>
-	<van-button type="primary" round>下一轮</van-button>
+	<van-button
+	 type="primary"
+	 round
+	 bindtap="onGoPrevious"
+	 customStyle="{{scoreRange.displayPre(currentMatchIndex,matchinfo.length)}}"
+	>上一轮
+	</van-button>
+	<van-button
+	 type="primary"
+	 round
+	 bindtap="onSubmit"
+	 customStyle="{{scoreRange.displaySub(currentMatchIndex,matchinfo.length)}}"
+	>提 交
+	</van-button>
+	<van-button
+	 type="primary"
+	 round
+	 bindtap="onGoNext"
+	 wx:if="{{currentMatchIndex < matchinfo.length - 1}}"
+	>下一轮
+	</van-button>
 </view>
 
 <van-popup
@@ -77,9 +96,11 @@
 	<van-picker
 	 title="选择分数"
 	 show-toolbar
-	 columns="{{columns}}"
+	 columns="{{scoreRange.getScoreRange(matchinfo[currentMatchIndex].distance)}}"
 	 bindcancel="onClose"
 	 bindconfirm="onConfirm"
 	/>
 </van-popup>
+
+<van-toast id="van-toast" />
 

@@ -23,8 +23,9 @@ Page({
   },
 
   clickPredict(evt){
+    var idEvent = 1134;
     wx.navigateTo({
-      url: "/pages/predict/predict",
+      url: `/pages/predict/predict?idEvent=${idEvent}`
     });
   }
 });
