@@ -1,15 +1,8 @@
 <view class="headBg">
 	<view class="title">
 		<!-- 标题轮播图等 -->
-		<swiper
-		 indicator-dots='true'
-		 autoplay='true'
-		 interval='3000'
-		 duration='1000'
-		 circular='true'
-		 class="swip"
-		>
-			<block wx:for="{{movies}}" wx:for-index="index">
+		<swiper indicator-dots='true' autoplay='true' interval='3000' duration='1000' circular='true' class="swip">
+			<block wx:for="{{movies}}" wx:for-index="index" wx:key="number">
 				<swiper-item>
 					<image src='{{item.url}}' mode='widthFix' />
 				</swiper-item>
@@ -18,21 +11,16 @@
 	</view>
 </view>
 
-<view class="matchbox" bindtap="tapMatch">
-	<image src="../../images/worldSnooker.jpg" style="width:25%" mode="widthFix" />
-	<view style="width:45%" class="matchInfo">
-		<view style="font-size: 30rpx; font-weight:bold">斯诺克单局限时赛</view>
-		<view style="font-size: 30rpx">2022/01/25 - 01/30</view>
+<view class="quizBox" bindtap="tapMatch">
+	<view class="quizPart">
+		<image src="../../images/worldSnooker.jpg" style="width:25%" mode="widthFix" />
+		<view style="width:65%" class="quizInfo">
+			<view style="font-weight:bold">斯诺克单局限时赛</view>
+			<view style="white-space:pre-wrap">德国, 柏林{{'\n'}}2022/01/25 - 01/30</view>
+		</view>
 	</view>
-	<van-button round type="primary" size="small" bindclick="clickPredict">去竞猜</van-button>
-</view>
-
-<view class="matchbox">
-	<image src="../../images/worldSnooker.jpg" style="width:25%" mode="widthFix" />
-	<view style="width:45%" class="matchInfo">
-		<view style="font-size: 30rpx; font-weight:bold">斯诺克德国大师赛</view>
-		<view style="font-size: 30rpx">2022/01/25 - 01/30</view>
+	<view class="btnPart">
+		<van-button type="primary" block round bindtap="tapMatch" style="margin: 20rpx; width: 50%">查看赛程</van-button>
+		<van-button type="info" block round bindtap="clickPredict" style="margin: 20rpx; width: 50%">竞猜</van-button>
 	</view>
-	<van-button round type="primary" size="small">去竞猜</van-button>
 </view>
-

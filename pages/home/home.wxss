@@ -27,25 +27,38 @@
 }
 /* 轮播图Over */
 
-.matchbox {
+.quizBox{
   margin: 20rpx;
   background: white;
-  height: 250rpx;
+  height: 350rpx;
   line-height: 40rpx;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 30rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.quizPart {
+  height: 60%;
   display: flex;
   align-items: center;
   justify-content: space-around;
 }
 
-.matchInfo{
+.btnPart{
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.quizInfo{
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  font-size: 30rpx;
 }
 
-.matchbox image {
+.quizBox image {
   width: 200rpx;
 }

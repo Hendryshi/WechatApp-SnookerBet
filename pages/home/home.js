@@ -23,7 +23,7 @@ Page({
   },
 
   clickPredict(evt){
-    var idEvent = 1134;
+    var idEvent = 1014;
     wx.navigateTo({
       url: `/pages/predict/predict?idEvent=${idEvent}`
     });
