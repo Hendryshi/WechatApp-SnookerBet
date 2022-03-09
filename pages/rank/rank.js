@@ -1,4 +1,5 @@
 import uCharts from "../../components/u-charts/u-charts";
+const api = require("../../utils/api");
 var uChartsInstance = {};
 Page({
   /**
@@ -8,6 +9,7 @@ Page({
     cWidth: "",
     cHeight: "",
     active: 0,
+    showSkeleton:true
   },
   /**
    * 生命周期函数--监听页面加载
@@ -19,62 +21,59 @@ Page({
     const cHeight = (500 / 750) * wx.getSystemInfoSync().windowWidth;
     const pixelRatio = wx.getSystemInfoSync().pixelRatio;
     this.setData({ cWidth, cHeight, pixelRatio });
-    this.getServerData();
+    this.getRankSummary();
   },
 
-  //   这里 先暂时 应用 ucharts 里面提供的数据 调取他们的接口
-  getServerData: function () {
-    setTimeout(() => {
-      //模拟服务器返回数据，如果数据格式和标准格式不同，需自行按下面的格式拼接
-      let res = {
-        categories: [
-          "第10天",
-          "第9天",
-          "第8天",
-          "第7天",
-          "第6天",
-          "第5天",
-          "第4天",
-          "第3天",
-          "第2天",
-          "第1天"
-        ],
-        series: [
-          {
-            name: "佳佳",
-            data: [250,250,230,180,140,100,100,70,50,20,10],
-          },
-          {
-            name: "肥肥",
-            data: [180,130,120,120,110,110,50,30,30,20,10],
-          },
-          {
-            name: "玩家3",
-            data: [300,280,270,159,100,80,50,80,30,50,10],
-          }
-        ],
+  getRankSummary: function(){
+    //test data idEvent 1014
+    api.getRankSummary().then(function(summary){
+      summary.data.sort((item1,item2) => item2 - item1);
+      this.setData({
+        summary: summary.data
+      });
+    }.bind(this))
+    .catch();
+  },
+  getRankTrending: function(){
+    //test data idEvent 1014
+    api.getRankTrending().then(function(rankPoints){
+      var gamerPointByDay = this.rankByDay(this.sorByDate(rankPoints.data));
+      var categories = this.rankByCategory(this.sorByDate(rankPoints.data));
+      var chartData = {
+        categories: categories,
+        series: gamerPointByDay
       };
-      this.drawCharts("canvasColumn", res);
-    }, 500);
-
-    // wx.request({
-    //   url: "https://www.ucharts.cn/data.json",
-    //   data: {},
-    //   success: function (res) {
-    //     let Column = { categories: [], series: [] };
-    //     Column.categories = res.data.data.ColumnB.categories;
-    //     Column.series = res.data.data.ColumnB.series;
-    //     //自定义标签颜色和字体大小
-    //     Column.series[1].textColor = "red";
-    //     Column.series[1].textSize = 11;
-    //     _self.showColumn("canvasColumn", Column);
-    //   },
-    //   fail: () => {
-    //     console.log("请点击右上角【详情】，启用不校验合法域名");
-    //   },
-    // });
+      this.drawCharts("canvasColumn", chartData);
+    }.bind(this))
+    .catch();
   },
-
+  sorByDate:function(data){
+    data.forEach(function(item){
+      item.oPredictByDays.sort((day1,day2)=>{return new Date(day2.dtResult) - new Date(day1.dtResult);});
+    });
+    return data;
+  },
+  rankByDay:function(points){  
+    var gamerPointByDay = [];
+    points.forEach(function(pointByGamer){
+      var item = {};
+      item.name = pointByGamer.gamerName;
+      item.data = [];
+      pointByGamer.oPredictByDays.forEach(function(pointByGamerByDay){
+        item.data.push(pointByGamerByDay.point);
+      });
+      gamerPointByDay.push(item);
+    });
+    return gamerPointByDay;
+  },
+  rankByCategory:function(points){
+    var categories = [];
+    points[0].oPredictByDays.forEach(function(element){
+      var language = wx.getSystemInfoSync().language.replace("_","-");   
+      categories.push(new Intl.DateTimeFormat(language,{month:"2-digit",day:"2-digit"}).format(new Date(element.dtResult)));
+    });
+    return categories;
+  },
   drawCharts(id, data) {
     const query = wx.createSelectorQuery().in(this);
     query
@@ -142,6 +141,12 @@ Page({
       });
   },
 
+  onReady: function(){
+    this.setData({
+      showSkeleton: false
+    })
+  },
+
   touchLineA(e) {
     uChartsInstance[e.target.id].scrollStart(e);
   },
@@ -169,7 +174,8 @@ Page({
         active: 1,
       });
       wx.pageScrollTo({ scrollTop: 0 });
-      this.getServerData();
+      //this.getServerData();
+      this.getRankTrending();
     }
   },
 });

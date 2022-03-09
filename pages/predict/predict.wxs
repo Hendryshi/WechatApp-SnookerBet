@@ -1,7 +1,8 @@
 var getScoreRange=function(maxScore){
 	var newScoreRange = [];
-	for(var i = 0; i <= maxScore; i++){
-		newScoreRange.push(i);
+	var i = maxScore - 1;
+	while(i>=0){
+		newScoreRange.push(i--);
 	}
 	return newScoreRange;
 }
@@ -25,12 +26,25 @@ var iconColor=function(playerId, winnerId){
 		return "black";
 	}
 }
-
 var desactive=function(item,maxScore,readonly,score){
-	if(item[score] === maxScore || item.predictStatus === 1 || readonly || item.winnerId === 0 || item.winnerId === null){	
+	if(item[score] === maxScore || item.predictStatus === 1 || readonly || item.winnerId === 376 || item.winnerId === null){	
 		return "desactive";
 	}else{
 		return "";
+	}
+}
+var winCorrect=function(winCorrect){
+	if(winCorrect){
+		return "输赢对";
+	}else{
+		return "输赢错";
+	}
+}
+var scoreCorrect=function(scoreCorrect){
+	if(scoreCorrect){
+		return "比分对";
+	}else{
+		return "比分错";
 	}
 }
 
@@ -40,5 +54,7 @@ module.exports={
 	displaySub: btnSub,
 	iconClick: iconClick,
 	iconColor: iconColor,
-	desactive: desactive
+	desactive: desactive,
+	winCorrect: winCorrect,
+	scoreCorrect: scoreCorrect
 };

@@ -12,23 +12,8 @@
 	</view>
 </view>
 
+<van-skeleton title row="10" row-width="90%" loading="{{showSkeleton}}">
 <view class="main-bg">
-	<!--<match-card custom-class="cardTest" wx:for="{{matchinfo[currentMatchIndex].oPredicts}}" wx:key="number">
-		<player slot="player1" name="{{item.player1.name}}" style="width:30%" showRank="True" />
-		<player slot="player2" name="{{item.player2.name}}" style="width:30%" showRank="True" />
-		<view slot="matchInfo" style="width:40%" class="matchbox">
-			<view class="scorebox">
-				<view id="{{index}}-score1" bindtap="showPopup" class="score" >
-					{{item.score1}}
-				</view>
-				<view>vs</view>
-				<view id="{{index}}-score2" bindtap="showPopup" class="score">
-					{{item.score2}}
-				</view>
-			</view>
-			<view/>
-		</view>
-	</match-card>-->
 	<view class="card" wx:for="{{matchinfo[currentMatchIndex].oPredicts}}" wx:key="number">
 		<view class="matchBox">
 			<view class="playerBox">
@@ -54,10 +39,18 @@
 		</view>
 		<view class="statusBox">
 			<view class="status">
-				<van-icon size="50rpx" id="{{index}}-{{item.player1.idPlayer}}-score1" name="{{scoreRange.iconClick(item.player1.idPlayer,item.winnerId)}}" color="{{scoreRange.iconColor(item.player1.idPlayer, item.winnerId)}}" bindclick="onPredictWinner"/>
+				<van-icon size="50rpx" id="{{index}}-{{item.player1.idPlayer}}-score1" name="{{scoreRange.iconClick(item.player1.idPlayer,item.winnerId)}}" color="{{scoreRange.iconColor(item.player1.idPlayer, item.winnerId)}}" bindclick="onPredictWinner" wx:if="{{!readonly && item.predictStatus === 0}}"/>
+				<view wx:if="{{readonly&&item.predictStatus === 1}}">
+					<van-tag round color="blue" wx:if="{{item.isWinnerCorrect}}">{{scoreRange.winCorrect(item.isWinnerCorrect)}}</van-tag>
+					<van-tag round color="red" wx:if="{{!item.isWinnerCorrect}}">{{scoreRange.winCorrect(item.isWinnerCorrect)}}</van-tag>
+				</view>
 			</view>
 			<view class="status">
-				<van-icon size="50rpx" id="{{index}}-{{item.player2.idPlayer}}-score2" name="{{scoreRange.iconClick(item.player2.idPlayer,item.winnerId)}}" color="{{scoreRange.iconColor(item.player2.idPlayer, item.winnerId)}}" bindclick="onPredictWinner"/>
+				<van-icon size="50rpx" id="{{index}}-{{item.player2.idPlayer}}-score2" name="{{scoreRange.iconClick(item.player2.idPlayer,item.winnerId)}}" color="{{scoreRange.iconColor(item.player2.idPlayer, item.winnerId)}}" bindclick="onPredictWinner" wx:if="{{!readonly && item.predictStatus === 0}}"/>
+				<view wx:if="{{readonly&&item.predictStatus === 1}}">
+					<van-tag round color="green" wx:if="{{item.isScoreCorrect}}">{{scoreRange.scoreCorrect(item.isScoreCorrect)}}</van-tag>
+					<van-tag round color="red" wx:if="{{!item.isScoreCorrect}}">{{scoreRange.scoreCorrect(item.isScoreCorrect)}}</van-tag>
+				</view>
 			</view>
 		</view>
 	</view>
@@ -68,24 +61,31 @@
 	 type="primary"
 	 round
 	 bindtap="onGoPrevious"
+	 size="small"
+	 style="margin: 20rpx"
 	 customStyle="{{scoreRange.displayPre(currentMatchIndex,matchinfo.length)}}"
 	>上一轮
 	</van-button>
 	<van-button
 	 type="primary"
 	 round
+	 size="small"
+	 style="margin: 20rpx"
 	 bindtap="onSubmit"
-	 customStyle="{{scoreRange.displaySub(currentMatchIndex,matchinfo.length)}}"
+	 customStyle="{{scoreRange.displaySub(currentMatchIndex,matchinfo.length)}}" wx:if="{{!readonly}}"
 	>提 交
 	</van-button>
 	<van-button
 	 type="primary"
 	 round
+	 size="small"
 	 bindtap="onGoNext"
+	 style="margin: 20rpx"
 	 wx:if="{{currentMatchIndex < matchinfo.length - 1}}"
 	>下一轮
 	</van-button>
 </view>
+</van-skeleton>
 
 <van-popup
  show="{{show}}"
@@ -104,3 +104,8 @@
 
 <van-toast id="van-toast" />
 
+<van-dialog use-slot id="van-dialog" show="{{showConfirmDialog}}" title="提交竞猜分数" bind:close="onDialogClose" bind:confirm="onDialogConfirm" show-cancel-button>
+	<van-cell-group>
+		<van-field model:value="{{gamerName}}" label="用户昵称" placeholder="请输入用户昵称" input-align="left" bind:change="onInputName" wx:if="{{idGamer === 0}}" error="{{inputNameError}}"/>
+	</van-cell-group>	
+</van-dialog>

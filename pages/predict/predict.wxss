@@ -20,6 +20,7 @@
 
 .main-bg {
   padding-top: 360rpx;
+  padding-bottom: 200rpx;
 }
 
 .scorebox {
@@ -31,11 +32,17 @@
 }
 
 .bottom{
-    margin-top: 60rpx;
-    margin-left: 20rpx;
-    margin-right: 20rpx;
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
+    align-items: center;
+    /*footer*/
+    z-index: 10;
+    height: 100rpx;
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+    background-color: #f6f6f6;
 }
 
 .card {

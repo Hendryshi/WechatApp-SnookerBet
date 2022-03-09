@@ -1,0 +1,13 @@
+var getAwardColor=function(userRank){
+    var awardColor = [
+        "#f0c239",
+        "#C0C0C0",
+        "#614e1a",
+        "#1fe0"
+    ];
+    return userRank <= 3 ? awardColor[userRank]:awardColor[3];
+}
+
+module.exports={
+    awardColor: getAwardColor
+};

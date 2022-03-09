@@ -35,7 +35,8 @@
     "van-field": "@vant/weapp/field/index",
     "van-popup": "@vant/weapp/popup/index",
     "van-toast": "@vant/weapp/toast/index",
-
+    "van-dialog": "@vant/weapp/dialog/index",
+    "van-skeleton": "@vant/weapp/skeleton/index",
     "match-card": "components/match-card/match-card",
     "player": "components/player/player",
     "match-info": "components/match-info/match-info"
