@@ -3,7 +3,14 @@ function showImage(avator){
         return "/images/TBD.jpg"
     return avator
 }
+function showRank(rank){
+    if(!rank){
+        return "#-";
+    }
+    else return "#" + rank; 
+}
 
 module.exports ={
-    showImage:showImage
+    showImage:showImage,
+    showRank: showRank
 }

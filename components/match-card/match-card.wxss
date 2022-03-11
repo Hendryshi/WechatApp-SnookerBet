@@ -8,7 +8,8 @@
   border-radius: 30rpx;
   margin: 20rpx;
   display: flex;
-  justify-content: center;
+  /*justify-content: center;*/
+  justify-content: space-between;
 }
 
 /* .card:hover {

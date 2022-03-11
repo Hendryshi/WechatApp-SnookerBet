@@ -17,8 +17,9 @@ Page({
   },
 
   tapMatch(evt) {
+    var idEvent = 1014;
     wx.navigateTo({
-      url: "/pages/match/match",
+      url: `/pages/match/match?idEvent=${idEvent}`
     });
   },
 

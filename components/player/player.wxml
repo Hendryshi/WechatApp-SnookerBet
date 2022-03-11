@@ -1,6 +1,6 @@
 <wxs src="./player.wxs" module="playerObj"></wxs>
 <view class="playerPart">
 	<image src="{{playerObj.showImage(avator)}}" lazy-load mode="widthFix" />
-	<van-tag color="black" round class="rankTag showRank-{{showRank}}">{{rank}}</van-tag>
+	<van-tag color="black" round class="rankTag showRank-{{showRank}}">{{playerObj.showRank(rank)}}</van-tag>
 	<view class="player">{{name}}</view>
 </view>

@@ -11,35 +11,58 @@ Page({
     idGamer: 0,
     gamerName: "",
     showConfirmDialog: false,
-    showSkeleton:true
+    showSkeleton:true,
+    apiResponse: []
   },
 
   onLoad: function (options) {
     //this.data.idEvent = options.idEvent;
     //get wechatname from storage ?
-    this.data.idEvent = 1014;//1134;
-    this.data.wechatName = "congcong";
+    this.data.idEvent = 1014;
+    this.data.wechatName = "audi";//"congcong";
     api
       .getPredict(this.data.idEvent, this.data.wechatName)
       .then(
         function (response) {
           this.data.apiResponse = response.data;
-          if (response.data.oGamer.idGamer !== 0) {
-            this.data.idGamer = response.data.oGamer.idGamer;
-            this.data.gamerName = response.data.oGamer.gamerName;
+          //new user + match started
+          if(this.data.apiResponse.length === 0){
+            let second = 3;          
+            const timer = setInterval(() => {
+              const toast = Toast("比赛已开始，新用户无法竞猜，3秒后返回主页");
+              if (second) {              
+                  toast.setData({
+                    message:  `比赛已开始，新用户无法竞猜，${second}秒后返回主页`,
+                  });
+                  second--;
+                }
+             else {
+                clearInterval(timer);
+                Toast.clear();
+                wx.switchTab({
+                  url: '/pages/home/home'   
+                });
+              }
+            }, 1000);
           }
-          this.setData({
-            currentRoundName:
-              response.data.oQuizRounds[this.data.currentMatchIndex].roundName,
-            currentRound:
-              response.data.oQuizRounds[this.data.currentMatchIndex].idRound,
-            maxScore:
-              response.data.oQuizRounds[this.data.currentMatchIndex].distance,
-            matchinfo: response.data.oQuizRounds,
-            idGamer: this.data.idGamer,
-            gamerName: this.data.gamerName,
-            readonly: false //response.data.readOnly,
-          });
+          if(response.data.length !== 0 ){
+            if (response.data.oGamer && response.data.oGamer.idGamer !== 0) {
+              this.data.idGamer = response.data.oGamer.idGamer;
+              this.data.gamerName = response.data.oGamer.gamerName;
+            }
+            this.setData({
+              currentRoundName:
+                response.data.oQuizRounds[this.data.currentMatchIndex].roundName,
+              currentRound:
+                response.data.oQuizRounds[this.data.currentMatchIndex].idRound,
+              maxScore:
+                response.data.oQuizRounds[this.data.currentMatchIndex].distance,
+              matchinfo: response.data.oQuizRounds,
+              idGamer: this.data.idGamer,
+              gamerName: this.data.gamerName,
+              readonly: response.data.readOnly,
+            });
+          }        
         }.bind(this)
       )
       .catch();
@@ -67,9 +90,6 @@ Page({
       .then(function (res) {
         if (res.statusCode === 200) {
           Toast.success(res.data);
-          /*wx.navigateTo({
-            url: "/pages/home/home",
-          });*/
           wx.switchTab({
             url: '/pages/home/home'   
           });

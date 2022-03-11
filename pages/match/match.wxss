@@ -24,9 +24,12 @@
   background: rgb(230, 230, 230);
   height: 100rpx;
   line-height: 100rpx;
-  padding-left: 30rpx;
-  font-size: 26rpx;
-  align-items: center;
+  /*padding-left: 30rpx;*/
+  font-size: 50rpx;
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  /*align-items: center;*/
   position: sticky;
   top: 360rpx;
 }

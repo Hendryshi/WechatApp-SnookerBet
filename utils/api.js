@@ -38,5 +38,10 @@ module.exports = {
     }else{
       return request.get("api/Quiz/GetQuizTrending");
     } 
+  },
+  getMatchPredict(idEvent, idRound, numberMatch){
+    if(idEvent && idRound && numberMatch){
+      return request.get(`api/Quiz/GetQuizMatch/?e=${idEvent}&r=${idRound}&n=${numberMatch}`);
+    }
   }
 };

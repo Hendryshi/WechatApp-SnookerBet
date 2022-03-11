@@ -1,11 +1,13 @@
+<wxs src="../match/match.wxs" module="dateFormat" />
+<wxs src="../predict/predict.wxs" module="predictFormat" />
 <view>
 	<image class="top-bg" src="/images/match.jpg" mode="aspectFill" />
 
 	<match-card custom-class="card">
-		<player slot="player1" style="width:30%" showRank="True" />
-		<player slot="player2" style="width:30%" showRank="True" />
-		<match-info slot="matchInfo" style="width:40%" matchType="none">
-			
+		<player slot="player1" style="width:30%" showRank="true" name="{{match.player1.name}}" avator="{{match.player1.photo}}" rank="{{match.player1.rank}}"/>
+		<player slot="player2" style="width:30%" showRank="True" name="{{match.player2.name}}" avator="{{match.player2.photo}}" rank="{{match.player2.rank}}"/>
+		<match-info slot="matchInfo" style="width:40%" matchType="none" score1="{{match.score1}}" score2="{{match.score2}}" matchType="{{match.stMatch}}" matchDate="{{dateFormat.getDate(match.scheduledDate)}}">
+		
 		</match-info>
 	</match-card>
 </view>
@@ -18,37 +20,17 @@
 </view>
 
 <view wx:if="{{active===0}}" class="cellBg release">
-	<van-cell-group inset title="佳佳">
-		<van-cell center title-width="350rpx" size="large">
-			<view>
-				<van-tag type="success" size="small">比分对</van-tag>
-				<van-tag type="primary" size="small" style="margin-left:20rpx">输赢对</van-tag>
+	<van-cell-group inset >
+		<van-cell center title-width="350rpx" size="large" use-label-slot wx:for="{{predict}}" wx:key="idPredict">			
+			<view>				
+				<van-tag wx:if="{{match.stMatch === 2}}" type="success" size="small">{{predictFormat.scoreCorrect(item.isScoreCorrect)}}</van-tag>
+				<van-tag wx:if="{{match.stMatch === 2}}" type="primary" size="small" style="margin-left:20rpx">{{predictFormat.winCorrect(item.isWinnerCorrect)}}</van-tag>
+			</view>
+			<view slot="label">
+				<view>{{item.player1.name}} {{item.score1}} - {{item.score2}} {{item.player2.name}}</view>
 			</view>
 			<view slot="title">
-				<view>奥沙利文 10 - 5 丁俊晖</view>
-			</view>
-		</van-cell>
-	</van-cell-group>
-	<van-cell-group inset title="聪聪">
-		<van-cell
-		 center
-		 title-width="350rpx"
-		 size="large"
-		 class="preName"
-		>
-			<view>
-				<van-tag type="primary" size="small">输赢对</van-tag>
-			</view>
-			<view slot="title">
-				<view class="preScore">奥沙利文 10 - 5 丁俊晖</view>
-			</view>
-		</van-cell>
-	</van-cell-group>
-	<van-cell-group inset title="肥肥" title-class="preName">
-		<van-cell center title-width="350rpx" size="large">
-			<view/>
-			<view slot="title">
-				<view class="preScore">奥沙利文 10 - 5 丁俊晖</view>
+				{{item.gamerName}}
 			</view>
 		</van-cell>
 	</van-cell-group>

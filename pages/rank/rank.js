@@ -60,7 +60,7 @@ Page({
       item.name = pointByGamer.gamerName;
       item.data = [];
       pointByGamer.oPredictByDays.forEach(function(pointByGamerByDay){
-        item.data.push(pointByGamerByDay.point);
+        item.data.push(pointByGamerByDay.cumulPoint);
       });
       gamerPointByDay.push(item);
     });

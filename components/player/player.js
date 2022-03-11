@@ -11,7 +11,7 @@ Component({
     },
     rank: {
       type: String,
-      value: "#10",
+      value: "10",
     },
     showRank: {
       type: String,

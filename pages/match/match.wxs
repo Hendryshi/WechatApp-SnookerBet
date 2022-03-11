@@ -1,0 +1,27 @@
+var formatTime = function (date) {
+  var date = getDate(date);
+  var year = date.getFullYear();
+  var month = fixz(date.getMonth() + 1);
+  var day = fixz(date.getDate());
+  var hour = fixz(date.getHours());
+  var minute = fixz(date.getMinutes());
+  var second = fixz(date.getSeconds());
+  console.log(month, day, hour, minute);
+  return [month, day].join('/') + ' ' + [hour, minute].join(':');
+  
+}
+
+var fixz = function(num) {
+  if(num < 10){
+    return '0' + num;
+  }
+  return num;
+};
+
+var getLocaleDate = function (dDate) {
+  var localTime = getDate(dDate).getTime() - getDate().getTimezoneOffset() * 60 * 1000 - 60*1000*60;
+  return formatTime(localTime);
+};
+module.exports = {
+  getDate: getLocaleDate,
+};

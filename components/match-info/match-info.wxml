@@ -1,16 +1,14 @@
 <view class="matchPart">
-	<view class="matchDate">
-		{{matchDate}}
-	</view>
 	<view class="matchScore">
-		<view style="text-align: right; color: green">{{score1}}</view>
+		<view style="text-align: right; color: green;padding-left:40rpx;padding-right:40rpx;">{{score1}}</view>
 		<view>vs</view>
-		<view style="text-align: left; color: green">{{score2}}</view>
+		<view style="text-align: left; color: green;padding-left:40rpx;padding-right:40rpx;">{{score2}}</view>
 	</view>
-	<view class="matchStatus matchType-{{matchType}}">
-		<van-tag wx:if="{{matchType == 'end'}}" type="warning" size="large">已结束</van-tag>
-		<van-tag wx:elif="{{matchType == 'live'}}" type="primary" size="large">直播中</van-tag>
-		<van-tag wx:else color="#808080" size="large">未开始</van-tag>
+	
+	<view class="matchStatus matchType-{{matchType}}">	    
+		<van-tag wx:if="{{matchType === '2'}}" type="warning" size="large">已结束</van-tag>
+		<van-tag wx:elif="{{matchType === '1'}}" type="primary" size="large">直播中</van-tag>
+		<view wx:else>{{matchDate}}</view>
 	</view>
 </view>
 
