@@ -1,13 +1,10 @@
 <wxs src="./predict.wxs" module="scoreRange" />
 <wxs src="../../components/player/player.wxs" module="playerObj"></wxs>
+
+<van-skeleton title row="10" row-width="90%" loading="{{showSkeleton}}">
 <view>
 	<image class="top-bg" src="/images/predict.jpg" mode="aspectFill" />
 </view>
-
-<view class="progress">
-
-</view>
-
 <view class="header">
 	<view class="progress">
 		<van-progress pivot-text="{{currentRoundName}}" stroke-width="50rpx" color="linear-gradient(to right, #be99ff, #7232dd)" percentage="{{(currentMatchIndex+1)/matchinfo.length*100}}" />
@@ -17,7 +14,7 @@
 	</view>
 </view>
 
-<van-skeleton title row="10" row-width="90%" loading="{{showSkeleton}}">
+
 	<view class="main-bg">
 		<view class="card" wx:for="{{matchinfo[currentMatchIndex].oPredicts}}" wx:key="number">
 			<view class="matchBox">

@@ -1,3 +1,4 @@
+<wxs src="../../utils/date.wxs" module="dateutil" />
 <view class="headBg">
 	<view class="title">
 		<!-- 标题轮播图等 -->
@@ -11,16 +12,21 @@
 	</view>
 </view>
 
-<view class="quizBox" bindtap="tapMatch">
-	<view class="quizPart">
-		<image src="../../images/worldSnooker.jpg" style="width:25%" mode="widthFix" />
-		<view style="width:65%" class="quizInfo">
-			<view style="font-weight:bold">斯诺克单局限时赛</view>
-			<view style="white-space:pre-wrap">德国, 柏林{{'\n'}}2022/01/25 - 01/30</view>
+<van-empty image="error" description="描述文字" wx:if="{{dataArr.length === 0}}"></van-empty>
+<view wx:else>
+	<view class="quizBox" wx:for="{{dataArr}}" wx:key="idEvent" >
+		<view class="quizPart">
+			<image src="../../images/worldSnooker.jpg" style="width:25%" mode="widthFix" />
+			<view style="width:65%" class="quizInfo">
+				<view style="font-weight:bold">{{item.name}}</view>
+				<view style="white-space:pre-wrap">{{item.country}}, {{item.city}}{{'\n'}}{{dateutil.getDate(item.startDate, 'yyyy/MM/dd')}} - {{dateutil.getDate(item.endDate, 'MM/dd')}}</view>
+			</view>
+		</view>
+		<view class="btnPart">
+			<van-button type="primary" block round bindtap="tapMatch" data-idEvent="{{item.idEvent}}" data-stQuiz="{{item.stQuiz}}" style="margin: 20rpx; width: 50%">查看赛程</van-button>
+			<van-button type="info" block round bindtap="clickPredict" data-idEvent="{{item.idEvent}}" style="margin: 20rpx; width: 50%">竞猜</van-button>
 		</view>
 	</view>
-	<view class="btnPart">
-		<van-button type="primary" block round bindtap="tapMatch" style="margin: 20rpx; width: 50%">查看赛程</van-button>
-		<van-button type="info" block round bindtap="clickPredict" style="margin: 20rpx; width: 50%">竞猜</van-button>
-	</view>
 </view>
+
+<van-toast id="van-toast" />

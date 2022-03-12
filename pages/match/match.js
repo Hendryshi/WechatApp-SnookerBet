@@ -5,45 +5,47 @@ import Toast from "/@vant/weapp/toast/toast"; //引入vant提示插件
 
 Page({
   data: {
-    idEvent: 1014,
-    gameName: "斯诺克单局限时赛",
+    idEvent: 0,
+    stQuiz: 0,
+    gameName: "",
     dataArr: [],
     Time: 0,
   },
 
   onLoad(options){
-    this.data.idEvent = options.idEvent;
-    this.getMatchData(options.idEvent);
+    console.log(options);
+    var idEvent = options.idEvent;
+    var stQuiz = options.stQuiz;
+    this.data.idEvent = idEvent;
+    this.data.stQuiz = stQuiz;
   },
 
-  getMatchData(idEvent){
+  onReady: function () {
+  },
+
+  onShow(){
+    var idEvent = this.data.idEvent;
+    this.getMatchData(idEvent);
+  },
+
+  getMatchData(idEvent, isPullDown){
     api.getMatch(idEvent).then(function(res){
       this.setData({
         idEvent: res.data.idEvent,
         dataArr: res.data
       })
+      if(isPullDown)
+        wx.stopPullDownRefresh();
     }.bind(this))
     .catch(err => {
-      Toast.fail("服务器无响应");
+      if(isPullDown)
+        wx.stopPullDownRefresh();
     })
   },
 
   onPullDownRefresh(){
-    //this.getMatchData(this.data.idEvent);
-    /*setTimeout(()=>{
-      wx.stopPullDownRefresh();
-    },1000);*/
-    api.getMatch(0).then(function(res){
-      this.setData({
-        idEvent: res.data.idEvent,
-        dataArr: res.data
-      });
-      wx.stopPullDownRefresh();
-    }.bind(this))
-    .catch(err => {
-      wx.stopPullDownRefresh();
-      Toast.fail("服务器无响应");
-    })
+    var idEvent = this.data.idEvent;
+    this.getMatchData(idEvent, true);
   },
 
   ClickCell(evt) {

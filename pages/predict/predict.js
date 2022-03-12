@@ -11,7 +11,7 @@ Page({
     idGamer: 0,
     gamerName: "",
     showConfirmDialog: false,
-    showSkeleton:true,
+    showSkeleton: true,
     apiResponse: []
   },
 
@@ -19,59 +19,55 @@ Page({
     //this.data.idEvent = options.idEvent;
     //get wechatname from storage ?
     this.data.idEvent = 1014;
-    this.data.wechatName = "audi";//"congcong";
-    api
-      .getPredict(this.data.idEvent, this.data.wechatName)
+    this.data.wechatName = "congcong"; //"congcong";
+    api.getPredict(this.data.idEvent, this.data.wechatName)
       .then(
         function (response) {
+          console.log("get data");
           this.data.apiResponse = response.data;
           //new user + match started
-          if(this.data.apiResponse.length === 0){
-            let second = 3;          
+          if (this.data.apiResponse.length === 0) {
+            let second = 3;
             const timer = setInterval(() => {
-              const toast = Toast("比赛已开始，新用户无法竞猜，3秒后返回主页");
-              if (second) {              
-                  toast.setData({
-                    message:  `比赛已开始，新用户无法竞猜，${second}秒后返回主页`,
-                  });
-                  second--;
-                }
-             else {
+              const toast = Toast.fail("竞猜不可用");
+              if (second) {
+                second--;
+              } else {
                 clearInterval(timer);
                 Toast.clear();
                 wx.switchTab({
-                  url: '/pages/home/home'   
+                  url: '/pages/home/home'
                 });
               }
             }, 1000);
-          }
-          if(response.data.length !== 0 ){
+          } else {
             if (response.data.oGamer && response.data.oGamer.idGamer !== 0) {
               this.data.idGamer = response.data.oGamer.idGamer;
               this.data.gamerName = response.data.oGamer.gamerName;
             }
             this.setData({
-              currentRoundName:
-                response.data.oQuizRounds[this.data.currentMatchIndex].roundName,
-              currentRound:
-                response.data.oQuizRounds[this.data.currentMatchIndex].idRound,
-              maxScore:
-                response.data.oQuizRounds[this.data.currentMatchIndex].distance,
+              currentRoundName: response.data.oQuizRounds[this.data.currentMatchIndex].roundName,
+              currentRound: response.data.oQuizRounds[this.data.currentMatchIndex].idRound,
+              maxScore: response.data.oQuizRounds[this.data.currentMatchIndex].distance,
               matchinfo: response.data.oQuizRounds,
               idGamer: this.data.idGamer,
               gamerName: this.data.gamerName,
               readonly: response.data.readOnly,
             });
-          }        
+          }
         }.bind(this)
       )
       .catch();
   },
+
+
   onReady: function () {
-    this.setData({
-      showSkeleton: false
-    });
+    
+      this.setData({
+        showSkeleton: false
+      });
   },
+
   onDialogConfirm(event) {
     //this.data.gamer = response.data.oGamer;
     if (this.data.idGamer === 0 && this.data.gamerName !== "") {
@@ -85,13 +81,11 @@ Page({
         inputNameError: true,
       });
     }
-    api
-      .postPredict(this.data.apiResponse)
-      .then(function (res) {
+    api.postPredict(this.data.apiResponse).then(function (res) {
         if (res.statusCode === 200) {
           Toast.success(res.data);
           wx.switchTab({
-            url: '/pages/home/home'   
+            url: '/pages/home/home'
           });
         }
       })
@@ -153,7 +147,7 @@ Page({
    * the binding will be new matchinfo with index+1
    */
   onGoNext() {
-    if(!this.data.readonly){
+    if (!this.data.readonly) {
       if (this.predictValidated()) {
         this.whoIsNextPlayer(this.data.matchinfo);
         this.data.currentMatchIndex += 1;
@@ -167,7 +161,7 @@ Page({
           duration: 2000,
         });
       }
-    }else{
+    } else {
       this.data.currentMatchIndex += 1;
       this.updateData(this.data.currentMatchIndex);
       this.scrollToTop();
@@ -201,9 +195,9 @@ Page({
         var nextMatchPlayer =
           (match.number + 1) % 2 === 1 ? "player2" : "player1";
         var winner =
-          match.player1.idPlayer === match.winnerId
-            ? match.player1
-            : match.player2;
+          match.player1.idPlayer === match.winnerId ?
+          match.player1 :
+          match.player2;
         var nextMatchIndex = arrayMatchInfo[
           this.data.currentMatchIndex + 1
         ].oPredicts.findIndex((item) => item.number === nextMatchNumber);
@@ -253,9 +247,9 @@ Page({
     if (
       !this.data.readOnly &&
       this.data.matchinfo[this.data.currentMatchIndex].oPredicts[sMatchIndex]
-        .predictStatus === 0
+      .predictStatus === 0
     ) {
-      
+
       var sPlayerId = parseInt(event.target.id.split("-")[1]);
       var score = event.target.id.split("-")[2];
       this.data.matchinfo[this.data.currentMatchIndex].oPredicts[

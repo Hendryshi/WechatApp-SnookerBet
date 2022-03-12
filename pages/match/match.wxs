@@ -6,9 +6,8 @@ var formatTime = function (date) {
   var hour = fixz(date.getHours());
   var minute = fixz(date.getMinutes());
   var second = fixz(date.getSeconds());
-  console.log(month, day, hour, minute);
+  // console.log(month, day, hour, minute);
   return [month, day].join('/') + ' ' + [hour, minute].join(':');
-  
 }
 
 var fixz = function(num) {
@@ -22,6 +21,7 @@ var getLocaleDate = function (dDate) {
   var localTime = getDate(dDate).getTime() - getDate().getTimezoneOffset() * 60 * 1000 - 60*1000*60;
   return formatTime(localTime);
 };
+
 module.exports = {
   getDate: getLocaleDate,
 };

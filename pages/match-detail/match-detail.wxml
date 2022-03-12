@@ -7,7 +7,6 @@
 		<player slot="player1" style="width:30%" showRank="true" name="{{match.player1.name}}" avator="{{match.player1.photo}}" rank="{{match.player1.rank}}"/>
 		<player slot="player2" style="width:30%" showRank="True" name="{{match.player2.name}}" avator="{{match.player2.photo}}" rank="{{match.player2.rank}}"/>
 		<match-info slot="matchInfo" style="width:40%" matchType="none" score1="{{match.score1}}" score2="{{match.score2}}" matchType="{{match.stMatch}}" matchDate="{{dateFormat.getDate(match.scheduledDate)}}">
-		
 		</match-info>
 	</match-card>
 </view>

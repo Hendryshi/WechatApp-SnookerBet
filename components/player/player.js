@@ -3,15 +3,15 @@ Component({
     avator: {
       type: String,
       value:
-        "http://www.snooker.org/img/players/McLeod.png",
+        "/images/TBD.jpg",
     },
     name: {
       type: String,
-      value: "丁俊晖",
+      value: "TBD",
     },
     rank: {
       type: String,
-      value: "10",
+      value: "-",
     },
     showRank: {
       type: String,

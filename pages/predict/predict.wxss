@@ -19,15 +19,6 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  
-}
-
-.progressold {
-  position: fixed;
-  z-index: 3;
-  height: 80rpx;
-  margin: 320rpx 25rpx 0rpx 25rpx;
-  width: 100%;
 }
 
 .progress {

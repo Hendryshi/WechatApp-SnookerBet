@@ -1,5 +1,5 @@
 .top-bg {
-  height: 360rpx;
+  height: 300rpx;
   width: 100%;
   position: fixed;
   top: 0;
@@ -16,20 +16,43 @@
   z-index: 2;
 }
 
-.main-bg {
-  padding-top: 360rpx;
+.header{
+  position: fixed;
+  z-index: 2;
+  height: 80rpx;
+  margin-top: 240rpx;
+  width: 100%;
+  background: rgb(230, 230, 230);
+  border-top-left-radius: 55rpx;
+  border-top-right-radius: 55rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  box-shadow: rgba(230, 230, 230) 0px 0px 6px;
+  line-height: 80rpx;
+  font-weight: bold ;
 }
 
-.header {
+.main-bg {
+  padding-top: 240rpx;
+  padding-bottom: 200rpx;
+}
+
+.roundBox {
   background: rgb(230, 230, 230);
-  height: 100rpx;
-  line-height: 100rpx;
-  /*padding-left: 30rpx;*/
-  font-size: 50rpx;
+  height: 80rpx;
+  line-height: 80rpx;
   display:flex;
   flex-direction: row;
   justify-content: center;
   /*align-items: center;*/
   position: sticky;
-  top: 360rpx;
+  top: 300rpx;
+}
+
+.loading{
+  height: 60rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
