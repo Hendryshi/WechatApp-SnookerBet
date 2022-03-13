@@ -1,2 +1,17 @@
 <view class="headBg" />
 <button type="warn" bindtap="sendMsg" plain="true">我要订阅</button>
+
+
+<view bindtap="changePoint">
+    <image wx:if="{{i==0}}" style="width: 80rpx; height: 80rpx;" src="../../images/test/{{i}}.png" ></image>
+    <image wx:if="{{i==1}}" style="width: 80rpx; height: 80rpx;" src="../../images/test/{{i}}.png" ></image>
+    <image wx:if="{{i==2}}" style="width: 80rpx; height: 80rpx;" src="../../images/test/{{i}}.png" ></image>
+    <image wx:if="{{i==3}}" style="width: 80rpx; height: 80rpx;" src="../../images/test/{{i}}.png" ></image>
+    <image wx:if="{{i==4}}" style="width: 80rpx; height: 80rpx;" src="../../images/test/{{i}}.png" ></image>
+    <image wx:if="{{i==5}}" style="width: 80rpx; height: 80rpx;" src="../../images/test/{{i}}.png" ></image>
+</view>
+<!-- <image wx:if="{{i==6}}" style="width: 80rpx;" mode="widthFix" src="../../images/test/{{i}}.png" ></image>
+<image wx:if="{{i==7}}" style="width: 80rpx;" mode="widthFix" src="../../images/test/{{i}}.png" ></image>
+<image wx:if="{{i==8}}" style="width: 80rpx;" mode="widthFix" src="../../images/test/{{i}}.png" ></image>
+<image wx:if="{{i==9}}" style="width: 80rpx;" mode="widthFix" src="../../images/test/{{i}}.png" ></image>
+<image wx:if="{{i==10}}" style="width: 80rpx;" mode="widthFix" src="../../images/test/{{i}}.png" ></image> -->
