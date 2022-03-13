@@ -1,6 +1,7 @@
 import Dialog from "../../miniprogram_npm/@vant/weapp/dialog/dialog";
 import Toast from "../../miniprogram_npm/@vant/weapp/toast/toast";
 const api = require("../../utils/api");
+const auth = require("../../utils/auth");
 
 Page({
   data: {
@@ -17,24 +18,25 @@ Page({
   },
 
   onLoad: function (options) {
-    //this.data.idEvent = options.idEvent;
-    //get wechatname from storage ?
-    this.data.idEvent = 1014;
-    this.data.wechatName = "audi"; //"congcong";
+    this.data.idEvent = options.idEvent;
+    //only for test
+    //this.data.wechatName = "congcong";
+    this.data.wechatName = auth.getUserWechatName();
     api.getPredict(this.data.idEvent, this.data.wechatName)
       .then(
         function (response) {
-          console.log("get data");
           this.data.apiResponse = response.data;
           //new user + match started
           if (this.data.apiResponse.length === 0) {
             let second = 3;
+            const toast = Toast.fail({
+              message: '竞猜不可用'
+            });
             const timer = setInterval(() => {
-              const toast = Toast.fail({
-                message: '竞猜不可用',
-                mask: true
-              });
               if (second) {
+                toast.setData({
+                  message: '竞猜不可用'
+                });
                 second--;
               } else {
                 clearInterval(timer);
@@ -65,8 +67,7 @@ Page({
   },
 
 
-  onReady: function () {
-    
+  onReady: function () {    
       this.setData({
         showSkeleton: false
       });
@@ -178,7 +179,6 @@ Page({
   },
   /**
    * Send the array of prediction to API after the validation of user's inputs
-   * TODO: add user's nickname
    */
   onSubmit() {
     if (this.predictValidated()) {

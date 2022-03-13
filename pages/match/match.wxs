@@ -6,7 +6,6 @@ var formatTime = function (date) {
   var hour = fixz(date.getHours());
   var minute = fixz(date.getMinutes());
   var second = fixz(date.getSeconds());
-  // console.log(month, day, hour, minute);
   return [month, day].join('/') + ' ' + [hour, minute].join(':');
 }
 

@@ -43,17 +43,18 @@
 				<view class="status">
 					<van-icon size="50rpx" id="{{index}}-{{item.player1.idPlayer}}-score1" name="{{scoreRange.iconClick(item.player1.idPlayer,item.winnerId)}}" color="{{scoreRange.iconColor(item.player1.idPlayer, item.winnerId)}}" bindclick="onPredictWinner" wx:if="{{!readonly && item.predictStatus === 0}}" />
 					<view wx:if="{{readonly&&item.predictStatus === 1}}">
-						<van-tag round color="blue" wx:if="{{item.isWinnerCorrect}}">{{scoreRange.winCorrect(item.isWinnerCorrect)}}</van-tag>
-						<van-tag round color="red" wx:if="{{!item.isWinnerCorrect}}">{{scoreRange.winCorrect(item.isWinnerCorrect)}}</van-tag>
+						<van-tag round color="{{item.isWinnerCorrect ? 'blue':'red'}}">{{scoreRange.winCorrect(item.isWinnerCorrect)}}</van-tag>
 					</view>
+				</view>
+				<view class="status" wx:if="{{readonly&&item.predictStatus === 0}}">
+					<van-tag round color="gray">未开始</van-tag>
 				</view>
 				<view class="status">
 					<van-icon size="50rpx" id="{{index}}-{{item.player2.idPlayer}}-score2" name="{{scoreRange.iconClick(item.player2.idPlayer,item.winnerId)}}" color="{{scoreRange.iconColor(item.player2.idPlayer, item.winnerId)}}" bindclick="onPredictWinner" wx:if="{{!readonly && item.predictStatus === 0}}" />
 					<view wx:if="{{readonly&&item.predictStatus === 1}}">
-						<van-tag round color="green" wx:if="{{item.isScoreCorrect}}">{{scoreRange.scoreCorrect(item.isScoreCorrect)}}</van-tag>
-						<van-tag round color="red" wx:if="{{!item.isScoreCorrect}}">{{scoreRange.scoreCorrect(item.isScoreCorrect)}}</van-tag>
+						<van-tag round color="{{item.isScoreCorrect?'green':'red'}}">{{scoreRange.scoreCorrect(item.isScoreCorrect)}}</van-tag>
 					</view>
-				</view>
+				</view>	
 			</view>
 		</view>
 	</view>

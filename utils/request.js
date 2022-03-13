@@ -24,7 +24,7 @@ const request = function (url, options) {
         Authorization: "Bearer " + app.globalData.token,
       },
       success: (res) => {
-        console.log("enter success");
+        //console.log("enter success");
         Toast.clear();
         if (res.statusCode === 503 || res.statusCode === 500) {
           console.log("res");

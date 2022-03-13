@@ -47,13 +47,12 @@ Page({
     this.getMatchData(idEvent, true);
   },
 
-  ClickCell(evt) {
-    // console.log(evt.currentTarget.dataset);
+  ClickCell(evt) {  
     var id = evt.currentTarget.dataset.id; //id composite with idEvent-idRound-numberMatch
     var roundName = evt.currentTarget.dataset.round;
     var stQuiz = this.data.stQuiz;
     wx.navigateTo({
-      url: `/pages/match-detail/match-detail?id=${id}&stQuiz=${stQuiz}&roundName=${roundName}`,
+        url: `/pages/match-detail/match-detail?id=${id}&stQuiz=${stQuiz}&roundName=${roundName}`,
     });
-  },
+  }
 });
