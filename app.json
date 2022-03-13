@@ -44,7 +44,8 @@
     "van-divider": "@vant/weapp/divider/index",
     "match-card": "components/match-card/match-card",
     "player": "components/player/player",
-    "match-info": "components/match-info/match-info"
+    "match-info": "components/match-info/match-info",
+    "dice": "components/dice/dice"
   },
   "tabBar": {
     "custom": true,

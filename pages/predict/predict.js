@@ -20,8 +20,8 @@ Page({
   onLoad: function (options) {
     this.data.idEvent = options.idEvent;
     //only for test
-    //this.data.wechatName = "congcong";
-    this.data.wechatName = auth.getUserWechatName();
+    this.data.wechatName = "audi";
+    //this.data.wechatName = auth.getUserWechatName();
     api.getPredict(this.data.idEvent, this.data.wechatName)
       .then(
         function (response) {
@@ -58,7 +58,7 @@ Page({
               matchinfo: response.data.oQuizRounds,
               idGamer: this.data.idGamer,
               gamerName: this.data.gamerName,
-              readonly: response.data.readOnly,
+              readonly: false//only for test response.data.readOnly,
             });
           }
         }.bind(this)
@@ -71,6 +71,40 @@ Page({
       this.setData({
         showSkeleton: false
       });
+  },
+
+  onChangePoint: function(evt){
+    var matchIndex = evt.currentTarget.id.split("-")[0];
+    if (
+      !this.data.readOnly &&
+      this.data.matchinfo[this.data.currentMatchIndex].oPredicts[matchIndex]
+      .predictStatus === 0
+    ) {
+      var oRandomMatch = this.getRandomWinner(this.data.matchinfo[this.data.currentMatchIndex].oPredicts[
+        matchIndex
+      ]);
+      this.data.matchinfo[this.data.currentMatchIndex].oPredicts[
+        matchIndex
+      ] = oRandomMatch;
+      }
+      this.setData({
+        matchinfo: this.data.matchinfo,
+      });
+  },
+  
+  getRandomWinner:function(oMatch){
+    var arrPlayers = [oMatch.player1.idPlayer, oMatch.player2.idPlayer]
+    var playerRandom = Math.floor(Math.random() * arrPlayers.length);
+    if(arrPlayers[playerRandom] === oMatch.player1.idPlayer){
+      oMatch.winnerId = parseInt(oMatch.player1.idPlayer);
+      oMatch.score1 = this.data.maxScore;
+      oMatch.score2 = Math.floor(Math.random() * (this.data.maxScore - 0)) + 0;
+    }else{
+      oMatch.winnerId = parseInt(oMatch.player2.idPlayer);
+      oMatch.score2 = this.data.maxScore;
+      oMatch.score1 = Math.floor(Math.random() * (this.data.maxScore - 0)) + 0;
+    }
+    return oMatch;
   },
 
   onDialogConfirm(event) {
@@ -275,5 +309,5 @@ Page({
         matchinfo: this.data.matchinfo,
       });
     }
-  },
+  }
 });
