@@ -10,7 +10,7 @@ import Notify from "../miniprogram_npm/@vant/weapp/notify/notify"; //引入vant�
 const request = function (url, options) {
   return new Promise((resolve, reject) => {
     Toast.loading({
-      duration: 0,
+      duration: 10000,
       message: '加载中...',
       forbidClick: false,
     });
@@ -24,16 +24,19 @@ const request = function (url, options) {
         Authorization: "Bearer " + app.globalData.token,
       },
       success: (res) => {
+        console.log("enter success");
         Toast.clear();
-        if (res.statusCode == 503) {
+        if (res.statusCode === 503 || res.statusCode === 500) {
           console.log("res");
-          Notify({ type: 'danger', message: '服务器获取失败' });
+          if(res.statusCode === 500)
+            Notify({ type: 'danger', message: '服务器获取失败' });
           reject(res.data.msg);
         } else {
           resolve(res);
         }
       },
       fail: (err) => {
+        console.log("enter fail");
         Toast.clear();
         Notify({ type: 'danger', message: '服务器获取失败' });
         reject(err);

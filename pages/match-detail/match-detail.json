@@ -1,5 +1,5 @@
 {
-    "usingComponents": {
-       
-    }
+    "usingComponents": {    },
+    "navigationBarTitleText": "比赛详情",
+    "backgroundColor": "#f6f6f6"
 }

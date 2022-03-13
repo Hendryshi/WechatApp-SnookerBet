@@ -1,8 +1,8 @@
 <view class="matchPart">
 	<view class="matchScore">
-		<view style="text-align: right; color: green;padding-left:40rpx;padding-right:40rpx;">{{score1}}</view>
+		<view class="score" style="text-align: right;margin-right: 40rpx;">{{score1}}</view>
 		<view>vs</view>
-		<view style="text-align: left; color: green;padding-left:40rpx;padding-right:40rpx;">{{score2}}</view>
+		<view class="score" style="text-align: left;margin-left: 40rpx;">{{score2}}</view>
 	</view>
 	
 	<view class="matchStatus matchType-{{matchType}}">	    

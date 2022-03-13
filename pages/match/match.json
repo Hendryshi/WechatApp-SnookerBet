@@ -1,7 +1,6 @@
 {
-  "usingComponents": {
-    
-  },
+  "usingComponents": {  },
+  "navigationBarTitleText": "赛程",
   "enablePullDownRefresh": true,
   "backgroundColor": "#f6f6f6"
 }

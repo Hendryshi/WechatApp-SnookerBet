@@ -1,1 +1,5 @@
-{}
+{
+    "usingComponents": {    },
+    "navigationBarTitleText": "竞猜排名",
+    "backgroundColor": "#f6f6f6"
+}

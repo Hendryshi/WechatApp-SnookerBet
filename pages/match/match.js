@@ -13,7 +13,6 @@ Page({
   },
 
   onLoad(options){
-    console.log(options);
     var idEvent = options.idEvent;
     var stQuiz = options.stQuiz;
     this.data.idEvent = idEvent;
@@ -49,9 +48,12 @@ Page({
   },
 
   ClickCell(evt) {
+    // console.log(evt.currentTarget.dataset);
     var id = evt.currentTarget.dataset.id; //id composite with idEvent-idRound-numberMatch
+    var roundName = evt.currentTarget.dataset.round;
+    var stQuiz = this.data.stQuiz;
     wx.navigateTo({
-      url: `/pages/match-detail/match-detail?id=${id}`,
+      url: `/pages/match-detail/match-detail?id=${id}&stQuiz=${stQuiz}&roundName=${roundName}`,
     });
   },
 });

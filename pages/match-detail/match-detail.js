@@ -3,26 +3,48 @@ const utils = require("../../utils/util");
 Page({
   data: {
     active: 0,
+    predict: [],
+    match: null,
+
   },
 
   onLoad: function (options) {
-    //TODO: add QuizStatus to allow the new user to see the predict for each match
-    if(options.id){
       var idEvent = options.id.split("-")[0];
       var idRound = options.id.split("-")[1];
       var numberMatch = options.id.split("-")[2];
-      api.getMatchPredict(idEvent,idRound,numberMatch).then(function(response){
+      var roundName = options.roundName;
+      var stQuiz = options.stQuiz;
+      wx.setNavigationBarTitle({
+        title: this.setTitle(roundName, numberMatch)
+      })
+      
+      this.getPredictMatch(idEvent, idRound, numberMatch, stQuiz);
+  },
+
+  onShow() {
+  },
+
+  setTitle(roundName, numberMatch)
+  {
+    if(roundName === "决赛")
+      return roundName;
+    else
+      return roundName + " 第" + numberMatch + "场";
+  },
+  
+  getPredictMatch(idEvent, idRound, numberMatch, stQuiz) {
+    api.getMatchPredict(idEvent, idRound, numberMatch).then(function (response) {
+      this.setData({
+        match: response.data.oMatch
+      });
+      if(stQuiz !== '0')
         this.setData({
-          predict: response.data.oPredicts,
-          match: response.data.oMatch
+          predict: response.data.oPredicts
         });
-      }.bind(this))
-      .catch(err => { wx.showToast({
-        title: 'err.errMsg',
-        icon: 'error'
-      }); 
+    }.bind(this))
+    .catch(err => {
+      console.log(err);
     });
-  }
   },
 
   //切换tab
@@ -31,13 +53,16 @@ Page({
       this.setData({
         active: 0,
       });
-      wx.pageScrollTo({ scrollTop: 0 });
-    }
-    if (event.detail.name == "1") {
+      wx.pageScrollTo({
+        scrollTop: 0
+      });
+    } else if (event.detail.name == "1") {
       this.setData({
         active: 1,
       });
-      wx.pageScrollTo({ scrollTop: 0 });
+      wx.pageScrollTo({
+        scrollTop: 0
+      });
     }
   },
 });

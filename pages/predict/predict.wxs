@@ -48,6 +48,14 @@ var scoreCorrect=function(scoreCorrect){
 	}
 }
 
+var calProgress = function(currentMatchIndex, matchLength){
+	console.log(currentMatchIndex, matchLength);
+	if(matchLength === 0)
+		return 20;
+	else
+		return (currentMatchIndex+1)/matchinfo.length*100;
+}
+
 module.exports={
 	getScoreRange: getScoreRange,
 	displayPre: btnPre,
@@ -56,5 +64,6 @@ module.exports={
 	iconColor: iconColor,
 	desactive: desactive,
 	winCorrect: winCorrect,
-	scoreCorrect: scoreCorrect
+	scoreCorrect: scoreCorrect,
+	calProgress: calProgress
 };

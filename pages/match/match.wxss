@@ -35,7 +35,7 @@
 
 .main-bg {
   padding-top: 240rpx;
-  padding-bottom: 200rpx;
+  padding-bottom: 100rpx;
 }
 
 .roundBox {

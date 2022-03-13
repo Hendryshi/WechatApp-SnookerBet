@@ -2,17 +2,17 @@
 <wxs src="../../components/player/player.wxs" module="playerObj"></wxs>
 
 <van-skeleton title row="10" row-width="90%" loading="{{showSkeleton}}">
-<view>
-	<image class="top-bg" src="/images/predict.jpg" mode="aspectFill" />
-</view>
-<view class="header">
-	<view class="progress">
-		<van-progress pivot-text="{{currentRoundName}}" stroke-width="50rpx" color="linear-gradient(to right, #be99ff, #7232dd)" percentage="{{(currentMatchIndex+1)/matchinfo.length*100}}" />
+	<view>
+		<image class="top-bg" src="/images/predict.jpg" mode="aspectFill" />
 	</view>
-	<view style="margin-right: 25rpx;">
-		<van-button type="primary" round size="small" bindtap="onGoNext" wx:if="{{currentMatchIndex < matchinfo.length - 1}}">修改</van-button>
+	<view class="header">
+		<view class="progress">
+			<van-progress pivot-text="{{currentRoundName}}" stroke-width="50rpx" color="linear-gradient(to right, #be99ff, #7232dd)" percentage="{{scoreRange.calProgress(currentMatchIndex, matchinfo.length)}}" />
+		</view>
+		<view style="margin-right: 25rpx;">
+			<van-button type="primary" round size="small" bindtap="onGoNext" wx:if="{{currentMatchIndex < matchinfo.length - 1}}">修改</van-button>
+		</view>
 	</view>
-</view>
 
 
 	<view class="main-bg">
@@ -73,6 +73,7 @@
 </van-popup>
 
 <van-toast id="van-toast" />
+<van-notify id="van-notify" />
 
 <van-dialog use-slot id="van-dialog" show="{{showConfirmDialog}}" title="提交竞猜分数" bind:close="onDialogClose" bind:confirm="onDialogConfirm" show-cancel-button>
 	<van-cell-group>

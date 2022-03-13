@@ -4,8 +4,6 @@
   position: fixed;
   top: 0;
   z-index: 1;
-  border-bottom-left-radius: 80rpx;
-  border-bottom-right-radius: 80rpx;
 }
 
 .top-title {

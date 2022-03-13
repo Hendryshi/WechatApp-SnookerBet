@@ -2,18 +2,14 @@ import uCharts from "../../components/u-charts/u-charts";
 const api = require("../../utils/api");
 var uChartsInstance = {};
 Page({
-  /**
-   * 页面的初始数据
-   */
   data: {
     cWidth: "",
     cHeight: "",
     active: 0,
-    showSkeleton:true
+    summary: [],
+    rankPoints:[]
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
+
   onLoad: function (options) {
     //这里的第一个 750 对应 css .charts 的 width
     const cWidth = (750 / 750) * wx.getSystemInfoSync().windowWidth;
@@ -37,6 +33,9 @@ Page({
   getRankTrending: function(){
     //test data idEvent 1014
     api.getRankTrending().then(function(rankPoints){
+      this.setData({
+        rankPoints: rankPoints
+      })
       var gamerPointByDay = this.rankByDay(this.sorByDate(rankPoints.data));
       var categories = this.rankByCategory(this.sorByDate(rankPoints.data));
       var chartData = {
@@ -142,9 +141,7 @@ Page({
   },
 
   onReady: function(){
-    this.setData({
-      showSkeleton: false
-    })
+    
   },
 
   touchLineA(e) {
@@ -168,13 +165,13 @@ Page({
         active: 0,
       });
       wx.pageScrollTo({ scrollTop: 0 });
+      this.getRankSummary();
     }
-    if (event.detail.name == "1") {
+    else if (event.detail.name == "1") {
       this.setData({
         active: 1,
       });
       wx.pageScrollTo({ scrollTop: 0 });
-      //this.getServerData();
       this.getRankTrending();
     }
   },

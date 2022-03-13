@@ -1,4 +1,4 @@
-<wxs src="./match.wxs" module="match" />
+<wxs src="../../utils/date.wxs" module="dateutil" />
 <view>
 	<view class="top-title">
 		
@@ -13,20 +13,19 @@
 </view>
 
 <view class="main-bg">
-	
 	<view class="loading"><van-loading size="48rpx">加载中...</van-loading></view>
-
 	<van-empty description="没有可用赛程" wx:if="{{dataArr.length === 0}}"></van-empty>
 	<view wx:else>
-		<view wx:for="{{dataArr.oEventRounds}}" wx:key="idRound" class="section">
-			<view class="roundBox" id="header" data-selectdata="{{item.idRound}}">{{item.roundName}}</view>
-			<match-card wx:for="{{item.oMatches}}" wx:key="number" catchtap="ClickCell" data-id="{{item.idEvent}}-{{item.idRound}}-{{item.number}}">
+		<view wx:for="{{dataArr.oEventRounds}}" wx:key="idRound" wx:for-item="r" class="section">
+			<view class="roundBox" id="header" data-selectdata="{{r.idRound}}">{{r.roundName}} (抢{{r.distance}})</view>
+			<match-card wx:for="{{r.oMatches}}" wx:key="number" catchtap="ClickCell" data-round="{{r.roundName}}" data-id="{{item.idEvent}}-{{item.idRound}}-{{item.number}}">
 				<player slot="player1" style="width:30%" showRank="True" name="{{item.player1.name}}" avator="{{item.player1.photo}}" rank="{{item.player1.rank}}" />
 				<player slot="player2" style="width:30%" showRank="True" name="{{item.player2.name}}" avator="{{item.player2.photo}}" rank="{{item.player2.rank}}" />
-				<match-info slot="matchInfo" matchDate="{{match.getDate(item.scheduledDate)}}" score1="{{item.score1}}" score2="{{item.score2}}" matchType="{{item.stMatch}}">
+				<match-info slot="matchInfo" matchDate="{{dateutil.getDate(item.scheduledDate)}}" score1="{{item.score1}}" score2="{{item.score2}}" matchType="{{item.stMatch}}">
 				</match-info>
 			</match-card>
 		</view>
+		<van-divider contentPosition="center" color="black">我也是有底线的</van-divider>
 	</view>
 </view>
 

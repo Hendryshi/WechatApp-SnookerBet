@@ -6,6 +6,7 @@ Page({
   data: {
     show: false,
     currentMatchIndex: 0,
+    currentRoundName: "第一轮",
     matchinfo: [],
     index: 0,
     idGamer: 0,
@@ -19,7 +20,7 @@ Page({
     //this.data.idEvent = options.idEvent;
     //get wechatname from storage ?
     this.data.idEvent = 1014;
-    this.data.wechatName = "congcong"; //"congcong";
+    this.data.wechatName = "audi"; //"congcong";
     api.getPredict(this.data.idEvent, this.data.wechatName)
       .then(
         function (response) {
@@ -29,7 +30,10 @@ Page({
           if (this.data.apiResponse.length === 0) {
             let second = 3;
             const timer = setInterval(() => {
-              const toast = Toast.fail("竞猜不可用");
+              const toast = Toast.fail({
+                message: '竞猜不可用',
+                mask: true
+              });
               if (second) {
                 second--;
               } else {

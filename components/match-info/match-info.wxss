@@ -17,6 +17,12 @@
   font-weight: bold;
 }
 
+.score{
+  color: green;
+  width: 80rpx;
+  
+}
+
 .matchStatus {
   display: flex;
   justify-content: center;

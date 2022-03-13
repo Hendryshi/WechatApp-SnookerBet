@@ -13,7 +13,7 @@ var formatTime = function (date, format) {
     else if (format === "MM/dd")
         return [month, day].join('/');
     else
-        return [month, day].join('/'); + ' ' + [hour, minute].join(':');
+        return [month, day].join('/') + ' ' + [hour, minute].join(':');
 }
 
 var fixz = function (num) {
@@ -24,8 +24,13 @@ var fixz = function (num) {
 };
 
 var getLocaleDate = function (dDate, format) {
-    var localTime = getDate(dDate).getTime() - getDate().getTimezoneOffset() * 60 * 1000 - 60 * 1000 * 60;
-    return formatTime(localTime, format);
+    if(!dDate || dDate === null)
+        return "Unknown";
+    else
+    {
+        var localTime = getDate(dDate).getTime() - getDate().getTimezoneOffset() * 60 * 1000 - 60 * 1000 * 60;
+        return formatTime(localTime, format);
+    }
 };
 
 module.exports = {
