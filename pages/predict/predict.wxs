@@ -49,7 +49,6 @@ var scoreCorrect=function(scoreCorrect){
 }
 
 var calProgress = function(currentMatchIndex, matchLength){
-	console.log(currentMatchIndex, matchLength);
 	if(matchLength === 0)
 		return 20;
 	else

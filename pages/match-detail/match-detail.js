@@ -4,8 +4,7 @@ Page({
   data: {
     active: 0,
     predict: [],
-    match: null,
-
+    match: null
   },
 
   onLoad: function (options) {
@@ -16,8 +15,7 @@ Page({
       var stQuiz = options.stQuiz;
       wx.setNavigationBarTitle({
         title: this.setTitle(roundName, numberMatch)
-      })
-      
+      });    
       this.getPredictMatch(idEvent, idRound, numberMatch, stQuiz);
   },
 
