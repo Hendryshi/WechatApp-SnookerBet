@@ -42,6 +42,7 @@
     "van-notify": "@vant/weapp/notify/index",
     "van-loading": "@vant/weapp/loading/index",
     "van-divider": "@vant/weapp/divider/index",
+    "van-switch": "@vant/weapp/switch/index",
     "match-card": "components/match-card/match-card",
     "player": "components/player/player",
     "match-info": "components/match-info/match-info",

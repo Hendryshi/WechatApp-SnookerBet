@@ -12,6 +12,8 @@ var formatTime = function (date, format) {
         return [year, month, day].join('/');
     else if (format === "MM/dd")
         return [month, day].join('/');
+    else if (format === "HH:mm:ss")
+        return [hour, minute, second].join(':');
     else
         return [month, day].join('/') + ' ' + [hour, minute].join(':');
 }
@@ -23,12 +25,15 @@ var fixz = function (num) {
     return num;
 };
 
-var getLocaleDate = function (dDate, format) {
+var getLocaleDate = function (dDate, format, isLocal) {
     if(!dDate || dDate === null)
         return "Unknown";
     else
     {
-        var localTime = getDate(dDate).getTime() - getDate().getTimezoneOffset() * 60 * 1000 - 60 * 1000 * 60;
+        if(isLocal)
+            var localTime = getDate(dDate).getTime()
+        else
+            var localTime = getDate(dDate).getTime() - getDate().getTimezoneOffset() * 60 * 1000 - 60 * 1000 * 60;
         return formatTime(localTime, format);
     }
 };

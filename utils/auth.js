@@ -13,7 +13,6 @@ const bindUserProfile = function(){
               if(result){
                 //result.userInfo [nickName: "sophie_zhf", avatarUrl: "https://...", language:"zh_CN"]
                 //set user info into storage
-                wx.setStorageSync("hasUserProfile", true);
                 wx.setStorageSync("userProfile", result.userInfo);
                 resolve(true);
               }
@@ -21,10 +20,6 @@ const bindUserProfile = function(){
             fail: (err)=>{
               console.log("get user profile error" + err.errMsg)
               reject(true);
-              /*wx.showToast({
-                title: '用户拒绝授权则无法继续下一步',
-                icon: 'none'
-              });*/
             }
           });
         }
@@ -36,7 +31,7 @@ const getUserWechatName = function(){
 };
 
 const hasUserProfile = function(){   
-    if(wx.getStorageSync("hasUserProfile") && wx.getStorageSync("userProfile")){
+    if(wx.getStorageSync("userProfile")){
         return true;
     }else{
         return false;

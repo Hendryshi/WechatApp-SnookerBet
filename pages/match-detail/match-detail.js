@@ -12,7 +12,7 @@ Page({
       var idRound = options.id.split("-")[1];
       var numberMatch = options.id.split("-")[2];
       var roundName = options.roundName;
-      var stQuiz = options.stQuiz;
+      var stQuiz = options.stQuiz === "undefined" ? wx.getStorageSync("stQuiz") : options.stQuiz;
       wx.setNavigationBarTitle({
         title: this.setTitle(roundName, numberMatch)
       });    
@@ -35,14 +35,11 @@ Page({
       this.setData({
         match: response.data.oMatch
       });
-      if(stQuiz !== '0')
+      if(stQuiz && stQuiz !== '0')
         this.setData({
           predict: response.data.oPredicts
         });
-    }.bind(this))
-    .catch(err => {
-      console.log(err);
-    });
+    }.bind(this));
   },
 
   //切换tab

@@ -1,5 +1,6 @@
 import uCharts from "../../components/u-charts/u-charts";
 const api = require("../../utils/api");
+const util = require("../../utils/util");
 var uChartsInstance = {};
 Page({
   data: {
@@ -7,7 +8,8 @@ Page({
     cHeight: "",
     active: 0,
     summary: [],
-    rankPoints:[]
+    rankPoints:[],
+    firstLoading: true
   },
 
   onLoad: function (options) {
@@ -17,41 +19,47 @@ Page({
     const cHeight = (500 / 750) * wx.getSystemInfoSync().windowWidth;
     const pixelRatio = wx.getSystemInfoSync().pixelRatio;
     this.setData({ cWidth, cHeight, pixelRatio });
-    this.getRankSummary();
   },
 
   getRankSummary: function(){
     //test data idEvent 1014
-    api.getRankSummary().then(function(summary){
+    api.getRankSummary({
+      noToast: !this.data.firstLoading
+    }).then(function(summary){
       summary.data.sort((item1,item2) => item2 - item1);
       this.setData({
         summary: summary.data
       });
     }.bind(this))
-    .catch();
   },
-  getRankTrending: function(){
-    //test data idEvent 1014
-    api.getRankTrending().then(function(rankPoints){
+
+  requestTrending(){
+    api.getRankTrending({
+      noToast: !this.data.firstLoading
+    }).then(function(rankPoints){
       this.setData({
-        rankPoints: rankPoints
-      })
-      var gamerPointByDay = this.rankByDay(this.sorByDate(rankPoints.data));
-      var categories = this.rankByCategory(this.sorByDate(rankPoints.data));
+        rankPoints: rankPoints.data
+      });
+    }.bind(this))
+  },
+
+  getRankTrending: function(){
+      var gamerPointByDay = this.rankByDay(this.sorByDate(this.data.rankPoints));
+      var categories = this.rankByCategory(this.sorByDate(this.data.rankPoints));
       var chartData = {
         categories: categories,
         series: gamerPointByDay
       };
       this.drawCharts("canvasColumn", chartData);
-    }.bind(this))
-    .catch();
   },
+
   sorByDate:function(data){
     data.forEach(function(item){
       item.oPredictByDays.sort((day1,day2)=>{return new Date(day2.dtResult) - new Date(day1.dtResult);});
     });
     return data;
   },
+
   rankByDay:function(points){  
     var gamerPointByDay = [];
     points.forEach(function(pointByGamer){
@@ -65,14 +73,16 @@ Page({
     });
     return gamerPointByDay;
   },
+
   rankByCategory:function(points){
     var categories = [];
     points[0].oPredictByDays.forEach(function(element){
       var language = wx.getSystemInfoSync().language.replace("_","-");   
-      categories.push(new Intl.DateTimeFormat(language,{month:"2-digit",day:"2-digit"}).format(new Date(element.dtResult)));
+      categories.push(util.formatTime(new Date(element.dtResult)));
     });
     return categories;
   },
+
   drawCharts(id, data) {
     const query = wx.createSelectorQuery().in(this);
     query
@@ -156,6 +166,15 @@ Page({
 
   onShow() {
     this.getTabBar().init();
+    this.getRankSummary();
+    this.requestTrending();
+    this.setData({
+      active: 0
+    })
+    if(this.data.firstLoading)
+      this.setData({
+        firstLoading: false
+      })
   },
 
   //切换tab
@@ -165,7 +184,6 @@ Page({
         active: 0,
       });
       wx.pageScrollTo({ scrollTop: 0 });
-      this.getRankSummary();
     }
     else if (event.detail.name == "1") {
       this.setData({

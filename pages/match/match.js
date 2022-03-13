@@ -1,7 +1,6 @@
 const api = require("../../utils/api"); //引入同意管理的接口js
 const utils = require("../../utils/util");
 const app = getApp(); //引入全局对象
-import Toast from "/@vant/weapp/toast/toast"; //引入vant提示插件
 
 Page({
   data: {
@@ -9,7 +8,7 @@ Page({
     stQuiz: 0,
     gameName: "",
     dataArr: [],
-    Time: 0,
+    firstLoading: true,
   },
 
   onLoad(options){
@@ -25,10 +24,18 @@ Page({
   onShow(){
     var idEvent = this.data.idEvent;
     this.getMatchData(idEvent);
+    if(this.data.firstLoading)
+    {
+      this.setData({
+        firstLoading: false
+      })
+    }
   },
 
   getMatchData(idEvent, isPullDown){
-    api.getMatch(idEvent).then(function(res){
+    api.getMatch(idEvent, {
+      noToast: !this.data.firstLoading && !isPullDown
+    }).then(function(res){
       this.setData({
         idEvent: res.data.idEvent,
         dataArr: res.data

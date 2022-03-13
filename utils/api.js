@@ -1,52 +1,46 @@
 //api.js 我们将所有的接口统一管理
 const request = require("./request"); //引入封装好的js文件
 module.exports = {
-  
-  login(data) {
-    return request.post("/learn/auth/login", data);
+
+  getMatch(idevent, options){
+    return request.get(`api/Snooker/GetEventWithMatch/${idevent}`, options)
   },
 
-  getMatch(idevent){
-    return request.get(`api/Snooker/GetEventWithMatch/${idevent}`)
+  getMatchOnGoing(options){
+    return request.get("api/Snooker/GetOnGoingMatch", options);
   },
 
   /**
    * @param {integer} idEvent mandatory
    * @param {string} wechatName not mandatory 
   */
-  getPredict(idEvent,wechatName){
-    return request.get(`api/Quiz/GetQuizPredict/?e=${idEvent}&wn=${wechatName}`);
+  getPredict(idEvent,wechatName, options){
+    return request.get(`api/Quiz/GetQuizPredict/?e=${idEvent}&wn=${wechatName}`, options);
   },
 
-  postPredict(oPredictData){
-    return request.post("api/Quiz/UpdateQuizPredict", oPredictData);
+  postPredict(options){
+    return request.post("api/Quiz/UpdateQuizPredict", options);
   },
 
   /**
    * @param {integer} idEvent not mandatory 
   */
-  getRankSummary(idEvent){
-    if(idEvent){
-      return request.get(`api/Quiz/GetQuizSummary/?e=${idEvent}`);
-    }else{
-      return request.get("api/Quiz/GetQuizSummary");
-    }  
+  getRankSummary(options){
+    return request.get("api/Quiz/GetQuizSummary", options);
   },
-  getRankTrending(idEvent){
-    if(idEvent){
-      return request.get(`api/Quiz/GetQuizTrending/?e=${idEvent}`);
-    }else{
-      return request.get("api/Quiz/GetQuizTrending");
-    } 
+
+  getRankTrending(options){
+    return request.get("api/Quiz/GetQuizTrending", options);
   },
-  getMatchPredict(idEvent, idRound, numberMatch){
+
+  getMatchPredict(idEvent, idRound, numberMatch, options){
     if(idEvent && idRound && numberMatch){
-      return request.get(`api/Quiz/GetQuizMatch/?e=${idEvent}&r=${idRound}&n=${numberMatch}`);
+      return request.get(`api/Quiz/GetQuizMatch/?e=${idEvent}&r=${idRound}&n=${numberMatch}`, options);
     }
   },
 
-  GetQuizEvent(){
-    return request.get("api/Quiz/GetQuizEvent"); 
+  GetQuizEvent(options){
+    return request.get("api/Quiz/GetQuizEvent", options); 
   }
 
 };

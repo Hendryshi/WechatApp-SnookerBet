@@ -2,7 +2,6 @@ const api = require("../../utils/api"); //引入同意管理的接口js
 const utils = require("../../utils/util");
 const auth = require("../../utils/auth");
 const app = getApp(); //引入全局对象
-import Toast from "/@vant/weapp/toast/toast"; //引入vant提示插件
 
 Page({
   data: {
@@ -19,19 +18,22 @@ Page({
     dataArr: []
   },
 
-  onLoad(options) {
+  onLoad() {
+  },
+
+  getQuizEvent(){
     api.GetQuizEvent().then(function(res){
       this.setData({
         dataArr: res.data
       })
+      if(this.data.dataArr.length > 0)
+        wx.setStorageSync("stQuiz", this.data.dataArr[0].stQuiz);
     }.bind(this))
-    .catch(err => {
-      Toast.fail("服务器无响应");
-    })
   },
 
   onShow() {
     this.getTabBar().init();
+    this.getQuizEvent();
   },
 
   tapMatch(evt) {
@@ -44,6 +46,7 @@ Page({
 
   clickPredict(evt) {
     if(!auth.hasUserProfile()){
+      console.log("not")
       auth.bindUserProfil().then(()=>{
         this.navToPredict(evt);
       })

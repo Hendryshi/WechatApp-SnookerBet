@@ -8,12 +8,15 @@ var app = getApp(); //引入全局app.js，我们可以在globalData中定义一
 import Toast from "../miniprogram_npm/@vant/weapp/toast/toast"; //引入vant插件，用于提示错误
 import Notify from "../miniprogram_npm/@vant/weapp/notify/notify"; //引入vant插件，用于提示错误
 const request = function (url, options) {
+  // console.log(options)
   return new Promise((resolve, reject) => {
-    Toast.loading({
-      duration: 10000,
-      message: '加载中...',
-      forbidClick: false,
-    });
+    if(!options.noToast){
+      Toast.loading({
+        duration: 10000,
+        message: '加载中...',
+        forbidClick: false,
+      });
+    }
     wx.request({
       url: app.globalData.baseUrl + url,
       method: options.method,
@@ -47,17 +50,17 @@ const request = function (url, options) {
 
 module.exports = {
   //封装get方法
-  get(url, data) {
+  get(url, options) {
     return request(url, {
-      method: "GET",
-      data,
+      ...options,
+      method: "GET"
     });
   },
   //封装post方法
-  post(url, data) {
+  post(url, options) {
     return request(url, {
+      ...options,
       method: "POST",
-      data,
     });
   },
 };

@@ -21,7 +21,7 @@
   margin-right: 20rpx;
   margin-left: 20rpx;
   color: black;
-  padding-bottom: 100rpx;
+  padding-bottom: 25rpx;
 }
 
 .card {

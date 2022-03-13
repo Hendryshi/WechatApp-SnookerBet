@@ -11,8 +11,6 @@
 	</van-tabs>
 </view>
 
-
-
 <view wx:if="{{active===0}}" class="cellBg release">
 	<van-empty description="暂无数据" wx:if="{{summary.length === 0}}"></van-empty>
 	<view wx:else>
@@ -22,8 +20,8 @@
 					<view class="van-cell-text">排名</view>
 				</view>
 				<view class="rankul">
-					<view class="rankli">比分</view>
 					<view class="rankli">晋级</view>
+					<view class="rankli">比分</view>
 					<view class="rankli">积分</view>
 				</view>
 			</van-cell>
