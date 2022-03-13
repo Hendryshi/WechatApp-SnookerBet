@@ -19,6 +19,8 @@ Page({
 
   onLoad: function (options) {
     this.data.idEvent = options.idEvent;
+    //only for test
+    //this.data.wechatName = "congcong";
     this.data.wechatName = auth.getUserWechatName();
     api.getPredict(this.data.idEvent, this.data.wechatName)
       .then(
@@ -27,12 +29,14 @@ Page({
           //new user + match started
           if (this.data.apiResponse.length === 0) {
             let second = 3;
+            const toast = Toast.fail({
+              message: '竞猜不可用'
+            });
             const timer = setInterval(() => {
-              const toast = Toast.fail({
-                message: '竞猜不可用',
-                mask: true
-              });
               if (second) {
+                toast.setData({
+                  message: '竞猜不可用'
+                });
                 second--;
               } else {
                 clearInterval(timer);

@@ -49,10 +49,10 @@ var scoreCorrect=function(scoreCorrect){
 }
 
 var calProgress = function(currentMatchIndex, matchLength){
-	if(matchLength === 0)
+	if(matchLength === "0")
 		return 20;
 	else
-		return (currentMatchIndex+1)/matchinfo.length*100;
+		return (currentMatchIndex+1)/matchLength*100;
 }
 
 module.exports={
