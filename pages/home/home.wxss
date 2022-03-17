@@ -62,3 +62,14 @@
 .quizBox image {
   width: 200rpx;
 }
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.wrapper image{
+  height: 800rpx;
+}

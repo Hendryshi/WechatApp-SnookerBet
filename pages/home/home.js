@@ -15,10 +15,13 @@ Page({
         url: '../../images/match.jpg'
       }
     ],
-    dataArr: []
+    dataArr: [],
+    showGuide: false
   },
 
   onLoad() {
+    if(!wx.getStorageSync("alreadyEnter"))
+      this.setData({showGuide: true});
   },
 
   getQuizEvent(){
@@ -63,5 +66,10 @@ Page({
     wx.navigateTo({
         url: `/pages/predict/predict?idEvent=${idEvent}`
     });
+  },
+
+  onClickHide(){
+    this.setData({showGuide: false});
+    wx.setStorageSync('alreadyEnter', true);
   }
 });

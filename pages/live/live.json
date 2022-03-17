@@ -2,5 +2,6 @@
     "usingComponents": {  },
     "navigationBarTitleText": "直播比分",
     "enablePullDownRefresh": true,
-    "backgroundColor": "#f6f6f6"
+    "backgroundColor": "#f6f6f6",
+    "backgroundTextStyle": "dark"
   }

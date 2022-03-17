@@ -14,7 +14,7 @@ const request = function (url, options) {
   return new Promise((resolve, reject) => {
     if(!options.noToast){
       Toast.loading({
-        duration: 10000,
+        duration: 0,
         message: '加载中...',
         forbidClick: false,
       });

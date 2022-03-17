@@ -3,7 +3,6 @@
     "pages/home/home",
     "pages/live/live",
     "pages/rank/rank",
-    "pages/user/user",
     "pages/match/match",
     "pages/match-detail/match-detail",
     "pages/predict/predict"
@@ -44,7 +43,7 @@
     "van-divider": "@vant/weapp/divider/index",
     "van-switch": "@vant/weapp/switch/index",
     "van-image": "@vant/weapp/image/index",
-    
+
     "match-card": "components/match-card/match-card",
     "player": "components/player/player",
     "match-info": "components/match-info/match-info",
@@ -61,9 +60,6 @@
       },
       {
         "pagePath": "pages/rank/rank"
-      },
-      {
-        "pagePath": "pages/user/user"
       }
     ]
   }
