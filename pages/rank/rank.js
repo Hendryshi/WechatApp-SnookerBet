@@ -168,9 +168,9 @@ Page({
     this.getTabBar().init();
     this.getRankSummary();
     this.requestTrending();
-    this.setData({
-      active: 0
-    })
+    // this.setData({
+    //   active: 0
+    // })
     if(this.data.firstLoading)
       this.setData({
         firstLoading: false

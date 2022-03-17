@@ -6,16 +6,6 @@
   z-index: 1;
 }
 
-.top-title {
-  color: white;
-  margin-top: 100rpx;
-  width: 100%;
-  font-size: large;
-  text-align: center;
-  position: fixed;
-  z-index: 2;
-}
-
 .header{
   position: fixed;
   z-index: 2;
@@ -35,7 +25,7 @@
 }
 
 .main-bg {
-  padding-top: 320rpx;
+  padding-top: 280rpx;
   padding-bottom: 200rpx;
 }
 

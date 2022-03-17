@@ -7,6 +7,8 @@
 var app = getApp(); //引入全局app.js，我们可以在globalData中定义一些公用的数据，比如baseUrl、token
 import Toast from "../miniprogram_npm/@vant/weapp/toast/toast"; //引入vant插件，用于提示错误
 import Notify from "../miniprogram_npm/@vant/weapp/notify/notify"; //引入vant插件，用于提示错误
+const auth = require("./auth");
+
 const request = function (url, options) {
   // console.log(options)
   return new Promise((resolve, reject) => {
@@ -24,7 +26,8 @@ const request = function (url, options) {
         options.method == "GET" ? options.data : JSON.stringify(options.data),
       // header这里根据业务情况自行选择需要还是不需要
       header: {
-        Authorization: "Bearer " + app.globalData.token,
+        // Authorization: "Bearer " + app.globalData.token,
+        WechatId: auth.getUserWechatName()
       },
       success: (res) => {
         //console.log("enter success");
@@ -39,7 +42,7 @@ const request = function (url, options) {
         }
       },
       fail: (err) => {
-        console.log("enter fail");
+        console.log(err);
         Toast.clear();
         Notify({ type: 'danger', message: '服务器获取失败' });
         reject(err);

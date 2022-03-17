@@ -3,7 +3,7 @@
   width: 100%;
   position: fixed;
   top: 0;
-  z-index: 1;
+  z-index: 3;
 }
 
 .top-title {
@@ -13,12 +13,12 @@
   font-size: large;
   text-align: center;
   position: fixed;
-  z-index: 2;
+  z-index: 3;
 }
 
 .header{
   position: fixed;
-  z-index: 2;
+  z-index: 3;
   height: 80rpx;
   margin-top: 240rpx;
   width: 100%;
@@ -31,6 +31,17 @@
   box-shadow: rgba(230, 230, 230) 0px 0px 6px;
   line-height: 80rpx;
   font-weight: bold ;
+}
+
+.headerTitle{
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.headerButton{
+  width: 15%;
 }
 
 .main-bg {
@@ -48,6 +59,7 @@
   /*align-items: center;*/
   position: sticky;
   top: 300rpx;
+  z-index: 2;
 }
 
 .loading{

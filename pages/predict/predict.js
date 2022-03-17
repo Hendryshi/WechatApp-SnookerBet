@@ -20,7 +20,7 @@ Page({
   onLoad: function (options) {
     this.data.idEvent = options.idEvent;
     //only for test
-    this.data.wechatName = "audi";
+    this.data.wechatName = "congcong";
     //this.data.wechatName = auth.getUserWechatName();
     api.getPredict(this.data.idEvent, this.data.wechatName)
       .then(
@@ -58,7 +58,7 @@ Page({
               matchinfo: response.data.oQuizRounds,
               idGamer: this.data.idGamer,
               gamerName: this.data.gamerName,
-              readonly: false//only for test response.data.readOnly,
+              readonly: false //only for test response.data.readOnly,
             });
           }
         }.bind(this)
@@ -67,13 +67,13 @@ Page({
   },
 
 
-  onReady: function () {    
-      this.setData({
-        showSkeleton: false
-      });
+  onReady: function () {
+    this.setData({
+      showSkeleton: false
+    });
   },
 
-  onChangePoint: function(evt){
+  onChangePoint: function (evt) {
     var matchIndex = evt.currentTarget.id.split("-")[0];
     if (
       !this.data.readOnly &&
@@ -86,20 +86,20 @@ Page({
       this.data.matchinfo[this.data.currentMatchIndex].oPredicts[
         matchIndex
       ] = oRandomMatch;
-      }
-      this.setData({
-        matchinfo: this.data.matchinfo,
-      });
+    }
+    this.setData({
+      matchinfo: this.data.matchinfo,
+    });
   },
-  
-  getRandomWinner:function(oMatch){
+
+  getRandomWinner: function (oMatch) {
     var arrPlayers = [oMatch.player1.idPlayer, oMatch.player2.idPlayer]
     var playerRandom = Math.floor(Math.random() * arrPlayers.length);
-    if(arrPlayers[playerRandom] === oMatch.player1.idPlayer){
+    if (arrPlayers[playerRandom] === oMatch.player1.idPlayer) {
       oMatch.winnerId = parseInt(oMatch.player1.idPlayer);
       oMatch.score1 = this.data.maxScore;
       oMatch.score2 = Math.floor(Math.random() * (this.data.maxScore - 0)) + 0;
-    }else{
+    } else {
       oMatch.winnerId = parseInt(oMatch.player2.idPlayer);
       oMatch.score2 = this.data.maxScore;
       oMatch.score1 = Math.floor(Math.random() * (this.data.maxScore - 0)) + 0;
@@ -243,7 +243,7 @@ Page({
         if (
           arrayMatchInfo[this.data.currentMatchIndex + 1].oPredicts[
             nextMatchIndex
-          ][nextMatchPlayer] !== winner
+          ][nextMatchPlayer].idPlayer !== winner.idPlayer
         ) {
           arrayMatchInfo[this.data.currentMatchIndex + 1].oPredicts[
             nextMatchIndex

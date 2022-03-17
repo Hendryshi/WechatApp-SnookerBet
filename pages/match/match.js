@@ -8,7 +8,9 @@ Page({
     stQuiz: 0,
     gameName: "",
     dataArr: [],
+    dataMatch:[],
     firstLoading: true,
+    showAllMatch: false
   },
 
   onLoad(options){
@@ -35,15 +37,24 @@ Page({
   getMatchData(idEvent, isPullDown){
     api.getMatch(idEvent, {
       noToast: !this.data.firstLoading && !isPullDown
-    }).then(function(res){
+    }).then(res => {
+      
+      if(!this.data.showAllMatch)
+        this.data.dataMatch = res.data.oEventRounds.filter(r => r.noTBDMatch);
+      else
+        this.data.dataMatch = res.data.oEventRounds;
+
       this.setData({
         idEvent: res.data.idEvent,
-        dataArr: res.data
+        dataArr: res.data,
+        dataMatch: this.data.dataMatch
       })
+
       if(isPullDown)
         wx.stopPullDownRefresh();
-    }.bind(this))
+    })
     .catch(err => {
+      console.log(err);
       if(isPullDown)
         wx.stopPullDownRefresh();
     })
@@ -61,5 +72,22 @@ Page({
     wx.navigateTo({
         url: `/pages/match-detail/match-detail?id=${id}&stQuiz=${stQuiz}&roundName=${roundName}`,
     });
-  }
+  },
+
+  onChange({ detail }) {
+    if(!detail)
+      this.setData({ 
+        showAllMatch: detail,
+        dataMatch: this.data.dataArr.oEventRounds.filter(r => r.noTBDMatch)
+      })
+    else
+      this.setData({ 
+        showAllMatch: detail,
+        dataMatch: this.data.dataArr.oEventRounds
+      })
+    
+    wx.pageScrollTo({
+      scrollTop: 0,
+    });
+  },
 });

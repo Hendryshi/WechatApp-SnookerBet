@@ -27,7 +27,7 @@ var fixz = function (num) {
 
 var getLocaleDate = function (dDate, format, isLocal) {
     if(!dDate || dDate === null)
-        return "Unknown";
+        return "未知";
     else
     {
         if(isLocal)

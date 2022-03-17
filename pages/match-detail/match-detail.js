@@ -35,7 +35,7 @@ Page({
       this.setData({
         match: response.data.oMatch
       });
-      if(stQuiz && stQuiz !== '0')
+      if((stQuiz && stQuiz !== '0') || this.data.match.stMatch === 2)
         this.setData({
           predict: response.data.oPredicts
         });

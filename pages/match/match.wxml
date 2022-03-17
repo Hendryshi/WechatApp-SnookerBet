@@ -1,15 +1,15 @@
 <wxs src="../../utils/date.wxs" module="dateutil" />
 <view>
-	<view class="top-title">
-		
-	</view>
 	<image class="top-bg" src="/images/background.jpg" mode="aspectFill" />
 </view>
 
 <view class="header">
-	<view class="progress">
+	<view class="headerButton"></view>
+	<view class="headerTitle">
 		{{dataArr.name}}
-		<van-switch checked="{{ checked }}" size="40rpx" bind:change="onChange" />
+	</view>
+	<view class="headerButton">
+		<van-switch checked="{{showAllMatch}}" size="40rpx" bind:change="onChange" />
 	</view>
 </view>
 
@@ -17,7 +17,7 @@
 	<view class="loading"><van-loading size="48rpx">加载中...</van-loading></view>
 	<van-empty description="暂无数据" wx:if="{{dataArr.length === 0}}"></van-empty>
 	<view wx:else>
-		<view wx:for="{{dataArr.oEventRounds}}" wx:key="idRound" wx:for-item="r" class="section">
+		<view wx:for="{{dataMatch}}" wx:key="idRound" wx:for-item="r" class="section">
 			<view class="roundBox" id="header" data-selectdata="{{r.idRound}}">{{r.roundName}} (抢{{r.distance}})</view>
 			<match-card wx:for="{{r.oMatches}}" wx:key="number" catchtap="ClickCell" data-round="{{r.roundName}}" data-id="{{item.idEvent}}-{{item.idRound}}-{{item.number}}">
 				<player slot="player1" style="width:30%" showRank="True" name="{{item.player1.name}}" avator="{{item.player1.photo}}" rank="{{item.player1.rank}}" />

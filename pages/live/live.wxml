@@ -6,9 +6,10 @@
 
 <view class="header">
 	<view class="updateDate">更新时间: {{dateutil.getDate(updateTime, "HH:mm:ss", true)}}</view>
-</view>w
+</view>
 
 <view class="main-bg">
+	<view class="loading"><van-loading size="48rpx">加载中...</van-loading></view>
 	<van-empty description="暂无数据" wx:if="{{dataArr.length === 0}}"></van-empty>
 	<view wx:else>
 		<match-card wx:for="{{dataArr}}" wx:key="number" catchtap="ClickCell" data-round="{{item.roundName}}" data-id="{{item.idEvent}}-{{item.idRound}}-{{item.number}}">

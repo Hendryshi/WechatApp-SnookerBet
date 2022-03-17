@@ -5,13 +5,9 @@
   align-items: center;
 }
 
-.playerPart image {
-  border-radius: 50%;
-  width: 115rpx;
-}
-
 .rankTag {
   margin-top: -30rpx;
+  z-index: 1;
 }
 
 .player {
