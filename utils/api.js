@@ -14,8 +14,8 @@ module.exports = {
    * @param {integer} idEvent mandatory
    * @param {string} wechatName not mandatory 
   */
-  getPredict(idEvent,wechatName, options){
-    return request.get(`api/Quiz/GetQuizPredict/?e=${idEvent}&wn=${wechatName}`, options);
+  getPredict(idEvent,wechatName,reEdit, options){
+    return request.get(`api/Quiz/GetQuizPredict/?e=${idEvent}&wn=${wechatName}&re=${reEdit}`, options);
   },
 
   postPredict(options){

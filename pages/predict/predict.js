@@ -7,12 +7,15 @@ Page({
   data: {
     show: false,
     currentMatchIndex: 0,
+    startMatchIndex: 0,
     currentRoundName: "第一轮",
     matchinfo: [],
     index: 0,
     idGamer: 0,
+    nbEditPredict: 0,
     gamerName: "",
     showConfirmDialog: false,
+    showReEditConfirmDialog:false,
     showSkeleton: true,
     apiResponse: []
   },
@@ -20,57 +23,105 @@ Page({
   onLoad: function (options) {
     this.data.idEvent = options.idEvent;
     //only for test
-    this.data.wechatName = "congcong";
-    //this.data.wechatName = auth.getUserWechatName();
-    api.getPredict(this.data.idEvent, this.data.wechatName)
-      .then(
-        function (response) {
-          this.data.apiResponse = response.data;
-          //new user + match started
-          if (this.data.apiResponse.length === 0) {
-            let second = 3;
-            const toast = Toast.fail({
-              message: '竞猜不可用'
-            });
-            const timer = setInterval(() => {
-              if (second) {
-                toast.setData({
-                  message: '竞猜不可用'
-                });
-                second--;
-              } else {
-                clearInterval(timer);
-                Toast.clear();
-                wx.switchTab({
-                  url: '/pages/home/home'
-                });
-              }
-            }, 1000);
-          } else {
-            if (response.data.oGamer && response.data.oGamer.idGamer !== 0) {
-              this.data.idGamer = response.data.oGamer.idGamer;
-              this.data.gamerName = response.data.oGamer.gamerName;
-            }
-            this.setData({
-              currentRoundName: response.data.oQuizRounds[this.data.currentMatchIndex].roundName,
-              currentRound: response.data.oQuizRounds[this.data.currentMatchIndex].idRound,
-              maxScore: response.data.oQuizRounds[this.data.currentMatchIndex].distance,
-              matchinfo: response.data.oQuizRounds,
-              idGamer: this.data.idGamer,
-              gamerName: this.data.gamerName,
-              readonly: false //only for test response.data.readOnly,
-            });
-          }
-        }.bind(this)
-      )
-      .catch();
+    //this.data.wechatName = "mercedes";
+    this.getStQuiz();
+    this.data.wechatName = auth.getUserWechatName();
+    this.updatePredictInfo(false);
   },
 
+  getStQuiz(){
+    var stQuiz = wx.getStorageSync("stQuiz");
+    this.setData({
+      stQuiz: stQuiz
+    });
+  },
+
+  updateData(index) {
+    this.setData({
+      currentRound: this.data.matchinfo[index].idRound,
+      currentRoundName: this.data.matchinfo[index].roundName,
+      currentMatchIndex: index,
+      maxScore: this.data.matchinfo[index].distance,
+      matchinfo: this.data.matchinfo
+    });
+  },
+
+  onReEdit() {
+    this.showReEditConfirm(true);
+  },
+
+  onReEditDialogClose(evt){
+    this.showReEditConfirm(false);
+  },
+
+  onReEditDialogConfirm(evt){
+    this.updatePredictInfo(true);
+  },
+
+  showReEditConfirm(bShow){
+    this.setData({
+      showReEditConfirmDialog: bShow,
+    });
+  },
+
+  showConfirmDialog(bShow){
+    this.setData({
+      showConfirmDialog: bShow,
+    });
+  },
+
+  updatePredictInfo(isReEdit){
+    api.getPredict(this.data.idEvent, this.data.wechatName, isReEdit)
+    .then(response => {
+        this.data.apiResponse = response.data;
+        //new user + match started
+        if (this.data.apiResponse.length === 0) {
+          this.showToastNoPredict();
+        } else {
+          this.setData({
+            idEvent: this.data.idEvent,
+            wechatName: this.data.wechatName,
+            matchinfo: response.data.oQuizRounds,
+            readonly: response.data.readOnly, //only for test response.data.readOnly,
+            idGamer: response.data.oGamer.idGamer,
+            gamerName: response.data.oGamer.gamerName,
+            nbEditPredict: response.data.oGamer.nbEditPredict, //0 -> can re-edit; 1-> no re-edit
+          });
+        }
+
+        if(!this.data.readonly)
+          this.setStartRoundIndex(this.data.matchinfo);
+
+        console.log(this.data.startMatchIndex);
+        this.updateData(this.data.startMatchIndex);
+      })
+  },
 
   onReady: function () {
     this.setData({
-      showSkeleton: false
+      showSkeleton: false,
     });
+  },
+
+  showToastNoPredict() {
+    let second = 3;
+    const toast = Toast.fail({
+      message: "竞猜不可用",
+    });
+    const timer = setInterval(() => {
+      if (second) {
+        toast.setData({
+          message: "竞猜不可用",
+        });
+        second--;
+      } else {
+        clearInterval(timer);
+        Toast.clear();
+        wx.switchTab({
+          url: "/pages/home/home",
+        });
+      }
+    }, 1000);
   },
 
   onChangePoint: function (evt) {
@@ -78,14 +129,13 @@ Page({
     if (
       !this.data.readOnly &&
       this.data.matchinfo[this.data.currentMatchIndex].oPredicts[matchIndex]
-      .predictStatus === 0
+        .predictStatus === 0
     ) {
-      var oRandomMatch = this.getRandomWinner(this.data.matchinfo[this.data.currentMatchIndex].oPredicts[
-        matchIndex
-      ]);
-      this.data.matchinfo[this.data.currentMatchIndex].oPredicts[
-        matchIndex
-      ] = oRandomMatch;
+      var oRandomMatch = this.getRandomWinner(
+        this.data.matchinfo[this.data.currentMatchIndex].oPredicts[matchIndex]
+      );
+      this.data.matchinfo[this.data.currentMatchIndex].oPredicts[matchIndex] =
+        oRandomMatch;
     }
     this.setData({
       matchinfo: this.data.matchinfo,
@@ -93,7 +143,7 @@ Page({
   },
 
   getRandomWinner: function (oMatch) {
-    var arrPlayers = [oMatch.player1.idPlayer, oMatch.player2.idPlayer]
+    var arrPlayers = [oMatch.player1.idPlayer, oMatch.player2.idPlayer];
     var playerRandom = Math.floor(Math.random() * arrPlayers.length);
     if (arrPlayers[playerRandom] === oMatch.player1.idPlayer) {
       oMatch.winnerId = parseInt(oMatch.player1.idPlayer);
@@ -109,35 +159,39 @@ Page({
 
   onDialogConfirm(event) {
     //this.data.gamer = response.data.oGamer;
-    if (this.data.idGamer === 0 && this.data.gamerName !== "") {
+    if (this.data.idGamer === 0 && this.data.gamerName !== "" || this.data.idGamer !== 0) {
       this.setData({
         inputNameError: false,
       });
       this.data.apiResponse.oGamer.gamerName = this.data.gamerName;
       this.data.apiResponse.oGamer.wechatName = this.data.wechatName;
+      var predictBody = {};
+      predictBody.data = this.data.apiResponse;
+      api
+        .postPredict(predictBody)
+        .then(function (res) {
+          if (res.statusCode === 200) {
+            Toast({
+              type: 'success',
+              message: '成功发送竞猜比分',
+              duration: 3000,
+              onClose: () => {
+                wx.switchTab({
+                  url: "/pages/home/home",
+                });
+              },
+            });
+          }
+        })
+        .catch((err) => console.log(err));
     } else {
       this.setData({
         inputNameError: true,
       });
     }
-    api.postPredict(this.data.apiResponse).then(function (res) {
-        if (res.statusCode === 200) {
-          Toast.success(res.data);
-          wx.switchTab({
-            url: '/pages/home/home'
-          });
-        }
-      })
-      .catch((err) => console.log(err));
   },
   onDialogClose(event) {
-    this.setData({
-      showConfirmDialog: false,
-    });
-  },
-  onInputName(event) {
-    //this.data.gamerName = event.detail.value;
-    //this.data.gamerName = event.detail;
+    this.showConfirmDialog(false);
   },
 
   showPopup(e) {
@@ -167,19 +221,14 @@ Page({
   },
 
   onGoPrevious() {
-    this.data.currentMatchIndex -= 1;
-    this.updateData(this.data.currentMatchIndex);
-    this.scrollToTop();
+    if(this.data.currentMatchIndex > this.data.startMatchIndex){
+      this.data.currentMatchIndex -= 1;
+      this.updateData(this.data.currentMatchIndex);
+      this.scrollToTop(); 
+    }
   },
-  updateData(index) {
-    this.setData({
-      currentRound: this.data.matchinfo[index].idRound,
-      currentRoundName: this.data.matchinfo[index].roundName,
-      currentMatchIndex: index,
-      maxScore: this.data.matchinfo[index].distance,
-      matchinfo: this.data.matchinfo,
-    });
-  },
+
+
   /**
    * round + 1;
    * with the winners updated from precedent round
@@ -193,7 +242,7 @@ Page({
         this.updateData(this.data.currentMatchIndex);
         this.scrollToTop();
       } else {
-        //user need to change their input, ?msg translation ?wx.getSystemInfoAsync language
+        //user need to change their input
         wx.showToast({
           title: "请输入有效分数",
           icon: "error",
@@ -218,9 +267,7 @@ Page({
     if (this.predictValidated()) {
       this.updateData(this.data.currentMatchIndex);
       this.data.apiResponse.oQuizRounds = this.data.matchinfo;
-      this.setData({
-        showConfirmDialog: true,
-      });
+      this.showConfirmDialog(true);
     }
   },
   /**
@@ -233,9 +280,9 @@ Page({
         var nextMatchPlayer =
           (match.number + 1) % 2 === 1 ? "player2" : "player1";
         var winner =
-          match.player1.idPlayer === match.winnerId ?
-          match.player1 :
-          match.player2;
+          match.player1.idPlayer === match.winnerId
+            ? match.player1
+            : match.player2;
         var nextMatchIndex = arrayMatchInfo[
           this.data.currentMatchIndex + 1
         ].oPredicts.findIndex((item) => item.number === nextMatchNumber);
@@ -261,6 +308,7 @@ Page({
       }.bind(this)
     );
   },
+
   /**
    * one score should be the max score and the other one should smaller than the max
    */
@@ -285,9 +333,8 @@ Page({
     if (
       !this.data.readOnly &&
       this.data.matchinfo[this.data.currentMatchIndex].oPredicts[sMatchIndex]
-      .predictStatus === 0
+        .predictStatus === 0
     ) {
-
       var sPlayerId = parseInt(event.target.id.split("-")[1]);
       var score = event.target.id.split("-")[2];
       this.data.matchinfo[this.data.currentMatchIndex].oPredicts[
@@ -309,5 +356,25 @@ Page({
         matchinfo: this.data.matchinfo,
       });
     }
-  }
+  },
+
+  setStartRoundIndex(quizRound){
+    for (
+      var currentRoundIndex = 0;
+      currentRoundIndex < quizRound.length;
+      currentRoundIndex++
+    ) {
+      if (
+        quizRound[currentRoundIndex].oPredicts.findIndex(
+          (oMatch) => oMatch.predictStatus === 0
+        ) !== -1
+      ) {
+        this.setData({
+          startMatchIndex: currentRoundIndex
+        })
+        
+        return currentRoundIndex;
+      }
+    }
+  },
 });

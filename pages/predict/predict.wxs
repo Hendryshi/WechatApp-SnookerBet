@@ -6,8 +6,8 @@ var getScoreRange=function(maxScore){
 	}
 	return newScoreRange;
 }
-var btnPre=function(index,len){
-	if(index === 0){ return "visibility: hidden";}
+var btnPre=function(index, startIndex, len){
+	if(index === startIndex){ return "visibility: hidden; pointer-events: none";}
 	else{ return "visibility: visible";}
 }
 var btnSub=function(index,len){
@@ -49,7 +49,7 @@ var scoreCorrect=function(scoreCorrect){
 }
 
 var calProgress = function(currentMatchIndex, matchLength){
-	if(matchLength === "0")
+	if(matchLength === 0)
 		return 20;
 	else
 		return (currentMatchIndex+1)/matchLength*100;
