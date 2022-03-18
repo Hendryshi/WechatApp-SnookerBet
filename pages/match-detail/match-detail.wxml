@@ -24,8 +24,8 @@
 		<van-cell-group inset>
 			<van-cell center title-width="350rpx" size="large" use-label-slot wx:for="{{predict}}" wx:key="idPredict">
 				<view>
-					<van-tag wx:if="{{match.stMatch === 2}}" type="success" size="small">{{predictFormat.scoreCorrect(item.isScoreCorrect)}}</van-tag>
-					<van-tag wx:if="{{match.stMatch === 2}}" type="primary" size="small" style="margin-left:20rpx">{{predictFormat.winCorrect(item.isWinnerCorrect)}}</van-tag>
+					<van-tag wx:if="{{match.stMatch === 2 && item.isScoreCorrect}}" type="success" size="small">{{predictFormat.scoreCorrect(item.isScoreCorrect)}}</van-tag>
+					<van-tag wx:if="{{match.stMatch === 2 && item.isWinnerCorrect}}" type="primary" size="small" style="margin-left:20rpx">{{predictFormat.winCorrect(item.isWinnerCorrect)}}</van-tag>
 				</view>
 				<view slot="label" style="color: black;">
 					<view>{{item.player1.name}} {{item.score1}} - {{item.score2}} {{item.player2.name}}</view>

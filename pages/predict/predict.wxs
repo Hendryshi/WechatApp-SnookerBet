@@ -35,9 +35,9 @@ var desactive=function(item,maxScore,readonly,score){
 }
 var winCorrect=function(winCorrect){
 	if(winCorrect){
-		return "输赢对";
+		return "晋级对";
 	}else{
-		return "输赢错";
+		return "晋级错";
 	}
 }
 var scoreCorrect=function(scoreCorrect){
