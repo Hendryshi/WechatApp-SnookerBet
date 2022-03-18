@@ -79,21 +79,6 @@
 					</view>
 				</view>
 			</view>
-			<view class="statusBox">
-				<view wx:if="{{!readonly&&item.predictStatus === 0}}">
-					<dice id="{{index}}-dice" class="dice" bindParentEvent="onChangePoint" />
-				</view>
-				<view wx:if="{{!readonly&&item.predictStatus === 0}}">
-					<view class="check">
-						<view>
-							<van-icon size="50rpx" id="{{index}}-{{item.player1.idPlayer}}-score1" name="{{scoreRange.iconClick(item.player1.idPlayer,item.winnerId)}}" color="{{scoreRange.iconColor(item.player1.idPlayer, item.winnerId)}}" bindclick="onPredictWinner" />
-						</view>
-						<view>
-							<van-icon size="50rpx" id="{{index}}-{{item.player2.idPlayer}}-score2" name="{{scoreRange.iconClick(item.player2.idPlayer,item.winnerId)}}" color="{{scoreRange.iconColor(item.player2.idPlayer, item.winnerId)}}" bindclick="onPredictWinner" />
-						</view>
-					</view>
-				</view>
-			</view>
 		</view>
 	</view>
 
