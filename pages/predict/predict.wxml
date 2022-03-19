@@ -111,6 +111,7 @@
  show="{{show}}"
  bind:close="onClose"
  position="bottom"
+ round
  custom-style="height: 40%"
 >
 	<van-picker

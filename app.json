@@ -43,6 +43,7 @@
     "van-divider": "@vant/weapp/divider/index",
     "van-switch": "@vant/weapp/switch/index",
     "van-image": "@vant/weapp/image/index",
+    "van-action-sheet": "@vant/weapp/action-sheet/index",
 
     "match-card": "components/match-card/match-card",
     "player": "components/player/player",

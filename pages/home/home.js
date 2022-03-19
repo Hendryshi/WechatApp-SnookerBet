@@ -71,5 +71,13 @@ Page({
   onClickHide(){
     this.setData({showGuide: false});
     wx.setStorageSync('alreadyEnter', true);
+  },
+
+  tapRule(){
+    this.setData({showRule: true});
+  },
+
+  onCloseRule(){
+    this.setData({showRule: false});
   }
 });
