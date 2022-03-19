@@ -26,7 +26,7 @@
 		<view class="quizPart">
 			<image src="../../images/worldSnooker1.jpg" mode="widthFix" />
 			<view class="quizInfo">
-				<view style="font-weight:bold; font-size: 35rpx;">{{item.name}}</view>
+				<view style="font-weight:bold; font-size: 35rpx;font-family: cursive;">{{item.name}}</view>
 				<view style="white-space:pre-wrap">{{item.country}}, {{item.city}}{{'\n'}}{{dateutil.getDate(item.startDate, 'yyyy/MM/dd')}} - {{dateutil.getDate(item.endDate, 'MM/dd')}}</view>
 			</view>
 		</view>

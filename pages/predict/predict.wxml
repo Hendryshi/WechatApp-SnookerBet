@@ -10,7 +10,7 @@
 			<van-progress
 			 pivot-text="{{currentRoundName}}"
 			 stroke-width="50rpx"
-			 color="linear-gradient(to right, #be99ff, #7232dd)"
+			 color="linear-gradient(121.94220263246461deg, rgba(86, 216, 228,1) 49.787109375%,rgba(159, 1, 234,1) 94.396484375%)"
 			 percentage="{{predict.calProgress(currentMatchIndex, matchinfo.length)}}"
 			/>
 		</view>
@@ -85,6 +85,7 @@
 	<view class="bottom">
 		<van-button
 		 type="primary"
+		 color="#428675"
 		 round
 		 bindtap="onGoPrevious"
 		 size="small"
@@ -94,6 +95,7 @@
 		</van-button>
 		<van-button
 		 type="primary"
+		 color="#428675"
 		 round
 		 size="small"
 		 style="margin: 20rpx; margin-right: 50rpx;"
@@ -102,7 +104,7 @@
 		 wx:if="{{!readonly}}"
 		>提 交
 		</van-button>
-		<van-button type="primary" round size="small" bindtap="onGoNext" style="margin: 20rpx; margin-right: 50rpx;" wx:if="{{currentMatchIndex < matchinfo.length - 1}}">下一轮
+		<van-button type="primary" color="#428675" round size="small" bindtap="onGoNext" style="margin: 20rpx; margin-right: 50rpx;" wx:if="{{currentMatchIndex < matchinfo.length - 1}}">下一轮
 		</van-button>
 	</view>
 </van-skeleton>

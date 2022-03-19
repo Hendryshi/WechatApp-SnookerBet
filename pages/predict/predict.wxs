@@ -8,10 +8,10 @@ var getScoreRange=function(maxScore){
 }
 var btnPre=function(index, startIndex, len){
 	if(index === startIndex){ return "visibility: hidden; pointer-events: none";}
-	else{ return "visibility: visible";}
+	else{ return "visibility: visible;";}
 }
 var btnSub=function(index,len){
-	if(index === len-1){ return "visibility: visible";}
+	if(index === len-1){ return "visibility: visible;";}
 	else{ return "visibility: hidden";}
 }
 var iconClick=function(playerId, winnerId){
@@ -20,7 +20,7 @@ var iconClick=function(playerId, winnerId){
 }
 var iconColor=function(playerId, winnerId){	
 	if(playerId === winnerId) {
-		return "green";
+		return "#428675";
 	}
 	else{
 		return "black";

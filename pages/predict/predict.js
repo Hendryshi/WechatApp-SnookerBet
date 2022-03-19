@@ -91,9 +91,7 @@ Page({
 
         if(!this.data.readonly)
           this.setStartRoundIndex(this.data.matchinfo);
-
-        console.log(this.data.startMatchIndex);
-        this.updateData(this.data.startMatchIndex);
+          this.updateData(this.data.startMatchIndex);
       })
   },
 
@@ -106,7 +104,8 @@ Page({
   showToastNoPredict() {
     let second = 3;
     const toast = Toast.fail({
-      message: "竞猜不可用",
+      duration: 4000,
+      message: "竞猜不可用"
     });
     const timer = setInterval(() => {
       if (second) {
@@ -116,7 +115,7 @@ Page({
         second--;
       } else {
         clearInterval(timer);
-        Toast.clear();
+        toast.clear();
         wx.switchTab({
           url: "/pages/home/home",
         });
