@@ -41,6 +41,10 @@ module.exports = {
 
   GetQuizEvent(options){
     return request.get("api/Quiz/GetQuizEvent", options); 
-  }
+  },
+
+  getQuizReport(options){
+    return request.get("api/Quiz/GetQuizReport", options);
+  },
 
 };

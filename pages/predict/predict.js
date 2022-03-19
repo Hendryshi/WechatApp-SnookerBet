@@ -16,8 +16,8 @@ Page({
     gamerName: "",
     showConfirmDialog: false,
     showReEditConfirmDialog:false,
-    showSkeleton: true,
-    apiResponse: []
+    apiResponse: [],
+    showEmpty: true
   },
 
   onLoad: function (options) {
@@ -76,7 +76,7 @@ Page({
         this.data.apiResponse = response.data;
         //new user + match started
         if (this.data.apiResponse.length === 0) {
-          this.showToastNoPredict();
+          this.setData({showEmpty: true});
         } else {
           this.setData({
             idEvent: this.data.idEvent,
@@ -87,20 +87,15 @@ Page({
             gamerName: response.data.oGamer.gamerName,
             nbEditPredict: response.data.oGamer.nbEditPredict, //0 -> can re-edit; 1-> no re-edit
           });
+
+          if(!this.data.readonly)
+            this.setStartRoundIndex(this.data.matchinfo);
+          this.updateData(this.data.startMatchIndex);
         }
-
-        if(!this.data.readonly)
-          this.setStartRoundIndex(this.data.matchinfo);
-
-        console.log(this.data.startMatchIndex);
-        this.updateData(this.data.startMatchIndex);
       })
   },
 
   onReady: function () {
-    this.setData({
-      showSkeleton: false,
-    });
   },
 
   showToastNoPredict() {

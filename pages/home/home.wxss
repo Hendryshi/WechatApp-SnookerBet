@@ -67,6 +67,10 @@
   justify-content: center;
 }
 
+.btn{
+  margin: 10rpx;
+  width: 45%
+}
 
 .wrapper {
   display: flex;
@@ -77,4 +81,22 @@
 
 .wrapper image{
   height: 800rpx;
+}
+
+.ruleBox{
+  height: 800rpx;
+  background-color: #f6f6f6;
+}
+
+.sheetContent{
+  background-color: #f6f6f6;
+  white-space:pre-wrap;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  padding-bottom: 200rpx;
+}
+
+.summaryBox{
+  min-height: 400rpx;
+  background-color: #f6f6f6;
 }

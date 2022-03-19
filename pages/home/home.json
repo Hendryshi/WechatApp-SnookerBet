@@ -1,5 +1,6 @@
 {
   "usingComponents": {},
+  "disableScroll": true,
   "navigationBarTitleText": "斯诺克小竞猜",
   "navigationBarBackgroundColor": "#5dbe8a",
   "backgroundColor": "#f6f6f6"

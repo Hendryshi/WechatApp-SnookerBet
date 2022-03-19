@@ -2,8 +2,8 @@
 
 <van-overlay show="{{ showGuide }}" z-index="100" bind:click="onClickHide">
 	<view class="wrapper">
-		<image src='../../images/step.png' mode="heightFix"/>
-  	</view>
+		<image src='../../images/step.png' mode="heightFix" />
+	</view>
 </van-overlay>
 
 <view class="headBg">
@@ -19,10 +19,9 @@
 	</view>
 </view>
 
-<van-empty description="暂无数据" wx:if="{{dataArr.length === 0}}"></van-empty>
+<van-empty image="/images/empty.png" description="暂无数据" wx:if="{{dataArr.length === 0}}"></van-empty>
 <view wx:else>
-
-	<view class="quizBox" wx:for="{{dataArr}}" wx:key="idEvent" >
+	<view class="quizBox" wx:for="{{dataArr}}" wx:key="idEvent">
 		<view class="quizPart">
 			<image src="../../images/worldSnooker1.jpg" mode="widthFix" />
 			<view class="quizInfo">
@@ -31,10 +30,10 @@
 			</view>
 		</view>
 		<view class="btnPart">
-			<van-button color="#428675"  block round bindtap="tapMatch" data-idEvent="{{item.idEvent}}" data-stQuiz="{{item.stQuiz}}" icon="calendar-o" style="margin: 10rpx; width: 45%">赛程</van-button>
-			<van-button color="#428675"  block round bindtap="clickPredict" data-idEvent="{{item.idEvent}}" icon="after-sale" style="margin: 10rpx; width: 45%">竞猜</van-button>
-			<van-button color="#428675"  block round bindtap="tapRule" data-idEvent="{{item.idEvent}}" data-stQuiz="{{item.stQuiz}}" icon="label-o" style="margin: 10rpx; width: 45%">规则</van-button>
-			<van-button color="#428675"  block round bindtap="clickPredict" data-idEvent="{{item.idEvent}}" icon="newspaper-o" style="margin: 10rpx; width: 45%">战报</van-button>
+			<van-button color="#428675" block round bindtap="tapRule" icon="label-o" class="btn">规则</van-button>
+			<van-button color="#428675" block round bindtap="clickPredict" data-idEvent="{{item.idEvent}}" icon="after-sale" class="btn">竞猜</van-button>
+			<van-button color="#428675" block round bindtap="tapMatch" data-idEvent="{{item.idEvent}}" data-stQuiz="{{item.stQuiz}}" icon="calendar-o" class="btn">赛程</van-button>
+			<van-button color="#428675" block round bindtap="tapSummary" icon="newspaper-o" class="btn">战报</van-button>
 		</view>
 	</view>
 </view>
@@ -42,9 +41,39 @@
 <van-notify id="van-notify" />
 
 <van-action-sheet show="{{ showRule }}" bind:close="onCloseRule" title="竞猜规则">
-  <view style="height: 500rpx; background-color: #eef7f2;">
-	  <view style="margin-left: 20rpx">
-		内容
-	  </view>
-  </view>
+	<view class="ruleBox">
+		<view class="sheetContent">
+			<view>在赛事开始之前，竞猜阶段开放，玩家可依次对每场比赛进行比分预测，当第一场比赛开始时，竞猜阶段结束。</view>
+			<view>当8强选手确定时，竞猜会重新开放，此时玩家可选择重填(仅有一次机会)。</view>
+			<view>{{'\n'}}</view>
+			<view>每场比赛总分为100分，平分给每个猜对的玩家。</view>
+			<view>若玩家在猜中输赢的基础上并且还猜对了比分，</view>
+			<view>则该玩家获得的积分为其余只猜对输赢玩家的积分的3倍</view>
+			<view>{{'\n'}}</view>
+			<view>例如:</view>
+			<view>6名玩家猜对输赢，其中2名还猜中比分，则积分结果为: 4名玩家获得10分，2名玩家获得30分</view>
+			<view>=> (10x4 + 30x2 = 100)</view>
+			<view>{{'\n'}}</view>
+			<view>此外: </view>
+			<view>- 若比赛为决胜局结束，则该场比赛荒翻。</view>
+			<view>- 若玩家在第二次竞猜开放时不选择重填，则该玩家之后所有比赛荒翻。</view>
+			<view>- 猜对一个四强名额额外获得30分。</view>
+			<view>- 猜对一个决赛名额额外获得50分。</view>
+			<view>- 猜对冠军额外获得100分。</view>
+		</view>
+	</view>
+</van-action-sheet>
+
+<van-action-sheet show="{{ showSummary }}" bind:close="onCloseSummary" title="每日战报">
+	<view class="summaryBox">
+		<van-empty image="/images/empty.png" description="暂无数据" wx:if="{{reportList.length === 0}}"></van-empty>
+		<view class="sheetContent" wx:else>
+			<view wx:for="{{reportList}}" wx:key="idSummary" wx:for-item="r">
+				<van-cell-group title="{{dateutil.getDate(r.dtResult, 'MM/dd')}} 战报">
+					<van-cell title="{{r.descMatchSummary}}" />
+					<van-cell title="{{r.descPointSummary}}" />
+				</van-cell-group>
+			</view>
+		</view>
+	</view>
 </van-action-sheet>
