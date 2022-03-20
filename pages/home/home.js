@@ -15,7 +15,7 @@ Page({
         url: '../../images/match.jpg'
       }
     ],
-    dataArr: [],
+    quizEvent: [],
     reportList:[],
     showGuide: false
   },
@@ -26,10 +26,11 @@ Page({
   },
 
   getQuizEvent(){
-    api.GetQuizEvent().then(res => {
+    api.GetQuizEvent().then(res => {  
       this.setData({
         dataArr: res.data
       })
+
       if(this.data.dataArr.length > 0)
         wx.setStorageSync("stQuiz", this.data.dataArr[0].stQuiz);
     })
@@ -59,7 +60,6 @@ Page({
 
   clickPredict(evt) {
     if(!auth.hasUserProfile()){
-      console.log("not")
       auth.bindUserProfil().then(()=>{
         this.navToPredict(evt);
       })

@@ -86,7 +86,7 @@
 <van-toast id="van-toast" />
 <van-notify id="van-notify" />
 
-<van-dialog use-slot="{{idGamer === 0}}" id="van-dialog" show="{{showConfirmDialog}}" title="是否确认提交竞猜比分 提交后不可修改" bind:close="onDialogClose" bind:confirm="onDialogConfirm" show-cancel-button>
+<van-dialog use-slot="{{idGamer === 0}}" id="van-dialog" show="{{showConfirmDialog}}" before-close="{{onBeforeCloseDialog}}" title="是否确认提交竞猜比分 提交后不可修改" bind:close="onDialogClose" bind:confirm="onDialogConfirm" show-cancel-button>
 	<van-cell-group wx:if="{{idGamer === 0}}">
 		<van-field model:value="{{gamerName}}" label="用户昵称" placeholder="请输入用户昵称" input-align="left" bind:change="onInputName" error="{{inputNameError}}" />
 	</van-cell-group>

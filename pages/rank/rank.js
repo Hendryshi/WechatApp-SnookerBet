@@ -44,6 +44,7 @@ Page({
   },
 
   getRankTrending: function(){
+    if(this.data.rankPoints.length !== 0){
       var gamerPointByDay = this.rankByDay(this.sorByDate(this.data.rankPoints));
       var categories = this.rankByCategory(this.sorByDate(this.data.rankPoints));
       var chartData = {
@@ -51,6 +52,7 @@ Page({
         series: gamerPointByDay
       };
       this.drawCharts("canvasColumn", chartData);
+    }
   },
 
   sorByDate:function(data){
