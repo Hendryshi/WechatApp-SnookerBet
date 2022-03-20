@@ -12,7 +12,7 @@
 </view>
 
 <view class='header'>
-	<van-tabs active="{{active}}" swipeable bind:change="onChange">
+	<van-tabs active="{{active}}" color="#428675" swipeable bind:change="onChange">
 		<van-tab title="玩家预测" />
 		<van-tab title="历史战绩" />
 	</van-tabs>

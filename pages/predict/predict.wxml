@@ -6,10 +6,10 @@
 </view>
 <view class="header">
 	<view class="progress">
-		<van-progress pivot-text="{{currentRoundName}}" stroke-width="50rpx" color="linear-gradient(to right, #be99ff, #7232dd)" percentage="{{predict.calProgress(currentMatchIndex, matchinfo.length)}}" />
+		<van-progress pivot-text="{{currentRoundName}}" stroke-width="50rpx" color="linear-gradient(113.20293126291256deg, #428675 4.775390625%,rgba(51, 69, 79,1) 98.13476562499999%)" percentage="{{predict.calProgress(currentMatchIndex, matchinfo.length)}}" />
 	</view>
 	<view style="margin-right: 25rpx;">
-		<van-button type="primary" round size="small" bindtap="onReEdit" wx:if="{{readonly && idGamer !== 0 && nbEditPredict === 0 && stQuiz === 0}}">重填
+		<van-button color="#428675" round size="small" bindtap="onReEdit" wx:if="{{readonly && idGamer !== 0 && nbEditPredict === 0 && stQuiz === 0}}">重填
 		</van-button>
 	</view>
 </view>
@@ -17,7 +17,7 @@
 
 <view class="main-bg">
 	<van-empty image="/images/nopredict.png" description="竞猜不可用！" wx:if="{{showEmpty}}"></van-empty>
-	<view wx:else="">
+	<view wx:else>
 		<view wx:for="{{matchinfo[currentMatchIndex].oPredicts}}" wx:key="number">
 			<view class="card" wx:if="{{readonly || item.predictStatus === 0}}">
 				<view class="matchBox">
@@ -56,6 +56,14 @@
 							</view>
 						</view>
 					</view>
+					<view class="status" wx:if="{{item.predictStatus === 1}}">
+						<view>
+							<van-tag round color="{{item.isWinnerCorrect ? 'blue':'red'}}">{{predict.winCorrect(item.isWinnerCorrect)}}</van-tag>
+						</view>
+						<view>
+							<van-tag round color="{{item.isScoreCorrect?'green':'red'}}">{{predict.scoreCorrect(item.isScoreCorrect)}}</van-tag>
+						</view>
+					</view>
 				</view>
 			</view>
 		</view>
@@ -63,11 +71,11 @@
 </view>
 
 <view class="bottom" wx:if="{{!showEmpty}}">
-	<van-button type="primary" round bindtap="onGoPrevious" size="small" style="margin: 20rpx; margin-left: 50rpx;" customStyle="{{predict.displayPre(currentMatchIndex,startMatchIndex,matchinfo.length)}}">上一轮
+	<van-button type="primary" color="#428675" round size="small" style="margin: 20rpx; margin-left: 50rpx;" bindtap="onGoPrevious" customStyle="{{predict.displayPre(currentMatchIndex,startMatchIndex,matchinfo.length)}}">上一轮
 	</van-button>
-	<van-button type="primary" round size="small" style="margin: 20rpx; margin-right: 50rpx;" bindtap="onSubmit" customStyle="{{predict.displaySub(currentMatchIndex,matchinfo.length)}}" wx:if="{{!readonly}}">提 交
+	<van-button type="primary" color="#428675" round size="small" style="margin: 20rpx; margin-right: 50rpx;" bindtap="onSubmit" customStyle="{{predict.displaySub(currentMatchIndex,matchinfo.length)}}" wx:if="{{!readonly}}">提 交
 	</van-button>
-	<van-button type="primary" round size="small" bindtap="onGoNext" style="margin: 20rpx; margin-right: 50rpx;" wx:if="{{currentMatchIndex < matchinfo.length - 1}}">下一轮
+	<van-button type="primary" color="#428675" round size="small" bindtap="onGoNext" style="margin: 20rpx; margin-right: 50rpx;" wx:if="{{currentMatchIndex < matchinfo.length - 1}}">下一轮
 	</van-button>
 </view>
 

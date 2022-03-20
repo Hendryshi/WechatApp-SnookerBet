@@ -98,5 +98,6 @@
 
 .summaryBox{
   min-height: 400rpx;
+  max-height: 600rpx;
   background-color: #f6f6f6;
 }

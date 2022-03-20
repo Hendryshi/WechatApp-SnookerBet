@@ -20,7 +20,7 @@ var iconClick=function(playerId, winnerId){
 }
 var iconColor=function(playerId, winnerId){	
 	if(playerId === winnerId) {
-		return "green";
+		return "#428675";
 	}
 	else{
 		return "black";

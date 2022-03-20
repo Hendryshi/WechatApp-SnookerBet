@@ -5,14 +5,14 @@
 </view>
 
 <view class='header'>
-	<van-tabs active="{{active}}" swipeable bind:change="onChange">
+	<van-tabs active="{{active}}" color="#428675" swipeable bind:change="onChange">
 		<van-tab title="玩家排名" />
 		<van-tab title="积分趋势" />
 	</van-tabs>
 </view>
 
 <view wx:if="{{active===0}}" class="cellBg release">
-	<van-empty description="暂无数据" wx:if="{{summary.length === 0}}"></van-empty>
+	<van-empty image="/images/empty.png" description="暂无数据" wx:if="{{summary.length === 0}}"></van-empty>
 	<view wx:else>
 		<van-cell-group inset>
 			<van-cell title-width="300rpx">
@@ -43,7 +43,7 @@
 </view>
 
 <view wx:else class="cellBg release">
-	<van-empty description="暂无数据" wx:if="{{rankPoints.length === 0}}"></van-empty>
+	<van-empty image="/images/empty.png" description="暂无数据" wx:if="{{rankPoints.length === 0}}"></van-empty>
 	<view wx:else>
 		<canvas canvas-id="canvasColumn" id="canvasColumn" type="2d" bindtouchstart="touchLineA" bindtouchmove="moveLineA" bindtouchend="touchEndLineA" class="charts-box" />
 	</view>

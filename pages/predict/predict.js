@@ -17,7 +17,7 @@ Page({
     showConfirmDialog: false,
     showReEditConfirmDialog:false,
     apiResponse: [],
-    showEmpty: true
+    showEmpty: false
   },
 
   onLoad: function (options) {

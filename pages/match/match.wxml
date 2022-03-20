@@ -9,7 +9,7 @@
 		{{dataArr.name}}
 	</view>
 	<view class="headerButton">
-		<van-switch checked="{{showAllMatch}}" size="40rpx" bind:change="onChange" />
+		<van-switch active-color="#428675" checked="{{showAllMatch}}" size="40rpx" bind:change="onChange" />
 	</view>
 </view>
 
