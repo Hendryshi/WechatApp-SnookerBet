@@ -15,9 +15,22 @@ Page({
     nbEditPredict: 0,
     gamerName: "",
     showConfirmDialog: false,
-    showReEditConfirmDialog:false,
-    showSkeleton: true,
-    apiResponse: []
+    showReEditConfirmDialog: false,
+    apiResponse: [],
+    showEmpty: false,
+    onBeforeCloseDialog(action) {
+      const pages = getCurrentPages();
+      let page = pages[pages.length - 1];
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          if (page.data.inputNameError && action === "confirm") {
+            resolve(false);
+          } else {
+            resolve(true);
+          }
+        }, 500);
+      });
+    }
   },
 
   onLoad: function (options) {
@@ -29,7 +42,7 @@ Page({
     this.updatePredictInfo(false);
   },
 
-  getStQuiz(){
+  getStQuiz() {
     var stQuiz = wx.getStorageSync("stQuiz");
     this.setData({
       stQuiz: stQuiz
@@ -50,33 +63,35 @@ Page({
     this.showReEditConfirm(true);
   },
 
-  onReEditDialogClose(evt){
+  onReEditDialogClose(evt) {
     this.showReEditConfirm(false);
   },
 
-  onReEditDialogConfirm(evt){
+  onReEditDialogConfirm(evt) {
     this.updatePredictInfo(true);
   },
 
-  showReEditConfirm(bShow){
+  showReEditConfirm(bShow) {
     this.setData({
       showReEditConfirmDialog: bShow,
     });
   },
 
-  showConfirmDialog(bShow){
+  showConfirmDialog(bShow) {
     this.setData({
       showConfirmDialog: bShow,
     });
   },
 
-  updatePredictInfo(isReEdit){
+  updatePredictInfo(isReEdit) {
     api.getPredict(this.data.idEvent, this.data.wechatName, isReEdit)
-    .then(response => {
+      .then(response => {
         this.data.apiResponse = response.data;
         //new user + match started
         if (this.data.apiResponse.length === 0) {
-          this.showToastNoPredict();
+          this.setData({
+            showEmpty: true
+          });
         } else {
           this.setData({
             idEvent: this.data.idEvent,
@@ -87,19 +102,15 @@ Page({
             gamerName: response.data.oGamer.gamerName,
             nbEditPredict: response.data.oGamer.nbEditPredict, //0 -> can re-edit; 1-> no re-edit
           });
-        }
 
-        if(!this.data.readonly)
-          this.setStartRoundIndex(this.data.matchinfo);
+          if (!this.data.readonly)
+            this.setStartRoundIndex(this.data.matchinfo);
           this.updateData(this.data.startMatchIndex);
+        }
       })
   },
 
-  onReady: function () {
-    this.setData({
-      showSkeleton: false,
-    });
-  },
+  onReady: function () {},
 
   showToastNoPredict() {
     let second = 3;
@@ -128,7 +139,7 @@ Page({
     if (
       !this.data.readOnly &&
       this.data.matchinfo[this.data.currentMatchIndex].oPredicts[matchIndex]
-        .predictStatus === 0
+      .predictStatus === 0
     ) {
       var oRandomMatch = this.getRandomWinner(
         this.data.matchinfo[this.data.currentMatchIndex].oPredicts[matchIndex]
@@ -158,7 +169,7 @@ Page({
 
   onDialogConfirm(event) {
     //this.data.gamer = response.data.oGamer;
-    if (this.data.idGamer === 0 && this.data.gamerName !== "" || this.data.idGamer !== 0) {
+    if ((this.data.idGamer === 0 && this.data.gamerName !== "" && this.data.gamerName !== null) || this.data.idGamer !== 0) {
       this.setData({
         inputNameError: false,
       });
@@ -166,8 +177,7 @@ Page({
       this.data.apiResponse.oGamer.wechatName = this.data.wechatName;
       var predictBody = {};
       predictBody.data = this.data.apiResponse;
-      api
-        .postPredict(predictBody)
+      api.postPredict(predictBody)
         .then(function (res) {
           if (res.statusCode === 200) {
             Toast({
@@ -184,6 +194,7 @@ Page({
         })
         .catch((err) => console.log(err));
     } else {
+      console.log("confirm");
       this.setData({
         inputNameError: true,
       });
@@ -220,10 +231,10 @@ Page({
   },
 
   onGoPrevious() {
-    if(this.data.currentMatchIndex > this.data.startMatchIndex){
+    if (this.data.currentMatchIndex > this.data.startMatchIndex) {
       this.data.currentMatchIndex -= 1;
       this.updateData(this.data.currentMatchIndex);
-      this.scrollToTop(); 
+      this.scrollToTop();
     }
   },
 
@@ -279,9 +290,9 @@ Page({
         var nextMatchPlayer =
           (match.number + 1) % 2 === 1 ? "player2" : "player1";
         var winner =
-          match.player1.idPlayer === match.winnerId
-            ? match.player1
-            : match.player2;
+          match.player1.idPlayer === match.winnerId ?
+          match.player1 :
+          match.player2;
         var nextMatchIndex = arrayMatchInfo[
           this.data.currentMatchIndex + 1
         ].oPredicts.findIndex((item) => item.number === nextMatchNumber);
@@ -332,7 +343,7 @@ Page({
     if (
       !this.data.readOnly &&
       this.data.matchinfo[this.data.currentMatchIndex].oPredicts[sMatchIndex]
-        .predictStatus === 0
+      .predictStatus === 0
     ) {
       var sPlayerId = parseInt(event.target.id.split("-")[1]);
       var score = event.target.id.split("-")[2];
@@ -357,11 +368,9 @@ Page({
     }
   },
 
-  setStartRoundIndex(quizRound){
+  setStartRoundIndex(quizRound) {
     for (
-      var currentRoundIndex = 0;
-      currentRoundIndex < quizRound.length;
-      currentRoundIndex++
+      var currentRoundIndex = 0; currentRoundIndex < quizRound.length; currentRoundIndex++
     ) {
       if (
         quizRound[currentRoundIndex].oPredicts.findIndex(
@@ -371,7 +380,7 @@ Page({
         this.setData({
           startMatchIndex: currentRoundIndex
         })
-        
+
         return currentRoundIndex;
       }
     }

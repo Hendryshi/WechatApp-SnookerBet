@@ -3,17 +3,17 @@ Component({
     active: 0,
     list: [
       {
-        icon: "home-o",
+        icon: "wap-home",
         text: "首页",
         url: "/pages/home/home",
       },
       {
-        icon: "tv-o",
+        icon: "fire",
         text: "直播",
         url: "/pages/live/live",
       },
       {
-        icon: "bar-chart-o",
+        icon: "award",
         text: "排名",
         url: "/pages/rank/rank",
       }

@@ -15,7 +15,8 @@ Page({
         url: '../../images/match.jpg'
       }
     ],
-    dataArr: [],
+    quizEvent: [],
+    reportList:[],
     showGuide: false
   },
 
@@ -25,18 +26,28 @@ Page({
   },
 
   getQuizEvent(){
-    api.GetQuizEvent().then(function(res){
+    api.GetQuizEvent().then(res => {  
       this.setData({
         dataArr: res.data
       })
+
       if(this.data.dataArr.length > 0)
         wx.setStorageSync("stQuiz", this.data.dataArr[0].stQuiz);
-    }.bind(this))
+    })
+  },
+
+  getQuizReport(){
+    api.getQuizReport().then(res => {
+      this.setData({
+        reportList: res.data
+      })
+    })
   },
 
   onShow() {
     this.getTabBar().init();
     this.getQuizEvent();
+    this.getQuizReport();
   },
 
   tapMatch(evt) {
@@ -49,7 +60,6 @@ Page({
 
   clickPredict(evt) {
     if(!auth.hasUserProfile()){
-      console.log("not")
       auth.bindUserProfil().then(()=>{
         this.navToPredict(evt);
       })
@@ -79,5 +89,13 @@ Page({
 
   onCloseRule(){
     this.setData({showRule: false});
+  },
+
+  tapSummary(){
+    this.setData({showSummary: true});
+  },
+
+  onCloseSummary(){
+    this.setData({showSummary: false});
   }
 });

@@ -1,38 +1,29 @@
 <wxs src="./predict.wxs" module="predict" />
 <wxs src="../../components/player/player.wxs" module="playerObj" />
 
-<van-skeleton title row="10" row-width="90%" loading="{{showSkeleton}}">
-	<view>
-		<image class="top-bg" src="/images/predict.jpg" mode="aspectFill" />
+<view>
+	<image class="top-bg" src="/images/predict.jpg" mode="aspectFill" />
+</view>
+<view class="header">
+	<view class="progress">
+		<van-progress pivot-text="{{currentRoundName}}" stroke-width="50rpx" color="linear-gradient(113.20293126291256deg, #428675 4.775390625%,rgba(51, 69, 79,1) 98.13476562499999%)" percentage="{{predict.calProgress(currentMatchIndex, matchinfo.length)}}" />
 	</view>
-	<view class="header">
-		<view class="progress">
-			<van-progress
-			 pivot-text="{{currentRoundName}}"
-			 stroke-width="50rpx"
-			 color="linear-gradient(121.94220263246461deg, rgba(86, 216, 228,1) 49.787109375%,rgba(159, 1, 234,1) 94.396484375%)"
-			 percentage="{{predict.calProgress(currentMatchIndex, matchinfo.length)}}"
-			/>
-		</view>
-		<view style="margin-right: 25rpx;">
-			<van-button
-			 type="primary"
-			 round
-			 size="small"
-			 bindtap="onReEdit"
-			 wx:if="{{readonly && idGamer !== 0 && nbEditPredict === 0 && stQuiz === 0}}"
-			>重填
-			</van-button>
-		</view>
+	<view style="margin-right: 25rpx;">
+		<van-button color="#428675" round size="small" bindtap="onReEdit" wx:if="{{readonly && idGamer !== 0 && nbEditPredict === 0 && stQuiz === 0}}">重填
+		</van-button>
 	</view>
+</view>
 
-	<view class="main-bg">
+
+<view class="main-bg">
+	<van-empty image="/images/nopredict.png" description="竞猜不可用！" wx:if="{{showEmpty}}"></van-empty>
+	<view wx:else>
 		<view wx:for="{{matchinfo[currentMatchIndex].oPredicts}}" wx:key="number">
 			<view class="card" wx:if="{{readonly || item.predictStatus === 0}}">
 				<view class="matchBox">
 					<view class="playerBox">
 						<view class="player">
-							<van-image round lazy-load fit="cover" height="60rpx" width="60rpx" src="{{playerObj.showImage(item.player1.photo)}}"/>
+							<van-image round lazy-load fit="cover" height="60rpx" width="60rpx" src="{{playerObj.showImage(item.player1.photo)}}" />
 							<view class="name">{{item.player1.name}}</view>
 							<van-tag round class="rankTag">{{item.player1.rank}}</van-tag>
 						</view>
@@ -42,7 +33,7 @@
 					</view>
 					<view class="playerBox">
 						<view class="player">
-							<van-image round lazy-load fit="cover" height="60rpx" width="60rpx" src="{{playerObj.showImage(item.player2.photo)}}"/>
+							<van-image round lazy-load fit="cover" height="60rpx" width="60rpx" src="{{playerObj.showImage(item.player2.photo)}}" />
 							<view class="name">{{item.player2.name}}</view>
 							<van-tag round class="rankTag">{{item.player2.rank}}</van-tag>
 						</view>
@@ -58,102 +49,47 @@
 					<view wx:if="{{!readonly&&item.predictStatus === 0}}">
 						<view class="check">
 							<view>
-								<van-icon
-								 size="50rpx"
-								 id="{{index}}-{{item.player1.idPlayer}}-score1"
-								 name="{{predict.iconClick(item.player1.idPlayer,item.winnerId)}}"
-								 color="{{predict.iconColor(item.player1.idPlayer, item.winnerId)}}"
-								 bindclick="onPredictWinner"
-								/>
+								<van-icon size="50rpx" id="{{index}}-{{item.player1.idPlayer}}-score1" name="{{predict.iconClick(item.player1.idPlayer,item.winnerId)}}" color="{{predict.iconColor(item.player1.idPlayer, item.winnerId)}}" bindclick="onPredictWinner" />
 							</view>
 							<view>
-								<van-icon
-								 size="50rpx"
-								 id="{{index}}-{{item.player2.idPlayer}}-score2"
-								 name="{{predict.iconClick(item.player2.idPlayer,item.winnerId)}}"
-								 color="{{predict.iconColor(item.player2.idPlayer, item.winnerId)}}"
-								 bindclick="onPredictWinner"
-								/>
+								<van-icon size="50rpx" id="{{index}}-{{item.player2.idPlayer}}-score2" name="{{predict.iconClick(item.player2.idPlayer,item.winnerId)}}" color="{{predict.iconColor(item.player2.idPlayer, item.winnerId)}}" bindclick="onPredictWinner" />
 							</view>
+						</view>
+					</view>
+					<view class="status" wx:if="{{item.predictStatus === 1}}">
+						<view>
+							<van-tag round color="{{item.isWinnerCorrect ? 'blue':'red'}}">{{predict.winCorrect(item.isWinnerCorrect)}}</van-tag>
+						</view>
+						<view>
+							<van-tag round color="{{item.isScoreCorrect?'green':'red'}}">{{predict.scoreCorrect(item.isScoreCorrect)}}</van-tag>
 						</view>
 					</view>
 				</view>
 			</view>
 		</view>
 	</view>
+</view>
 
-	<view class="bottom">
-		<van-button
-		 type="primary"
-		 color="#428675"
-		 round
-		 bindtap="onGoPrevious"
-		 size="small"
-		 style="margin: 20rpx; margin-left: 50rpx;"
-		 customStyle="{{predict.displayPre(currentMatchIndex,startMatchIndex,matchinfo.length)}}"
-		>上一轮
-		</van-button>
-		<van-button
-		 type="primary"
-		 color="#428675"
-		 round
-		 size="small"
-		 style="margin: 20rpx; margin-right: 50rpx;"
-		 bindtap="onSubmit"
-		 customStyle="{{predict.displaySub(currentMatchIndex,matchinfo.length)}}"
-		 wx:if="{{!readonly}}"
-		>提 交
-		</van-button>
-		<van-button type="primary" color="#428675" round size="small" bindtap="onGoNext" style="margin: 20rpx; margin-right: 50rpx;" wx:if="{{currentMatchIndex < matchinfo.length - 1}}">下一轮
-		</van-button>
-	</view>
-</van-skeleton>
+<view class="bottom" wx:if="{{!showEmpty}}">
+	<van-button type="primary" color="#428675" round size="small" style="margin: 20rpx; margin-left: 50rpx;" bindtap="onGoPrevious" customStyle="{{predict.displayPre(currentMatchIndex,startMatchIndex,matchinfo.length)}}">上一轮
+	</van-button>
+	<van-button type="primary" color="#428675" round size="small" style="margin: 20rpx; margin-right: 50rpx;" bindtap="onSubmit" customStyle="{{predict.displaySub(currentMatchIndex,matchinfo.length)}}" wx:if="{{!readonly}}">提 交
+	</van-button>
+	<van-button type="primary" color="#428675" round size="small" bindtap="onGoNext" style="margin: 20rpx; margin-right: 50rpx;" wx:if="{{currentMatchIndex < matchinfo.length - 1}}">下一轮
+	</van-button>
+</view>
 
-<van-popup
- show="{{show}}"
- bind:close="onClose"
- position="bottom"
- round
- custom-style="height: 40%"
->
-	<van-picker
-	 title="选择分数"
-	 show-toolbar
-	 columns="{{predict.getScoreRange(matchinfo[currentMatchIndex].distance)}}"
-	 bindcancel="onClose"
-	 bindconfirm="onConfirm"
-	/>
+<van-popup show="{{show}}" bind:close="onClose" position="bottom" round custom-style="height: 40%">
+	<van-picker title="选择分数" show-toolbar columns="{{predict.getScoreRange(matchinfo[currentMatchIndex].distance)}}" bindcancel="onClose" bindconfirm="onConfirm" />
 </van-popup>
 
 <van-toast id="van-toast" />
 <van-notify id="van-notify" />
 
-<van-dialog
- use-slot="{{idGamer === 0}}"
- id="van-dialog"
- show="{{showConfirmDialog}}"
- title="是否确认提交竞猜比分 提交后不可修改"
- bind:close="onDialogClose"
- bind:confirm="onDialogConfirm"
- show-cancel-button>
+<van-dialog use-slot="{{idGamer === 0}}" id="van-dialog" show="{{showConfirmDialog}}" before-close="{{onBeforeCloseDialog}}" title="是否确认提交竞猜比分 提交后不可修改" bind:close="onDialogClose" bind:confirm="onDialogConfirm" show-cancel-button>
 	<van-cell-group wx:if="{{idGamer === 0}}">
-		<van-field
-		 model:value="{{gamerName}}"
-		 label="用户昵称"
-		 placeholder="请输入用户昵称"
-		 input-align="left"
-		 bind:change="onInputName"
-		 error="{{inputNameError}}"
-		/>
+		<van-field model:value="{{gamerName}}" label="用户昵称" placeholder="请输入用户昵称" input-align="left" bind:change="onInputName" error="{{inputNameError}}" />
 	</van-cell-group>
 </van-dialog>
 
-<van-dialog
- id="van-dialog"
- show="{{showReEditConfirmDialog}}"
- title="重填机会有且仅有一次"
- message="\n是否继续"
- bind:close="onReEditDialogClose"
- bind:confirm="onReEditDialogConfirm"
- show-cancel-button />
-
+<van-dialog id="van-dialog" show="{{showReEditConfirmDialog}}" title="重填机会有且仅有一次" message="\n是否继续" bind:close="onReEditDialogClose" bind:confirm="onReEditDialogConfirm" show-cancel-button />

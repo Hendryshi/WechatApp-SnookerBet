@@ -12,14 +12,14 @@
 </view>
 
 <view class='header'>
-	<van-tabs active="{{active}}" swipeable bind:change="onChange">
+	<van-tabs active="{{active}}" color="#428675" swipeable bind:change="onChange">
 		<van-tab title="玩家预测" />
 		<van-tab title="历史战绩" />
 	</van-tabs>
 </view>
 
 <view wx:if="{{active===0}}" class="cellBg release">
-	<van-empty description="无预测数据" wx:if="{{predict.length === 0}}"></van-empty>
+	<van-empty image="/images/empty.png" description="无预测数据" wx:if="{{predict.length === 0}}"></van-empty>
 	<view wx:else>
 		<van-cell-group inset>
 			<van-cell center title-width="350rpx" size="large" use-label-slot wx:for="{{predict}}" wx:key="idPredict">
@@ -39,7 +39,7 @@
 </view>
 
 <view wx:else class="cellBg release">
-	<van-empty description="暂未开放"></van-empty>
+	<van-empty image="/images/notopen.png" description="暂未开放"></van-empty>
 </view>
 
 <van-toast id="van-toast" />
