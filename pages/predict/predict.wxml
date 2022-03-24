@@ -16,11 +16,11 @@
 
 
 <view class="main-bg">
-	<van-empty image="/images/nopredict.png" description="竞猜不可用！" wx:if="{{showEmpty}}"></van-empty>
+	<van-empty image="/images/nopredict.png" description="竞猜已结束" wx:if="{{showEmpty}}"></van-empty>
 	<view wx:else>
 		<view wx:for="{{matchinfo[currentMatchIndex].oPredicts}}" wx:key="number">
-			<view class="card" wx:if="{{readonly || item.predictStatus === 0}}">
-				<view class="matchBox">
+			<view class="card" wx:if="{{readonly || item.predictStatus === 0}}" >
+				<view class="matchBox" catchtap="GotoMatch" data-id="{{item.idEvent}}-{{item.idRound}}-{{item.number}}">
 					<view class="playerBox">
 						<view class="player">
 							<van-image round lazy-load fit="cover" height="60rpx" width="60rpx" src="{{playerObj.showImage(item.player1.photo)}}" />

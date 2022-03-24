@@ -385,4 +385,15 @@ Page({
       }
     }
   },
+
+  GotoMatch(evt) {
+    if (this.data.readonly) {
+      var id = evt.currentTarget.dataset.id; //id composite with idEvent-idRound-numberMatch
+      var roundName = this.data.currentRoundName;
+      var stQuiz = this.data.stQuiz;
+      wx.navigateTo({
+        url: `/pages/match-detail/match-detail?id=${id}&stQuiz=${stQuiz}&roundName=${roundName}`,
+      });
+    }
+  },
 });

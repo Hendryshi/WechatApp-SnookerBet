@@ -3,12 +3,12 @@
   width: 100%;
   position: fixed;
   top: 0;
-  z-index: 1;
+  z-index: 3;
 }
 
 .header{
   position: fixed;
-  z-index: 2;
+  z-index: 3;
   height: 80rpx;
   margin-top: 300rpx;
   width: 100%;
@@ -31,6 +31,7 @@
 
 .loading{
   height: 60rpx;
+  margin-bottom: 60rpx;
   display: flex;
   justify-content: center;
   align-items: center;
