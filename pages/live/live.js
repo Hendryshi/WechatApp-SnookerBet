@@ -22,6 +22,9 @@ Page({
         firstLoading: false
       })
     }
+    wx.pageScrollTo({
+      scrollTop: 0,
+    });
   },
 
   getMatchOnGoing(isPullDown){
