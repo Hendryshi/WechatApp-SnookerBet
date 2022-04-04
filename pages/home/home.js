@@ -57,10 +57,15 @@ Page({
           url: `/pages/match/match?idEvent=${idEvent}&stQuiz=${stQuiz}`
     }); 
   },
-
+  /**
+   * ask the authorization to get user profile and send subscribed message
+   * if refuse to get profile, then not go to predict;
+   * else stock user profile in storage with wechatname;
+   * if refuse to subscribe then do not trigger corresponding func
+  */
   clickPredict(evt) {
     if(!auth.hasUserProfile()){
-      auth.bindUserProfil().then(()=>{
+      auth.bindUserProfile().then((values)=>{
         this.navToPredict(evt);
       })
       .catch( err => {

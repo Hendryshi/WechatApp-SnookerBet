@@ -40,7 +40,7 @@ const hasUserProfile = function(){
 };
 
 module.exports = {
-    bindUserProfil: bindUserProfile,
+    bindUserProfile: bindUserProfile,
     getUserWechatName: getUserWechatName,
     hasUserProfile: hasUserProfile
 };

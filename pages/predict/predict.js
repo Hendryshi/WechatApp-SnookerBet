@@ -176,23 +176,23 @@ Page({
       this.data.apiResponse.oGamer.gamerName = this.data.gamerName;
       this.data.apiResponse.oGamer.wechatName = this.data.wechatName;
       var predictBody = {};
-      predictBody.data = this.data.apiResponse;
-      api.postPredict(predictBody)
-        .then(function (res) {
-          if (res.statusCode === 200) {
-            Toast({
-              type: 'success',
-              message: '成功发送竞猜比分',
-              duration: 3000,
-              onClose: () => {
-                wx.switchTab({
-                  url: "/pages/home/home",
-                });
-              },
-            });
-          }
-        })
-        .catch((err) => console.log(err));
+        predictBody.data = this.data.apiResponse;
+        api.postPredict(predictBody)
+          .then(function (res) {
+            if (res.statusCode === 200) {
+              Toast({
+                type: 'success',
+                message: '成功发送竞猜比分',
+                duration: 3000,
+                onClose: () => {
+                  wx.switchTab({
+                    url: "/pages/home/home",
+                  });              
+                },
+              });
+            }
+          })
+          .catch((err) => console.log(err));   
     } else {
       console.log("confirm");
       this.setData({
@@ -277,7 +277,36 @@ Page({
     if (this.predictValidated()) {
       this.updateData(this.data.currentMatchIndex);
       this.data.apiResponse.oQuizRounds = this.data.matchinfo;
-      this.showConfirmDialog(true);
+      //show the demand of subscription before sending the prediction
+      wx.requestSubscribeMessage({
+        tmplIds: ['EJdD37u3aSIlAsb59OoBx-rrfagW7ThBoVw77P7wKBA'],
+        success:(res)=>{
+          wx.login({
+            success:(res)=>{
+              if(res.code){
+                this.data.apiResponse.oGamer.wechatCode = res.code;
+                console.log("user accepte subscription "+res);  
+              }else {
+                console.log("failed get user code "+ res.code);
+              }
+            }
+          });    
+        },
+        fail:(err)=>{
+          console.log("user refuse subscription " + err);
+        },
+        complete:(res)=>{
+          console.log("user refuse subscription " + res);
+          this.showConfirmDialog(true);
+        }
+      });        
+    } else {
+      //user need to change their input
+      wx.showToast({
+        title: "请输入有效分数",
+        icon: "error",
+        duration: 2000,
+      });
     }
   },
   /**
