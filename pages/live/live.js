@@ -22,9 +22,9 @@ Page({
         firstLoading: false
       })
     }
-    wx.pageScrollTo({
-      scrollTop: 0,
-    });
+    // wx.pageScrollTo({
+    //   scrollTop: 0,
+    // });
   },
 
   getMatchOnGoing(isPullDown){

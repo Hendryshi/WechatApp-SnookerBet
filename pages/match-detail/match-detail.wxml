@@ -31,7 +31,7 @@
 					<view>{{item.player1.name}} {{item.score1}} - {{item.score2}} {{item.player2.name}}</view>
 				</view>
 				<view slot="title" style="font-weight: bold;">
-					{{item.gamerName}}
+					{{item.gamerName}} {{predictFormat.showPoint(item.point)}}
 				</view>
 			</van-cell>
 		</van-cell-group>

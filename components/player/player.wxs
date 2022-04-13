@@ -4,7 +4,7 @@ function showImage(avator){
     return avator
 }
 function showRank(rank){
-    if(!rank){
+    if(!rank || rank === 0){
         return "#-";
     }
     else return "#" + rank; 

@@ -277,29 +277,32 @@ Page({
     if (this.predictValidated()) {
       this.updateData(this.data.currentMatchIndex);
       this.data.apiResponse.oQuizRounds = this.data.matchinfo;
+      if(this.data.gamerName === null|| this.data.gamerName === ""){
       //show the demand of subscription before sending the prediction
-      wx.requestSubscribeMessage({
-        tmplIds: ['EJdD37u3aSIlAsb59OoBx-rrfagW7ThBoVw77P7wKBA'],
-        success:(res)=>{
-          wx.login({
-            success:(res)=>{
-              if(res.code){
-                this.data.apiResponse.oGamer.wechatCode = res.code;
-                console.log("user accepte subscription "+res);  
-              }else {
-                console.log("failed get user code "+ res.code);
+        wx.requestSubscribeMessage({
+          tmplIds: ['B8VySS-uZZMcUlwUCOpiXOG1lyW6HGue4oiVJGZMHBQ'],
+          success:(res)=>{
+            wx.login({
+              success:(res)=>{
+                if(res.code){
+                  this.data.apiResponse.oGamer.wechatCode = res.code;
+                  console.log("user accepte subscription "+res);  
+                }else {
+                  console.log("failed get user code "+ res.code);
+                }
               }
-            }
-          });    
-        },
-        fail:(err)=>{
-          console.log("user refuse subscription " + err);
-        },
-        complete:(res)=>{
-          console.log("user refuse subscription " + res);
-          this.showConfirmDialog(true);
-        }
-      });        
+            });    
+          },
+          fail:(err)=>{
+            console.log("user refuse subscription " + err);
+          },
+          complete:(res)=>{
+            this.showConfirmDialog(true);
+          }
+        });        
+      }else{
+        this.showConfirmDialog(true);
+      }
     } else {
       //user need to change their input
       wx.showToast({

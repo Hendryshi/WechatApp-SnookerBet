@@ -55,6 +55,12 @@ var calProgress = function(currentMatchIndex, matchLength){
 		return (currentMatchIndex+1)/matchLength*100;
 }
 
+var showPoint = function(point){
+	console.log(point)
+	if(point !== null && point !== 0)
+		return "(+" + point + ")";
+}
+
 module.exports={
 	getScoreRange: getScoreRange,
 	displayPre: btnPre,
@@ -64,5 +70,6 @@ module.exports={
 	desactive: desactive,
 	winCorrect: winCorrect,
 	scoreCorrect: scoreCorrect,
-	calProgress: calProgress
+	calProgress: calProgress,
+	showPoint: showPoint
 };
