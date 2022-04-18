@@ -33,7 +33,7 @@ var getLocaleDate = function (dDate, format, isLocal) {
         if(isLocal)
             var localTime = getDate(dDate).getTime()
         else
-            var localTime = getDate(dDate).getTime() - getDate().getTimezoneOffset() * 60 * 1000 - 60 * 1000 * 60;
+            var localTime = getDate(dDate).getTime() - getDate().getTimezoneOffset() * 60 * 1000;
         return formatTime(localTime, format);
     }
 };
