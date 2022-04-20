@@ -38,3 +38,9 @@
   font-weight: bold;
   font-size: 16px;
 }
+
+.matchNote{
+  padding: 20rpx;
+  text-align: left;
+  min-height: 300rpx;
+}

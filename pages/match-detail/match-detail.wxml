@@ -14,7 +14,7 @@
 <view class='header'>
 	<van-tabs active="{{active}}" color="#428675" swipeable bind:change="onChange">
 		<van-tab title="玩家预测" />
-		<van-tab title="历史战绩" />
+		<van-tab title="比赛评论" />
 	</van-tabs>
 </view>
 
@@ -39,7 +39,10 @@
 </view>
 
 <view wx:else class="cellBg release">
-	<van-empty image="/images/notopen.png" description="暂未开放"></van-empty>
+	<van-empty image="/images/notopen.png" description="暂无数据" wx:if="{{match === null || match.note === ' '}}"></van-empty>
+	<view class="matchNote" wx:else>
+		{{match.note}}
+	</view>
 </view>
 
 <van-toast id="van-toast" />
