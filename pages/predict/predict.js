@@ -13,7 +13,7 @@ Page({
     index: 0,
     idGamer: 0,
     nbEditPredict: 0,
-    gamerName: "",
+    gamerName:"",
     showConfirmDialog: false,
     showReEditConfirmDialog: false,
     apiResponse: [],
@@ -35,10 +35,9 @@ Page({
 
   onLoad: function (options) {
     this.data.idEvent = options.idEvent;
-    //only for test
-    //this.data.wechatName = "mercedes";
     this.getStQuiz();
     this.data.wechatName = auth.getUserWechatName();
+    this.data.gamerName = auth.getUserWechatName();
     this.updatePredictInfo(false);
   },
 
@@ -168,7 +167,7 @@ Page({
   },
 
   onDialogConfirm(event) {
-    //this.data.gamer = response.data.oGamer;
+    this.data.gamerName = auth.getUserWechatName();
     if ((this.data.idGamer === 0 && this.data.gamerName !== "" && this.data.gamerName !== null) || this.data.idGamer !== 0) {
       this.setData({
         inputNameError: false,
@@ -291,7 +290,7 @@ Page({
                   console.log("failed get user code "+ res.code);
                 }
               }
-            });    
+            });
           },
           fail:(err)=>{
             console.log("user refuse subscription " + err);

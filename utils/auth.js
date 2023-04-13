@@ -27,7 +27,7 @@ const bindUserProfile = function(){
 };
 
 const getUserWechatName = function(){
-  return wx.getStorageSync("userProfile").nickName;
+  return wx.getStorageSync("gamerName");
 };
 
 const hasUserProfile = function(){   

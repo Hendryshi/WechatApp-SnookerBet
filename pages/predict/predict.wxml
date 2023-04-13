@@ -87,9 +87,9 @@
 <van-notify id="van-notify" />
 
 <van-dialog use-slot="{{idGamer === 0}}" id="van-dialog" show="{{showConfirmDialog}}" before-close="{{onBeforeCloseDialog}}" title="是否确认提交竞猜比分 提交后不可修改" bind:close="onDialogClose" bind:confirm="onDialogConfirm" show-cancel-button>
-	<van-cell-group wx:if="{{idGamer === 0}}">
+	<!-- <van-cell-group wx:if="{{idGamer === 0}}">
 		<van-field model:value="{{gamerName}}" label="用户昵称" placeholder="请输入用户昵称" input-align="left" bind:change="onInputName" error="{{inputNameError}}" />
-	</van-cell-group>
+	</van-cell-group> -->
 </van-dialog>
 
 <van-dialog id="van-dialog" show="{{showReEditConfirmDialog}}" title="重填机会有且仅有一次" message="\n是否继续" bind:close="onReEditDialogClose" bind:confirm="onReEditDialogConfirm" show-cancel-button />

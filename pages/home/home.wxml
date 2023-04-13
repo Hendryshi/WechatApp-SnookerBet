@@ -79,3 +79,9 @@
 		</view>
 	</view>
 </van-action-sheet>
+
+<van-dialog use-slot="true" id="van-dialog" show="{{showGamerName}}" bind:close="onCloseGamerName" bind:confirm="onGamerNameConfirm" show-cancel-button>
+	<van-cell-group>
+		<van-field model:value="{{gamerName}}" label="游玩昵称" placeholder="请输入您的游玩昵称" input-align="left" bind:change="onInputName" />
+	</van-cell-group>
+</van-dialog>

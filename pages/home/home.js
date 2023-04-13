@@ -17,7 +17,10 @@ Page({
     ],
     quizEvent: [],
     reportList:[],
-    showGuide: false
+    showGuide: false,
+    showGamerName: false,
+    gamerName: "",
+    idEvent: 0
   },
 
   onLoad() {
@@ -64,13 +67,9 @@ Page({
    * if refuse to subscribe then do not trigger corresponding func
   */
   clickPredict(evt) {
-    if(!auth.hasUserProfile()){
-      auth.bindUserProfile().then((values)=>{
-        this.navToPredict(evt);
-      })
-      .catch( err => {
-        console.log(err.errMsg);
-      }); 
+    if(!wx.getStorageSync("gamerName")){
+      this.setData({showGamerName: true});
+      this.setData({idevent: evt.currentTarget.dataset.idevent});
     }else{
       this.navToPredict(evt);
     }
@@ -102,5 +101,16 @@ Page({
 
   onCloseSummary(){
     this.setData({showSummary: false});
+  },
+
+  onGamerNameConfirm(){
+    wx.setStorageSync('gamerName', this.data.gamerName);
+    wx.navigateTo({
+      url: `/pages/predict/predict?idEvent=${this.data.idevent}`
+  });
+  },
+
+  onCloseGamerName(){
+    this.setData({showGamerName: false});
   }
 });

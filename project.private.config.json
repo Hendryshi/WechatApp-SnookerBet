@@ -1,54 +1,48 @@
 {
-  "setting": {},
-  "condition": {
-    "plugin": {
-      "list": []
-    },
-    "game": {
-      "list": []
-    },
-    "gamePlugin": {
-      "list": []
-    },
-    "miniprogram": {
-      "list": [
-        {
-          "name": "",
-          "pathName": "pages/match-detail/match-detail",
-          "query": "id=11",
-          "scene": null
+    "setting": {},
+    "condition": {
+        "plugin": {
+            "list": []
         },
-        {
-          "name": "",
-          "pathName": "pages/live/live",
-          "query": "",
-          "scene": null
+        "game": {
+            "list": []
         },
-        {
-          "name": "",
-          "pathName": "pages/rank/rank",
-          "query": "",
-          "scene": null
+        "gamePlugin": {
+            "list": []
         },
-        {
-          "name": "",
-          "pathName": "pages/predict/predict",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "pages/user/user",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "pages/match/match",
-          "query": "",
-          "scene": null
+        "miniprogram": {
+            "list": [
+                {
+                    "name": "pages/live/live",
+                    "pathName": "pages/live/live",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/predict/predict",
+                    "pathName": "pages/predict/predict",
+                    "query": "idEvent=1014",
+                    "scene": null
+                },
+                {
+                    "name": "pages/match-detail/match-detail",
+                    "pathName": "pages/match-detail/match-detail",
+                    "query": "id=1014-7-13&stQuiz=1&roundName=%E7%AC%AC%E4%B8%80%E8%BD%AE",
+                    "scene": null
+                },
+                {
+                    "name": "pages/match-detail/match-detail",
+                    "pathName": "pages/match-detail/match-detail",
+                    "query": "id=1128-7-1&stQuiz=0&roundName=%E7%AC%AC%E4%B8%80%E8%BD%AE",
+                    "scene": null
+                },
+                {
+                    "name": "pages/home/home",
+                    "pathName": "pages/home/home",
+                    "query": "",
+                    "scene": null
+                }
+            ]
         }
-      ]
     }
-  }
 }

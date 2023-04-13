@@ -27,7 +27,7 @@ const request = function (url, options) {
       // header这里根据业务情况自行选择需要还是不需要
       header: {
         // Authorization: "Bearer " + app.globalData.token,
-        WechatId: auth.getUserWechatName()
+        WechatId: encodeURIComponent(auth.getUserWechatName())
       },
       success: (res) => {
         //console.log("enter success");
